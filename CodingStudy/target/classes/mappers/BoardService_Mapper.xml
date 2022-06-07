@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.mypj.myapp.persistence.BoardService_Mapper">
+
+<sql id="search">    
+	    <if test="searchType != null and searchType.equals('writer')">	
+			 and  writer like CONCAT('%', #{keyword}, '%')
+		</if>	
+		<if test="searchType != null and searchType.equals('subject')">	
+			 and  subject like CONCAT('%', #{keyword}, '%')
+		</if> 
+</sql>  
+
+
+ <select id="rtnOriginbidx" resultType="int">
+        SELECT ifnull(max(bidx),0)+1 FROM board      
+    </select>
+
+<insert id="boardInsert" parameterType="HashMap">
+  
+insert into board(originbidx,depth,level_,subject,contents,writer,ip,password,midx) 
+values(#{originbidx},0,0,#{subject},#{contents},#{writer},#{ip},#{password},#{midx})
+
+</insert>
+
+<select id="boardselectAll" parameterType="scri" resultType="bvo">
+select * from board where delyn='N' 
+<include refid="search" />	
+order by originbidx desc, depth asc limit #{pageStart},15
+</select>
+
+<select id="boardTotal" parameterType="scri" resultType="Integer">
+select count(*) from board where delyn='N' 
+<include refid="search" />	
+</select>
+
+<update id="boardView" parameterType ="Integer" >
+update board set viewcnt= ifnull(viewcnt,0)+1 where bidx=#{bidx} 
+</update>
+
+<select id="boardSelectOne" parameterType="Integer" resultType="bvo">
+select * from board where delyn='N' and bidx= #{bidx}
+</select>
+
+<update id="boardUpdate" parameterType="HashMap">
+update board set subject=#{subject},contents=#{contents},writer=#{writer} where bidx=#{bidx} and password=#{password}
+</update>
+
+<update id="boardDelete" parameterType="HashMap">
+update board set delyn='Y' where bidx=#{bidx} and password=#{password}
+</update>
+ 
+<update id="boardReplyUpdate" parameterType="Integer">
+<![CDATA[ update board set depth = depth+1 where originbidx=#{0} and depth>#{1} ]]>
+</update>
+
+<insert id="boardReplyInsert" parameterType="HashMap">
+insert into board(originbidx,depth,level_,subject,contents,writer,password,delyn,ip,writeday,midx) 
+values(#{originbidx},#{depth}+1,#{level_}+1,#{subject},#{contents},#{writer},#{password},default,#{ip},default,#{midx})
+</insert>
+<!--
+<update id="boardRecommend" parameterType="Integer">
+update board set recommend= nvl(recommend,0)+1 where bidx=#{bidx}
+</update>
+-->
+</mapper>

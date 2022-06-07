@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+     
+ <configuration>   
+  <typeAliases> 
+	<typeAlias alias="mvo" type="kr.mypj.myapp.domain.MemberVo"/>	
+	<typeAlias alias="bvo" type="kr.mypj.myapp.domain.BoardVo"/>	
+	<typeAlias alias="cri" type="kr.mypj.myapp.domain.Criteria"/>
+  	<typeAlias alias="scri" type="kr.mypj.myapp.domain.SearchCriteria"/>
+  	<typeAlias alias="cavo" type="kr.mypj.myapp.domain.CategoryVo"/>
+  	<typeAlias alias="stvo" type="kr.mypj.myapp.domain.StudyareaVo"/>
+  	<typeAlias alias="tevo" type="kr.mypj.myapp.domain.TeacherVo"/>
+  </typeAliases> 
+ </configuration>
