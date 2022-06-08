@@ -43,6 +43,11 @@ update board set viewcnt= ifnull(viewcnt,0)+1 where bidx=#{bidx}
 select * from board where delyn='N' and bidx= #{bidx}
 </select>
 
+<select id="boardMyQuestion" parameterType="Integer" resultType="bvo">
+select * from board where delyn='N' and midx= #{midx}
+</select>
+
+
 <update id="boardUpdate" parameterType="HashMap">
 update board set subject=#{subject},contents=#{contents},writer=#{writer} where bidx=#{bidx} and password=#{password}
 </update>

@@ -13,11 +13,11 @@ select count(*) from member where memberId = #{memberId}
 </select>
 
 <select id="memberLogin" parameterType="String" resultType="mvo">
-select * from member where memberid= #{0} and memberpwd= #{1}
+select * from member where delyn='N' and memberid= #{0} and memberpwd= #{1}
 </select>
 
 <select id="memberSelectOne" parameterType="Integer" resultType="mvo">
-select * from member where midx = #{midx} 
+select * from member where delyn='N' and midx = #{midx} 
 </select>
 
 <update id="memberModify"  parameterType="HashMap">
@@ -28,6 +28,11 @@ memberemail = #{memberEmail},membergender=#{memberGender},memberbirth=#{memberBi
 <update id="passwordChange" parameterType="HashMap">
 update member set memberPwd=#{memberPwd} where midx = #{midx}
 </update>
+
+<update id="memberDelete" parameterType="HashMap">
+update member set delyn='Y',writeday=now(), reason=#{reason} where midx = #{midx}
+</update>
+
 
 <!-- 
 <delete id="stockNewsDelete">

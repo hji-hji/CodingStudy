@@ -232,4 +232,33 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping(value="/member/memberOutAction.do")
+	public String memberOutAction(@RequestParam("reason") String reason, HttpSession session, RedirectAttributes rttr) {	
+		
+		int midx = Integer.parseInt(session.getAttribute("midx").toString());
+		int value = memberService.memberDelete(midx,reason);
+		
+		String path= "";
+		
+		if (value == 1) {	
+			//세션 초기화
+			session.invalidate();
+			
+			rttr.addFlashAttribute("msg", "회원탈퇴 되었습니다.");	
+			path = "redirect:/main/main.do";
+		}else {
+			path = "redirect:/member/memberOut.do";
+		}		
+		
+		return path;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -14,4 +14,6 @@ public interface TeacherService {
 	
 
 	public ArrayList<TeacherVo> teacherSelectAll(int midx);
+	
+	public int teacherDelete(int tidx, int midx);
 }

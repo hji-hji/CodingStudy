@@ -2,7 +2,7 @@ package kr.mypj.myapp.domain;
 
 public class TeacherVo {
 
-	
+	private int tidx;	
 	private String teacherName;
 	private String teacherEmail;
 	private String teacherPhone;
@@ -17,6 +17,13 @@ public class TeacherVo {
 	private String teacherexp;
 	private String teacherpay;
 	private String teacherinfo;
+	
+	public int getTidx() {
+		return tidx;
+	}
+	public void setTidx(int tidx) {
+		this.tidx = tidx;
+	}
 	
 	public String getTeacherName() {
 		return teacherName;

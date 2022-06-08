@@ -90,6 +90,17 @@ public class MemberServiceImpl implements MemberService  {
 		
 		return value;
 	}
+
+	@Override
+	public int memberDelete(int midx, String reason) {
+		
+		HashMap<String,Object> hm = new HashMap<String,Object>();
+		hm.put("midx", midx);
+		hm.put("reason", reason);
+		int value = msm.memberDelete(hm);
+		
+		return value;
+	}
 	
 	
 	

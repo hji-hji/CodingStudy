@@ -15,4 +15,6 @@ public interface MemberService {
 	public int memberModify(String memberName, String memberPhone, String memberEmail, String memberGender, String memberBirth, int midx);
 	
 	public int passwordChange(String memberPwd, int midx);
+	
+	public int memberDelete(int midx, String reason);
 }

@@ -9,8 +9,13 @@ values(#{teacherName},#{teacherEmail},#{teacherPhone},#{filename},#{teacherIp},#
 </insert>
 
 <select id="teacherSelectAll"  parameterType="Integer" resultType="tevo">
-select * from teacher where delyn='N' and midx = #{midx}
+select * from teacher where delyn='N' and midx = #{midx} order by tidx desc
 </select>
+
+
+<update id="teacherDelete" parameterType="Integer">
+update teacher set delyn='Y' where tidx=#{0} and midx=#{1}
+</update>
 <!-- 
 
 <select id="idCheck" parameterType="String" resultType="int">

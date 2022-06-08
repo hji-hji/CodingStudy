@@ -14,6 +14,19 @@ a {
   text-decoration: none;
 } 
 </style>
+<script type="text/javascript">
+
+function check(){
+
+	var fm = document.frm;
+	
+	fm.action="<%=request.getContextPath()%>/member/memberOutAction.do";
+	fm.method="post";
+	fm.submit();
+	
+	
+}
+</script>
 </head>
 <body>
 <table border="1" style="width:800px;">
@@ -37,16 +50,17 @@ a {
 </tr>
 </table>
 <center>회원 탈퇴 이유를 적어주세요.
+<form name="frm">
 <table style="text-align:center;">
 <tr><td>
 <textarea name="reason"  cols="50" rows="5"></textarea>
 <br>
-<button>확인</button>
-<button>취소</button>
-<a href="<%=request.getContextPath()%>/main/main.do"> 메인가기</a>
+<button onclick="check();">확인</button>
+<button onclick="location.href='<%=request.getContextPath() %>/member/memberMypage.do'" >취소</button>
+
 </td></tr>
 </table>
-
+</form>
 </center>
 </body>
 </html>

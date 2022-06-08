@@ -181,6 +181,31 @@ public class TeacherController {
 		return path;
 	}
 	
+	
+	
+	@RequestMapping(value = "/teacher/teacherDeleteAction.do", method=RequestMethod.POST)
+	public String teacherDeleteAction(
+			@RequestParam("tidx") int tidx,
+			HttpSession session,
+			RedirectAttributes rttr
+			) {	
+		
+		int midx = Integer.parseInt(session.getAttribute("midx").toString());
+		
+		int value = teacherService.teacherDelete(tidx, midx);
+				
+		String path= "";
+		
+		if (value == 1) {				
+			rttr.addFlashAttribute("msg", "선생님 회원정보가 삭제되었습니다.");				
+		}
+		path="redirect:/teacher/teacherMypage.do";
+		return path;
+	}
+	
+	
+	
+	
 //	@ResponseBody
 //	@RequestMapping(value = "/member/memberIdCheck.do")
 //	public String memberIdCheck(

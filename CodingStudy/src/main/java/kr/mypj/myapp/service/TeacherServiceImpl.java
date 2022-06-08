@@ -59,6 +59,15 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 
 
+	@Override
+	public int teacherDelete(int tidx, int midx) {
+		
+		int value = tsm.teacherDelete(tidx, midx);
+		
+		return value;
+	}
+
+
 	
 
 }

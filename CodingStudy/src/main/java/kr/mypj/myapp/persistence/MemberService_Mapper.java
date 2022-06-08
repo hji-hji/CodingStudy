@@ -22,4 +22,6 @@ public interface MemberService_Mapper {
 	public int memberModify(HashMap<String,Object> hm);	
 	
 	public int passwordChange(HashMap<String,Object> hm);
+	
+	public int memberDelete(HashMap<String,Object> hm);
 	}

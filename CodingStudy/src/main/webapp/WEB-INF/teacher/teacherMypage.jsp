@@ -24,6 +24,27 @@ text-decoration:none;
 <%	if (request.getAttribute("msg") != null) { %>
 		alert('<%=request.getAttribute("msg")%>');
 <%	} %>
+
+function check(i){
+	
+		
+	
+	if (confirm("선생님 회원 등록을 삭제하시겠습니까?")){
+		
+		var t_idx = document.getElementsByName("t_idx")[i].value;	
+		var fm = document.frm;
+		fm.tidx.value = t_idx;
+		
+		fm.action = "<%=request.getContextPath()%>/teacher/teacherDeleteAction.do";
+		fm.method = "post";
+		fm.submit();		
+	}else{
+		alert("취소 되었습니다.");
+	}
+	
+}
+
+
 </script> 
  </HEAD>
 
@@ -64,7 +85,11 @@ text-decoration:none;
 </td>
 
 <td>
-<% for (TeacherVo tevo : tlist)  {%>
+<form name="frm">
+<input type="hidden" name="tidx">
+<% 
+int i = 0;
+for (TeacherVo tevo : tlist)  {%>
 <table border="1" style="text-align:left;height:300px">
 <tr>
 <td style="width:150px">사진 및 이름</td>
@@ -117,19 +142,17 @@ text-decoration:none;
 <td colspan=3>
 <button onclick="location.href='<%=request.getContextPath()%>/apply/applyList.do';">과외 신청정보 확인</button> 
 <button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do';">과정 리뷰보기</button> 
-<input type="button" value="선생님 회원등록 삭제" onclick="location.href='<%=request.getContextPath()%>/main/main.do';">
+<input type="hidden" name="t_idx" value="<%=tevo.getTidx() %>">
+<input type="button" value="선생님 회원등록 삭제" onclick="check(<%=i %>)">
+
 </td>
 </tr>
 </table>
- <%} %>
- 
- 
- 
- 
-
-
-
-
+ <%
+i = i+1; 
+}
+%>
+ </form>
 
 </td>
 
