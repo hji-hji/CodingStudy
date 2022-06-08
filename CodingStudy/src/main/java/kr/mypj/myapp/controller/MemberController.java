@@ -1,6 +1,8 @@
 package kr.mypj.myapp.controller;
 
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.mypj.myapp.domain.BoardVo;
 import kr.mypj.myapp.domain.MemberVo;
+import kr.mypj.myapp.service.BoardService;
 import kr.mypj.myapp.service.MemberService;
 
 
@@ -21,6 +25,9 @@ public class MemberController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	BoardService boardService;
 		
 	@RequestMapping(value = "/member/memberJoin.do", method = RequestMethod.GET)
 	public String memberJoin() {						
@@ -217,7 +224,14 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/member/memberBoardList.do", method = RequestMethod.GET)
-	public String memberBoardList() {						
+	public String memberBoardList(HttpSession session, Model model) {
+				
+		int midx = Integer.parseInt(session.getAttribute("midx").toString());
+		
+		
+		ArrayList<BoardVo> blist =  boardService.boardMyQuestion(midx);
+		
+		model.addAttribute("blist", blist);
 		
 		return "/WEB-INF/member/memberBoardList";
 	}
@@ -225,9 +239,6 @@ public class MemberController {
 	@RequestMapping(value="/member/memberOut.do")
 	public String memberOut(HttpSession session) {	
 				
-		//세션 삭제		
-	//	session.invalidate();		
-		
 		return "/WEB-INF/member/memberOut";
 	}
 	

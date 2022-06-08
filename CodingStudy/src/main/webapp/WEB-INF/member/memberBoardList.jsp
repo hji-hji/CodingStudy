@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
     pageEncoding="UTF-8" %>  
+<%@ page import="java.util.*" %>
+<%@ page import ="kr.mypj.myapp.domain.*" %>
+<% 
+	ArrayList<BoardVo> blist =  (ArrayList<BoardVo>)request.getAttribute("blist");
 
+%>
    
 <!DOCTYPE HTML>
 <HTML>
@@ -17,37 +22,8 @@ body
   margin: 0 auto;
   width: 800px;
 }
-</style>
+</style> 
  
-  <script>
-  function check(){
-  //	alert("테스트");
-  	
-  	var fm = document.frm;
-  	
-    if (fm.memberPwd.value == ""){
-  		alert("변경 비밀번호를 입력하세요");  		
-  		fm.memberPwd.focus();
-  		return;
-  	}else if (fm.memberPwd2.value == ""){
-  		alert("변경 비밀번호 확인을 입력하세요");  		
-  		fm.memberPwd2.focus();
-  		return;
-  	}else if (fm.memberPwd.value !=fm.memberPwd2.value){
-  		alert("변경 비밀번호가 일치 하지 않습니다.");  		
-  		fm.memberPwd.value = "";
-  		fm.memberPwd2.value = "";
-  		fm.memberPwd.focus();
-  	  	return;
-  	}
-  		fm.action = "<%=request.getContextPath()%>/member/memberPwdChangeAction.do";
-  		fm.method = "post";
-  		fm.submit();  	
-  
-  		return;
-  }
-  
-  </script>
  </HEAD>
 
  <BODY>
@@ -88,50 +64,35 @@ body
 
 </td>
 
-<td>
+<td style="vertical-align:top;">
 <table border= "1" width="600px">
-<tr align="center">
+<tr align="center" style="color:green;">
 <td>번호</td>
 <td width="300px">제목</td>
 <td width="100px">작성자</td>
 <td>작성일</td>
 <td>조회수</td>
 </tr>
-<tr align="center">
-<td>1</td>
-<td width="300px">안녕하세요</td>
-<td width="100px">홍길동</td>
-<td>2022.06.01</td>
-<td>100</td>
+<tr align="center" style="color:green;">
+<td colspan=5>문의 내용</td>
 </tr>
+
+<% for (BoardVo bv : blist) { %>
 <tr align="center">
-<td>2</td>
-<td width="300px">안녕하세요</td>
-<td width="100px">홍길동</td>
-<td>2022.06.01</td>
-<td>100</td>
+<td><%=bv.getBidx() %></td>
+<td width="300px"><%=bv.getSubject() %></td>
+<td width="100px"><%=bv.getWriter()%></td>
+<td><%=bv.getWriteday().substring(0, 10) %></td>
+<td><%=bv.getViewcnt() %></td>
 </tr>
-<tr align="center">
-<td>3</td>
-<td width="300px">안녕하세요</td>
-<td width="100px">홍길동</td>
-<td>2022.06.01</td>
-<td>100</td>
+<tr>
+<td colspan=5><%=bv.getContents()%></td>
 </tr>
-<tr align="center">
-<td>4</td>
-<td width="300px">안녕하세요</td>
-<td width="100px">홍길동</td>
-<td>2022.06.01</td>
-<td>100</td>
+<tr>
+<td colspan=5>ㄴ<%=bv.getAnswer()%></td>
 </tr>
-<tr align="center">
-<td>5</td>
-<td width="300px">안녕하세요</td>
-<td width="100px">홍길동</td>
-<td>2022.06.01</td>
-<td>100</td>
-</tr>
+<%} %>
+
 </table>
 
 

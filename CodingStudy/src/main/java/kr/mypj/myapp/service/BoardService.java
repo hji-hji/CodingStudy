@@ -28,4 +28,6 @@ public interface BoardService {
 	
 	public int boardRecommend(int bidx);
 	
+	public ArrayList<BoardVo> boardMyQuestion(int midx);
+	
 	}

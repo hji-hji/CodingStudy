@@ -133,5 +133,13 @@ public class BoardServiceImpl implements BoardService{
 		return value;
 	}
 
+	@Override
+	public ArrayList<BoardVo> boardMyQuestion(int midx) {
+		
+		ArrayList<BoardVo> blist  = bsm.boardMyQuestion(midx);		
+		
+		return blist;
+	}
+
 	
 	}

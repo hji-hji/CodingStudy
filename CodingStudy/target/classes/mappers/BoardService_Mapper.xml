@@ -44,7 +44,8 @@ select * from board where delyn='N' and bidx= #{bidx}
 </select>
 
 <select id="boardMyQuestion" parameterType="Integer" resultType="bvo">
-select * from board where delyn='N' and midx= #{midx}
+select a.*, (select b.contents from board b where b.originbidx = a.bidx and b.depth = 1 ) as answer
+from board a where a.delyn='N' and a.midx= #{midx} and a.depth=0
 </select>
 
 

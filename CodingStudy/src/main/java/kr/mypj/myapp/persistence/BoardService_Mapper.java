@@ -28,4 +28,6 @@ public interface BoardService_Mapper {
 	public int boardRecommend(int bidx);
 	
 	public int rtnOriginbidx();
+	
+	public ArrayList<BoardVo> boardMyQuestion(int midx);
 	}
