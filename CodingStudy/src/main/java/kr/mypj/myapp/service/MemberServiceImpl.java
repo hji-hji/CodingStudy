@@ -101,6 +101,22 @@ public class MemberServiceImpl implements MemberService  {
 		
 		return value;
 	}
+
+	@Override
+	public String memberIdFind(String memberName, String memberEmail) {
+		
+		String memberId = msm.memberIdFind(memberName, memberEmail);
+		
+		return memberId;
+	}
+
+	@Override
+	public String memberPwdFind(String memberId, String memberEmail) {
+
+		String memberPwd  = msm.memberPwdFind(memberId, memberEmail);
+		
+		return memberPwd;
+	}
 	
 	
 	

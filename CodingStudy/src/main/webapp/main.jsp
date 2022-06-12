@@ -22,11 +22,58 @@ a {
   text-decoration: none;
 } 
 </style>
-
+<style>
+    .view-box{ 
+      min-height: 20px; border: 1px solid black; line-height: 20px;
+    }
+     .view-box2{ 
+      min-height: 20px; border: 1px solid black; line-height: 20px;
+    }
+  </style>
 <script>
 <%	if (request.getAttribute("msg") != null) { %>
 		alert('<%=request.getAttribute("msg")%>');
 <%	} %>
+</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.0.js"></script>
+<script type="text/javascript">
+
+var arr=[];
+
+$(function(){
+  $('input[name=cateName]').click(function(){
+    var value = $(this).val();
+    
+    var index = arr.indexOf(value);
+    //선택한 항목이 있으면(체크를 해제하면)
+    if(index >=0){
+    	$(this).css("color", "black");	
+      arr.splice(index,1);
+    //선택한 항목이 없으면(체크하면)
+    }else{
+    	$(this).css("color", "red");
+      arr.push(value);
+    }
+    $('.view-box').text(arr.join(','));
+  });
+  var arr2=[];
+  $('input[name=areaName]').click(function(){
+	    var value = $(this).val();
+	    
+	    var index = arr2.indexOf(value);
+	    //선택한 항목이 있으면(체크를 해제하면)
+	    if(index >=0){
+	    	$(this).css("color", "black");	
+	      arr2.splice(index,1);
+	    //선택한 항목이 없으면(체크하면)
+	    }else{
+	    	$(this).css("color", "red");
+	      arr2.push(value);
+	    }
+	    $('.view-box2').text(arr2.join(','));
+	  });
+  
+})
 </script>
 </head>
 <body>
@@ -61,12 +108,20 @@ a {
 %>
 <tr>
 <% for(int j = i; j<i+5; j++) { %>
-<td><%=clist.get(j).getCateName() %></td>
+<td>
+<input type="text" name="cateName"   value="<%=clist.get(j).getCateName() %>"  size=12  readonly >
+</td>
 <%} %>
 </tr>
 <%} %>
 
  </table>
+ 
+
+<div class="view-box"></div>
+<div class="view-box2"></div>
+
+ 
  <table border="1" style="width:800px;">
 <tr>
 <td rowspan="4" style="width:150px;vertical-align:top;">
@@ -76,7 +131,9 @@ int cnt2 = slist.size();
 for (int i2=1 ; i2< cnt2 ; i2 = i2+2) {
 	
 	 for(int j2 = i2; j2<i2+2; j2++) {
-		out.println(slist.get(j2).getAreaName());
+%>
+	<input type="text" name="areaName"   value="<%=slist.get(j2).getAreaName()%>"  size=2  readonly >			
+<%		 
 	 }
 	 out.println("<br>");
 }

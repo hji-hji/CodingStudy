@@ -265,10 +265,64 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping(value = "/member/memberIdFind.do", method = RequestMethod.GET)
+	public String memberIdFind() {						
+		
+		return "/WEB-INF/member/memberIdFind";
+	}
 	
+	@RequestMapping(value = "/member/memberPwdFind.do", method = RequestMethod.GET)
+	public String memberPwdFind() {						
+		
+		return "/WEB-INF/member/memberPwdFind";
+	}
 	
+	@RequestMapping(value = "/member/memberIdFindAction.do", method = RequestMethod.POST)
+	public String memberIdFindAction(
+			@RequestParam("memberName") String memberName,
+			@RequestParam("memberEmail") String memberEmail,
+			RedirectAttributes rttr) {
+		
+		
+		String memberId = null;
+		String path= "";
+		
+		memberId = memberService.memberIdFind(memberName,memberEmail);
+		
+		
+		if (memberId != null) {	
+			rttr.addFlashAttribute("memberId", memberId);			
+		}else {
+			rttr.addFlashAttribute("msg", "해당하는 아이디가 없습니다.");			
+		}		
+		path = "redirect:/member/memberIdFind.do";
+		
+		return path;
+	}
 	
+	@RequestMapping(value = "/member/memberPwdFindAction.do", method = RequestMethod.POST)
+	public String memberPwdFindAction(
+			@RequestParam("memberId") String memberId,
+			@RequestParam("memberEmail") String memberEmail,
+			RedirectAttributes rttr) {
+		
 	
+		String memberPwd = null;
+		String path= "";
+		
+		memberPwd = memberService.memberPwdFind(memberId,memberEmail);
+		System.out.println("memberPwd"+memberPwd);
+		
+		if (memberPwd != null) {	
+			rttr.addFlashAttribute("memberPwd", memberPwd);			
+		}else {
+			rttr.addFlashAttribute("msg", "해당하는 아이디/이메일이 없습니다.");			
+		}		
+		path = "redirect:/member/memberPwdFind.do";
+		
+		return path;		
+		
+	}	
 	
 	
 	

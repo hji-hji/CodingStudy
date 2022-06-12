@@ -26,18 +26,18 @@ a {
   	
   	var fm = document.frm;
   	
-  	if (fm.memberId.value ==""){
-  		alert("아이디를 입력하세요");
+  	if (fm.memberName.value ==""){
+  		alert("이름을 입력하세요");
   		fm.memberId.focus();
   		return;
-  	}else if (fm.memberPwd.value ==""){
-  		alert("비밀번호를 입력하세요");
+  	}else if (fm.memberEmail.value ==""){
+  		alert("이메일을 입력하세요");
   		fm.memberPwd.focus();
   		return;
   	}  		
   	
   		// 가상경로를 사용해서 페이지 이동시킨다
-  		fm.action = "<%=request.getContextPath()%>/member/memberLoginAction.do";
+  		fm.action = "<%=request.getContextPath()%>/member/memberIdFindAction.do";
   		fm.method = "post";
   		fm.submit();
   	
@@ -65,24 +65,23 @@ a {
 </tr>
 <tr>
 <td colspan=6 style="width:800px;height:200px" >
-<img src="test.jpg" width="800px" height="200px" alt="로그인이미지">
+<img src="test.jpg" width="800px" height="200px" alt="이미지">
 </td>
 </tr>
 </table>
-<center><h1>로그인</h1></center>
+<center><h1>아이디 찾기</h1></center>
 <hr></hr>
 <form name="frm"> 
  <table border="1" style="text-align:left;width:800px;height:300px">
 <tr>
 <td style="text-align:left;height:50px">
-아이디
+이름
 <br>
-비밀번호
+이메일
 </td>
 <td>
-<input type="text" name="memberId" size="30"><br>
-<input type="password" name="memberPwd" size="30"><br>
-<input type="checkbox" name="autoLogin" value="Y">자동로그인
+<input type="text" name="memberName" size="30"><br>
+<input type="text" name="memberEmail" size="30"><br>
 </td>
 </tr>
 <tr>
@@ -92,14 +91,23 @@ a {
 <input type="reset" value="다시작성"> 
 </td>
 </tr>
-<tr>
-<td colspan=2 style="text-align:left;height:50px">
-<a href="<%=request.getContextPath()%>/member/memberJoin.do">회원가입</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
-<a href="<%=request.getContextPath()%>/member/memberIdFind.do">아이디</a>/
-<a href="<%=request.getContextPath()%>/member/memberPwdFind.do">비밀번호 찾기</a>
-</td>
-</tr>
  </table>
  </form>
+ 
+ <%	if (request.getAttribute("memberId") != null) {
+	 out.println(request.getAttribute("memberId"));	 
+ } %>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  </BODY>
 </HTML>

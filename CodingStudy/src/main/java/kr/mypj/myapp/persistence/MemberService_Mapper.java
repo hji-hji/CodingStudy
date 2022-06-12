@@ -24,4 +24,12 @@ public interface MemberService_Mapper {
 	public int passwordChange(HashMap<String,Object> hm);
 	
 	public int memberDelete(HashMap<String,Object> hm);
+	
+	public String memberIdFind(String memberName, String memberEmail);
+	
+	public String memberPwdFind(String memberId, String memberEmail);
+
+	
+	
+	
 	}

@@ -34,6 +34,17 @@ update member set delyn='Y',writeday=now(), reason=#{reason} where midx = #{midx
 </update>
 
 
+<select id="memberIdFind" parameterType="String" resultType="String">
+select memberid from member where delyn='N' and membername = #{0} and memberemail = #{1}
+</select>
+
+<select id="memberPwdFind" parameterType="String" resultType="String">
+select memberpwd from member where delyn='N' and memberid = #{0} and memberemail = #{1}
+</select>
+
+
+
+
 <!-- 
 <delete id="stockNewsDelete">
 delete from StocksNews
