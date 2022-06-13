@@ -132,10 +132,15 @@ $(function(){
 <table border="1" style="width:800px;">
 <%
 	   int cnt = clist.size();
-	   for (int i=1 ; i< cnt; i = i+5) {
+	   for (int i=0 ; i< cnt; i = i+5) {
 %>
 <tr>
-<% for(int j = i; j<i+5; j++) { %>
+<% 
+for(int j = i; j<i+5; j++) { 
+	 if (j == cnt){
+		 break;
+	 }
+%>
 <td>
 <input type="text" name="cateName"   value="<%=clist.get(j).getCateName() %>"  size=12  readonly >
 </td>
@@ -166,9 +171,13 @@ $(function(){
 
 <%
 int cnt2 = slist.size();
-for (int i2=1 ; i2< cnt2 ; i2 = i2+2) {
+for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 	
 	 for(int j2 = i2; j2<i2+2; j2++) {
+		 if (j2 == cnt2){
+			 break;
+		 }
+			 
 %>
 	<input type="text" name="areaName"   value="<%=slist.get(j2).getAreaName()%>"  size=2  readonly >			
 <%		 

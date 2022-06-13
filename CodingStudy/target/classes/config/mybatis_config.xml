@@ -10,5 +10,6 @@
   	<typeAlias alias="cavo" type="kr.mypj.myapp.domain.CategoryVo"/>
   	<typeAlias alias="stvo" type="kr.mypj.myapp.domain.StudyareaVo"/>
   	<typeAlias alias="tevo" type="kr.mypj.myapp.domain.TeacherVo"/>
+  	<typeAlias alias="tedto" type="kr.mypj.myapp.domain.TeacherDto"/>
   </typeAliases> 
  </configuration>

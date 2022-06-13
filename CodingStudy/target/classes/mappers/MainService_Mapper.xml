@@ -12,6 +12,26 @@ select * from category where delyn='N' order by caidx asc;
 select * from studyarea where delyn='N' order by stidx asc; 
 </select>
 
+<select id="teacherSelectAll" parameterType="HashMap"  resultType="tedto">
 
+select a.teacherName,a.teacherGender,a.teacherExp,a.teacherPay,a.teacherInfo,b.cateName,c.areaName from teacher a 
+inner join category b on a.caidx=b.caidx 
+inner join studyarea c on a.stidx = c.stidx
+where a.delyn='N'
+
+<if test='cateName !=null' >
+and b.cateName in
+<foreach collection="cateName" item="arr" open="(" close=")" separator=",">
+ #{arr}
+</foreach>
+</if>
+<if test='areaName !=null' >
+and c.areaName in
+<foreach collection="areaName"  item="arr2" open="(" close=")" separator=",">
+ #{arr2}
+</foreach>
+</if>
+
+</select>
 
 </mapper>
