@@ -24,11 +24,12 @@ a {
 </style>
 <style>
     .view-box{ 
-      min-height: 20px; border: 1px solid black; line-height: 20px;
+      width: 750px; min-height: 20px; border: 1px solid black; 
     }
      .view-box2{ 
-      min-height: 20px; border: 1px solid black; line-height: 20px;
+      width: 750px; min-height: 20px; border: 1px solid black;      
     }
+   
   </style>
 <script>
 <%	if (request.getAttribute("msg") != null) { %>
@@ -55,6 +56,7 @@ $(function(){
       arr.push(value);
     }
     $('.view-box').text(arr.join(','));
+    $('input[name=cateNameReq]').val(arr.join(','));
   });
   var arr2=[];
   $('input[name=areaName]').click(function(){
@@ -71,10 +73,36 @@ $(function(){
 	      arr2.push(value);
 	    }
 	    $('.view-box2').text(arr2.join(','));
+	    $('input[name=areaNameReq]').val(arr2.join(','));
 	  });
   
+  $('#btn').click(function(){
+	  
+	  var cateNameReq = $('#cateNameReq').val();
+	  var areaNameReq = $('#areaNameReq').val();
+  
+	  alert(cateNameReq);
+	  alert(areaNameReq);
+	  $.ajax({ 
+  		type: 'post',        	
+			url: '<%=request.getContextPath()%>/main/mainSearch.do', 
+			data: {"cateNameReq" : cateNameReq,"areaNameReq" : areaNameReq},
+			dataType : 'json', 
+			success: function(data) {
+				alert("success");
+							
+			},
+			error : function(){
+				alert('서버요청실패');
+			}
+		}); 
+	  
+	  
+  
+  });
 })
 </script>
+
 </head>
 <body>
 
@@ -117,10 +145,20 @@ $(function(){
 
  </table>
  
-
-<div class="view-box"></div>
-<div class="view-box2"></div>
-
+<table>
+<form name="frm">
+<input type="hidden" name="cateNameReq" id="cateNameReq">
+<input type="hidden" name="areaNameReq" id="areaNameReq">
+<tr>
+<td><div class="view-box"></div></td>
+<td rowspan=2><input type="button" name="btn" id="btn" value="검색"></td>
+</tr>
+<tr>
+<td><div class="view-box2"></div></td>
+</tr>
+</form>
+</table>
+ 
  
  <table border="1" style="width:800px;">
 <tr>

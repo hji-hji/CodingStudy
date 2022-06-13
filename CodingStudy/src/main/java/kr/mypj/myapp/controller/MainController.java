@@ -8,9 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.mypj.myapp.domain.CategoryVo;
 import kr.mypj.myapp.domain.StudyareaVo;
+import kr.mypj.myapp.domain.TeacherVo;
 import kr.mypj.myapp.service.MainService;
 
 
@@ -34,7 +37,19 @@ public class MainController {
 		return "/main";
 	}
 	
+	@ResponseBody	
+	@RequestMapping(value = "/main/mainSearch.do", method = RequestMethod.POST)
+	public ArrayList<TeacherVo> mainSearch(
+			@RequestParam("cateNameReq") String cateNameReq,
+			@RequestParam("areaNameReq") String areaNameReq,
+			Model model) {
 	
-	
-	
+		System.out.println("cateNameReq:"+cateNameReq);
+		System.out.println("areaNameReq:"+areaNameReq);
+		
+		ArrayList<TeacherVo> tlist = new ArrayList<TeacherVo>();
+		
+		
+		return tlist; 
+	}
 }
