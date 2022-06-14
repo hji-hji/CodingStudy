@@ -14,7 +14,8 @@
 
 
  <select id="rtnOriginbidx" resultType="int">
-        SELECT ifnull(max(bidx),0)+1 FROM board      
+     <!--    SELECT ifnull(max(bidx),0)+1 FROM board  -->
+     SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'board' AND table_schema = DATABASE()      
     </select>
 
 <insert id="boardInsert" parameterType="HashMap">

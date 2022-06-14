@@ -2,7 +2,10 @@ package kr.mypj.myapp.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +28,9 @@ public class MainController {
 	MainService mainservice;	
 	
 	@RequestMapping(value = "/main/main.do", method = RequestMethod.GET)
-	public String main(Model model) {			
+	public String main(Model model) {	
+		
+		System.out.println("main.do");
 		
 		ArrayList<CategoryVo> clist = mainservice.categorySelectAll();
 		
@@ -38,21 +43,50 @@ public class MainController {
 		return "/main";
 	}
 	
-	@ResponseBody	
-	@RequestMapping(value = "/main/mainSearch.do", method = RequestMethod.POST)
-	public ArrayList<TeacherDto> mainSearch(
-			@RequestParam("cateNameReq") String cateNameReq,
-			@RequestParam("areaNameReq") String areaNameReq,
-			Model model) {
-	
-		System.out.println("cateNameReq:"+cateNameReq);
-		System.out.println("areaNameReq:"+areaNameReq);
+	@ResponseBody
+	@RequestMapping(value = "/main/mainSearch.do", produces="text/plain;charset=UTF-8")
+	public String mainSearch(
+			@RequestParam(value="cateNameReq", required = false, defaultValue="C/C++") String cateNameReq,
+			@RequestParam(value="areaNameReq", required = false, defaultValue="±§¡÷" ) String areaNameReq,
+			Model model) throws Exception {
 		
-	//	ArrayList<TeacherVo> tlist = new ArrayList<TeacherVo>();
+	//	System.out.println("mainSearch.do");
+	
+	//	System.out.println("cateNameReq:"+cateNameReq);
+	//	System.out.println("areaNameReq:"+areaNameReq);
 		
 		ArrayList<TeacherDto> telist = mainservice.teacherSelectAll(cateNameReq, areaNameReq );
-		System.out.println("telist:"+telist);
+		//System.out.println("telist:"+telist);
 		
-		return telist; 
+		//HashMap<String,Object> map = new HashMap<String,Object>();
+		
+		//String str = "{\"checkValue\":\"trest\"}";
+		String str = "";
+		String strr = null;
+		int cnt  = telist.size();
+		System.out.println("cnt"+cnt);
+		for( int i =0; i<cnt;i++) {
+			
+			 strr = "";
+			if (i !=cnt-1) {
+				strr = ",";
+			}
+			str = str + "{\"areaName\":\""+telist.get(i).getAreaName()+"\",\"cateName\":\""+telist.get(i).getCateName()+"\"}"+strr;
+		            
+			
+		}
+		
+		String strB = " ["+str+"]";
+		//System.out.println("map"+map);
+		
+		
+		
+		
+	//	JSONObject json =  new JSONObject(map);
+	//	json.put("telist", telist);
+ 	
+		System.out.println("strB"+strB);
+		
+		return strB; 
 	}
 }

@@ -84,12 +84,20 @@ $(function(){
 	  alert(cateNameReq);
 	  alert(areaNameReq);
 	  $.ajax({ 
-  		type: 'post',        	
+  			type: 'post',        	
 			url: '<%=request.getContextPath()%>/main/mainSearch.do', 
 			data: {"cateNameReq" : cateNameReq,"areaNameReq" : areaNameReq},
-			dataType : 'json', 
-			success: function(data) {
+			dataType : 'json', 			
+			success: function(data) {				
+		
 				alert("success");
+				
+				 $.each(data, function (i, item) {
+	                    alert("i : "+i);
+	                    alert("item : "+item.areaName);
+	                    alert("item : "+item.cateName);
+	                });
+				
 							
 			},
 			error : function(){
