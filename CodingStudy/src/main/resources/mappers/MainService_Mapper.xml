@@ -14,7 +14,7 @@ select * from studyarea where delyn='N' order by stidx asc;
 
 <select id="teacherSelectAll" parameterType="HashMap"  resultType="tedto">
 
-select a.teacherName,a.teacherGender,a.teacherExp,a.teacherPay,a.teacherInfo,b.cateName,c.areaName from teacher a 
+select a.teacherName,a.teacherGender,a.teacherExp,a.teacherPay,a.teacherInfo,b.cateName,c.areaName,a.filename from teacher a 
 inner join category b on a.caidx=b.caidx 
 inner join studyarea c on a.stidx = c.stidx
 where a.delyn='N'
@@ -31,6 +31,17 @@ and c.areaName in
  #{arr2}
 </foreach>
 </if>
+
+</select>
+
+
+<select id="teacherRandomSelectAll"  resultType="tedto">
+
+select a.teacherName,a.teacherGender,a.teacherExp,a.teacherPay,a.teacherInfo,b.cateName,c.areaName,a.filename from teacher a 
+inner join category b on a.caidx=b.caidx 
+inner join studyarea c on a.stidx = c.stidx
+where a.delyn='N'
+order by rand() limit 10
 
 </select>
 

@@ -34,11 +34,13 @@ public class MainController {
 		
 		ArrayList<CategoryVo> clist = mainservice.categorySelectAll();
 		
-		ArrayList<StudyareaVo> slist = mainservice.studyareaSelectAll();		
+		ArrayList<StudyareaVo> slist = mainservice.studyareaSelectAll();	
 		
-		model.addAttribute("clist", clist);
+		ArrayList<TeacherDto> telist = mainservice.teacherRandomSelectAll();
 		
-		model.addAttribute("slist", slist);		
+		model.addAttribute("clist", clist);		
+		model.addAttribute("slist", slist);
+		model.addAttribute("telist", telist);		
 		
 		return "/main";
 	}
@@ -66,8 +68,16 @@ public class MainController {
 			if (i !=cnt-1) {
 				strr = ",";
 			}
-			str = str + "{\"areaName\":\""+telist.get(i).getAreaName()+"\",\"teacherExp\":\""+telist.get(i).getTeacherExp()+"\",\"teacherGender\":\""+telist.get(i).getTeacherGender()+"\",\"teacherInfo\":\""+telist.get(i).getTeacherInfo()+"\",\"teacherName\":\""+telist.get(i).getTeacherName()+"\",\"teacherPay\":\""+telist.get(i).getTeacherPay()+"\",\"cateName\":\""+telist.get(i).getCateName()+"\"}"+strr; 
-		//  str = str + "{\"areaName\":\""+telist.get(i).getAreaName()+"\",\"cateName\":\""+telist.get(i).getCateName()+"\"}"+strr; 
+			str = str + "{"
+						  + "\"areaName\":\""+telist.get(i).getAreaName()+"\","
+						  + "\"teacherExp\":\""+telist.get(i).getTeacherExp()+"\","
+						  + "\"teacherGender\":\""+telist.get(i).getTeacherGender()+"\","
+						  + "\"teacherInfo\":\""+telist.get(i).getTeacherInfo()+"\","
+						  + "\"teacherName\":\""+telist.get(i).getTeacherName()+"\","
+						  + "\"teacherPay\":\""+telist.get(i).getTeacherPay()+"\","
+						  + "\"cateName\":\""+telist.get(i).getCateName()+"\""
+						  + "}"+strr; 
+		
 		}
 		
 		

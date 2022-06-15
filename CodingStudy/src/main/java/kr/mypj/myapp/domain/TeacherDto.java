@@ -9,8 +9,15 @@ public class TeacherDto {
 	private String teacherInfo;
 	private String cateName;
 	private String areaName;
+	private String filename;
 	
 	
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	public String getTeacherName() {
 		return teacherName;
 	}

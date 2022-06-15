@@ -59,8 +59,14 @@ public class MainServiceImpl implements MainService  {
 		hm.put("areaName", areaName);
 		
 		ArrayList<TeacherDto> telist = msm.teacherSelectAll(hm);
-		System.out.println("t==>"+telist);
+//		System.out.println("t==>"+telist);
 		
+		return telist;
+	}
+
+	@Override
+	public ArrayList<TeacherDto> teacherRandomSelectAll() {
+		ArrayList<TeacherDto> telist = msm.teacherRandomSelectAll();
 		return telist;
 	}
 	

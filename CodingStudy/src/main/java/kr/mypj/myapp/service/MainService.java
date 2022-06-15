@@ -14,4 +14,6 @@ public interface MainService {
 	public ArrayList<StudyareaVo> studyareaSelectAll();
 	
 	public ArrayList<TeacherDto> teacherSelectAll(String cateNameReq, String areaNameReq);
+	
+	public ArrayList<TeacherDto> teacherRandomSelectAll();
 }

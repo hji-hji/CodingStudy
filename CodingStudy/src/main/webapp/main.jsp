@@ -5,6 +5,7 @@
 <%  
 		ArrayList<CategoryVo> clist  = (ArrayList<CategoryVo>)request.getAttribute("clist");
 		ArrayList<StudyareaVo> slist  = (ArrayList<StudyareaVo>)request.getAttribute("slist");
+		ArrayList<TeacherDto> telist  = (ArrayList<TeacherDto>)request.getAttribute("telist");
 %>      
     
 <!DOCTYPE html>
@@ -40,39 +41,48 @@ a {
 <script type="text/javascript">
 
 var arr=[];
-
+var arr2=[];
+var arr3=[];
 $(function(){
   $('input[name=cateName]').click(function(){
     var value = $(this).val();
     
     var index = arr.indexOf(value);
+    var index3 = arr3.indexOf(value);
     //선택한 항목이 있으면(체크를 해제하면)
-    if(index >=0){
+    if(index3 >=0){
     	$(this).css("color", "black");	
       arr.splice(index,1);
+      arr3.splice(index3,1);
     //선택한 항목이 없으면(체크하면)
     }else{
     	$(this).css("color", "red");
       arr.push(value);
-    }
-    $('.view-box').text(arr.join(','));
+      arr3.push(value);
+    }         
+    $('.view-box').text(arr3.join(','));
     $('input[name=cateNameReq]').val(arr.join(','));
   });
-  var arr2=[];
+ 
   $('input[name=areaName]').click(function(){
 	    var value = $(this).val();
-	    
-	    var index = arr2.indexOf(value);
+	    	    
+	    var index2 = arr2.indexOf(value);
+	    var index3 = arr3.indexOf(value);
 	    //선택한 항목이 있으면(체크를 해제하면)
-	    if(index >=0){
+	    if(index3 >=0){
 	    	$(this).css("color", "black");	
-	      arr2.splice(index,1);
+	      arr2.splice(index2,1);
+	      arr3.splice(index3,1);     
 	    //선택한 항목이 없으면(체크하면)
 	    }else{
 	    	$(this).css("color", "red");
-	      arr2.push(value);
-	    }
-	    $('.view-box2').text(arr2.join(','));
+	      arr2.push(value);	
+	      arr3.push(value);
+	    }	
+	
+	    $('.view-box').text(arr3.join(','));	    
+	    
 	    $('input[name=areaNameReq]').val(arr2.join(','));
 	  });
   
@@ -82,8 +92,8 @@ $(function(){
 	  var areaNameReq = $('#areaNameReq').val();
   	  var str = "";
 	  
-	  alert(cateNameReq);
-	  alert(areaNameReq);
+//	  alert(cateNameReq);
+//	  alert(areaNameReq);
 	  $.ajax({ 
   			type: 'post',        	
 			url: '<%=request.getContextPath()%>/main/mainSearch.do', 
@@ -91,17 +101,24 @@ $(function(){
 			dataType : 'json', 			
 			success: function(data) {				
 		
-				alert("data");
+		//		alert("data");
 				
-			//	 $.each(data, function (i, item) {
-	         //           alert("i : "+i);
-	         //           alert("item : "+item.areaName);
-	         //           alert("item : "+item.cateName);
-	         //    str = str + "<tr><td></td><td>"+item.teacherName+" <br>"+item.cateName+" <br>"+item.teacherExp+" <br>"+item.teacherGender+"<br>"+item.areaName+" <br>"+item.teacherPay+"  <br>"+item.teacherInfo+"   </td><td></td></tr>"; 
-			//	 });
+				 $.each(data, function (i, item) {
+	     //              alert("i : "+i);
+	    //               alert("item : "+item.areaName);
+	    //               alert("item : "+item.cateName);
+	             str = str + "<table border=1 style='width:650px;vertical-align:top;'><tr>"
+	             +"<td style='width:100px;''><img src='test.jpg' width='100px' height='30px' alt='사진'></td>"
+	             +"<td>"+item.teacherName+" <br>"+item.cateName+" <br>"+item.teacherExp+" <br>"+item.teacherGender+"<br>"+item.areaName+" <br>"+item.teacherPay+"  <br>"+item.teacherInfo+"   </td>"
+	             +"<td width='100px'><button onclick='location.href=/review/reviewList.do'>리뷰보기</button>"
+	             +"<button onclick='location.href=/apply/applyJoin.do'>과외 신청</button></td>"
+	             +"</tr></table>"; 
+				 });
 				
-			//	alert(str);		
-				 
+		//		alert(str);		
+				$("#cont").html(str); 
+				
+				
 			},
 			error : function(){
 				alert('서버요청실패');
@@ -158,27 +175,22 @@ for(int j = i; j<i+5; j++) {
 <%} %>
 </tr>
 <%} %>
-
  </table>
  
 <table>
 <form name="frm">
-<input type="hidden" name="cateNameReq" id="cateNameReq">
-<input type="hidden" name="areaNameReq" id="areaNameReq">
+<input type="hidden" name="cateNameReq" id="cateNameReq" size=35>
+<input type="hidden" name="areaNameReq" id="areaNameReq" size=35>
 <tr>
-<td><div class="view-box"></div></td>
-<td rowspan=2><input type="button" name="btn" id="btn" value="검색"></td>
-</tr>
-<tr>
-<td><div class="view-box2"></div></td>
+<td class="view-box"></td>
+<td><input type="button" name="btn" id="btn" value="검색"></td>
 </tr>
 </form>
-</table>
- 
- 
+</table> 
+
  <table border="1" style="width:800px;">
 <tr>
-<td rowspan="4" style="width:150px;vertical-align:top;">
+<td style="width:150px;vertical-align:top;">
 
 <%
 int cnt2 = slist.size();
@@ -187,8 +199,7 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 	 for(int j2 = i2; j2<i2+2; j2++) {
 		 if (j2 == cnt2){
 			 break;
-		 }
-			 
+		 }			 
 %>
 	<input type="text" name="areaName"   value="<%=slist.get(j2).getAreaName()%>"  size=2  readonly >			
 <%		 
@@ -198,48 +209,31 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 %>
 
 </td>
-<td style="width:100px"><img src="test.jpg" width="100px" height="30px" alt="사진"></td>
-<td>
-&nbsp;이름 : 홍길동 <br>
-&nbsp;과외 : C/C++ <br>
-&nbsp;지역 : 서울  <br>
-&nbsp;자기 소개 : test <br>
-&nbsp;경력 및 경험 : 10년 
+<td id="cont">
+<% for (TeacherDto tedto : telist){ %>
+<table border=1 style='width:650px;vertical-align:top;'>
+<tr>
+<td style='width:100px;''><img src='test.jpg' width='100px' height='30px' alt='사진'></td>
+<td><%=tedto.getTeacherName()%>
+<br><%=tedto.getCateName() %> 
+<br><%=tedto.getTeacherExp() %> 
+<br><%=tedto.getTeacherGender() %>
+<br><%=tedto.getAreaName() %> 
+<br><%=tedto.getTeacherPay() %> 
+<br><%=tedto.getTeacherInfo() %>
+ </td>
+<td width='100px'>
+<button onclick='location.href=/review/reviewList.do'>리뷰보기</button>
+<button onclick='location.href=/apply/applyJoin.do'>과외 신청</button>
+</td>
+</tr>
+</table>
 
-</td>
-<td style="text-align:center;width:100px;">
-<button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do'">리뷰보기</button>
-<button onclick="location.href='<%=request.getContextPath()%>/apply/applyJoin.do'">과외 신청</button>
+<%} %>
 </td>
 </tr>
-<tr>
-<td><img src="test.jpg" width="100px" height="30px" alt="사진"></td>
-<td>
-&nbsp;이름 : 홍길동 <br>
-&nbsp;과외 : C/C++ <br>
-&nbsp;지역 : 서울  <br>
-&nbsp;자기 소개 : test <br>
-&nbsp;경력 및 경험 : 10년 
-</td>
-<td  style="text-align:center;">
-<button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do'">리뷰보기</button>
-<button onclick="location.href='<%=request.getContextPath()%>/apply/applyJoin.do'">과외 신청</button>
-</td>
-</tr>
-<tr>
-<td><img src="test.jpg" width="100px" height="30px" alt="사진"></td>
-<td>
-&nbsp;이름 : 홍길동 <br>
-&nbsp;과외 : C/C++ <br>
-&nbsp;지역 : 서울  <br>
-&nbsp;자기 소개 : test <br>
-&nbsp;경력 및 경험 : 10년 
-</td>
-<td  style="text-align:center;">
-<button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do'">리뷰보기</button>
-<button onclick="location.href='<%=request.getContextPath()%>/apply/applyJoin.do'">과외 신청</button>
-</td>
-</tr>
+
+
 <tr>
 <td style="text-align:left;" colspan="3">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
