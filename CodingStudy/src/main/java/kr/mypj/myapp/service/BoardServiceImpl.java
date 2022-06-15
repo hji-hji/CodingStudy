@@ -44,18 +44,22 @@ public class BoardServiceImpl implements BoardService{
 		
 		int value = 0;
 		
-		int originbidx = bsm.rtnOriginbidx();
+	//	int originbidx = bsm.rtnOriginbidx();
 		
 		HashMap<String,Object> map = new HashMap<String,Object>();
-		map.put("originbidx", originbidx);
+	//	map.put("originbidx", originbidx);
 		map.put("subject", subject);
 		map.put("contents", contents);
 		map.put("writer", writer);		
 		map.put("ip", ip);	
 		map.put("password", password);
-		map.put("midx", midx);	
-		value  = bsm.boardInsert(map);		
+		map.put("midx", midx);
+	//	map.put("bidx",0);
+		value  = bsm.boardInsert(map);
+	//	System.out.println("value"+map.get("bidx"));
 		
+		value = bsm.boardBidxUpdate(map.get("bidx"));				 
+				 
 		return value;
 	}
 

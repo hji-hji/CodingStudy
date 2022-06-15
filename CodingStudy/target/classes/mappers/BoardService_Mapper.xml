@@ -19,11 +19,17 @@
     </select>
 
 <insert id="boardInsert" parameterType="HashMap">
+<selectKey resultType="int" keyProperty="bidx" order="AFTER">
+  SELECT MAX(bidx) FROM board        
+</selectKey>
   
-insert into board(originbidx,depth,level_,subject,contents,writer,ip,password,midx) 
-values(#{originbidx},0,0,#{subject},#{contents},#{writer},#{ip},#{password},#{midx})
-
+insert into board(depth,level_,subject,contents,writer,ip,password,midx) 
+values(0,0,#{subject},#{contents},#{writer},#{ip},#{password},#{midx})
 </insert>
+
+<update id="boardBidxUpdate" parameterType ="Integer">
+update board set originbidx= #{bidx} where bidx=#{bidx} 
+</update>
 
 <select id="boardselectAll" parameterType="scri" resultType="bvo">
 select * from board where delyn='N' 

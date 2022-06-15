@@ -12,6 +12,8 @@ public interface BoardService_Mapper {
 	public int boardTotal(SearchCriteria scri);
 	
 	public int boardInsert(HashMap<String,Object> map); 
+	
+	public int boardBidxUpdate(Object bidx);
 		
 	public int boardView(int bidx);
 	
