@@ -80,7 +80,8 @@ $(function(){
 	  
 	  var cateNameReq = $('#cateNameReq').val();
 	  var areaNameReq = $('#areaNameReq').val();
-  
+  	  var str = "";
+	  
 	  alert(cateNameReq);
 	  alert(areaNameReq);
 	  $.ajax({ 
@@ -90,15 +91,17 @@ $(function(){
 			dataType : 'json', 			
 			success: function(data) {				
 		
-				alert("success");
+				alert("data");
 				
-				 $.each(data, function (i, item) {
-	                    alert("i : "+i);
-	                    alert("item : "+item.areaName);
-	                    alert("item : "+item.cateName);
-	                });
+			//	 $.each(data, function (i, item) {
+	         //           alert("i : "+i);
+	         //           alert("item : "+item.areaName);
+	         //           alert("item : "+item.cateName);
+	         //    str = str + "<tr><td></td><td>"+item.teacherName+" <br>"+item.cateName+" <br>"+item.teacherExp+" <br>"+item.teacherGender+"<br>"+item.areaName+" <br>"+item.teacherPay+"  <br>"+item.teacherInfo+"   </td><td></td></tr>"; 
+			//	 });
 				
-							
+			//	alert(str);		
+				 
 			},
 			error : function(){
 				alert('서버요청실패');

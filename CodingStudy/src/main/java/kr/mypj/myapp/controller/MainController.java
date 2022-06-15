@@ -46,45 +46,32 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping(value = "/main/mainSearch.do", produces="text/plain;charset=UTF-8")
 	public String mainSearch(
-			@RequestParam(value="cateNameReq", required = false, defaultValue="C/C++") String cateNameReq,
-			@RequestParam(value="areaNameReq", required = false, defaultValue="±§¡÷" ) String areaNameReq,
+			@RequestParam(value="cateNameReq", required = false, defaultValue="") String cateNameReq,
+			@RequestParam(value="areaNameReq", required = false, defaultValue="") String areaNameReq,
 			Model model) throws Exception {
 		
-	//	System.out.println("mainSearch.do");
-	
-	//	System.out.println("cateNameReq:"+cateNameReq);
-	//	System.out.println("areaNameReq:"+areaNameReq);
+		System.out.println("cateNameReq"+cateNameReq);
+		System.out.println("areaNameReq"+areaNameReq);
 		
 		ArrayList<TeacherDto> telist = mainservice.teacherSelectAll(cateNameReq, areaNameReq );
 		//System.out.println("telist:"+telist);
-		
-		//HashMap<String,Object> map = new HashMap<String,Object>();
-		
-		//String str = "{\"checkValue\":\"trest\"}";
+				
 		String str = "";
-		String strr = null;
-		int cnt  = telist.size();
-		System.out.println("cnt"+cnt);
+		String strr = null;		
+		int cnt  = telist.size();				
+		
 		for( int i =0; i<cnt;i++) {
 			
 			 strr = "";
 			if (i !=cnt-1) {
 				strr = ",";
 			}
-			str = str + "{\"areaName\":\""+telist.get(i).getAreaName()+"\",\"cateName\":\""+telist.get(i).getCateName()+"\"}"+strr;
-		            
-			
+			str = str + "{\"areaName\":\""+telist.get(i).getAreaName()+"\",\"teacherExp\":\""+telist.get(i).getTeacherExp()+"\",\"teacherGender\":\""+telist.get(i).getTeacherGender()+"\",\"teacherInfo\":\""+telist.get(i).getTeacherInfo()+"\",\"teacherName\":\""+telist.get(i).getTeacherName()+"\",\"teacherPay\":\""+telist.get(i).getTeacherPay()+"\",\"cateName\":\""+telist.get(i).getCateName()+"\"}"+strr; 
+		//  str = str + "{\"areaName\":\""+telist.get(i).getAreaName()+"\",\"cateName\":\""+telist.get(i).getCateName()+"\"}"+strr; 
 		}
 		
-		String strB = " ["+str+"]";
-		//System.out.println("map"+map);
 		
-		
-		
-		
-	//	JSONObject json =  new JSONObject(map);
-	//	json.put("telist", telist);
- 	
+		String strB = " ["+str+"]";	 	
 		System.out.println("strB"+strB);
 		
 		return strB; 
