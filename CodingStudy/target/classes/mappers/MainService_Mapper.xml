@@ -14,11 +14,10 @@ select * from studyarea where delyn='N' order by stidx asc;
 
 <select id="teacherSelectAll" parameterType="HashMap"  resultType="tedto">
 
-select a.teacherName,a.teacherGender,a.teacherExp,a.teacherPay,a.teacherInfo,b.cateName,c.areaName,a.filename from teacher a 
+select a.tidx, a.teacherName,a.teacherGender,a.teacherExp,a.teacherPay,a.teacherInfo,b.cateName,c.areaName,a.filename from teacher a 
 inner join category b on a.caidx=b.caidx 
 inner join studyarea c on a.stidx = c.stidx
-where a.delyn='N'
-
+where a.delyn='N' 
 <if test='cateName !=null' >
 and b.cateName in
 <foreach collection="cateName" item="arr" open="(" close=")" separator=",">
@@ -31,13 +30,13 @@ and c.areaName in
  #{arr2}
 </foreach>
 </if>
-
+order by a.tidx desc
 </select>
 
 
 <select id="teacherRandomSelectAll"  resultType="tedto">
 
-select a.teacherName,a.teacherGender,a.teacherExp,a.teacherPay,a.teacherInfo,b.cateName,c.areaName,a.filename from teacher a 
+select a.tidx, a.teacherName,a.teacherGender,a.teacherExp,a.teacherPay,a.teacherInfo,b.cateName,c.areaName,a.filename from teacher a 
 inner join category b on a.caidx=b.caidx 
 inner join studyarea c on a.stidx = c.stidx
 where a.delyn='N'

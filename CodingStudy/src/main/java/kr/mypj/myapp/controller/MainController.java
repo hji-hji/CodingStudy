@@ -75,6 +75,8 @@ public class MainController {
 						  + "\"teacherInfo\":\""+telist.get(i).getTeacherInfo()+"\","
 						  + "\"teacherName\":\""+telist.get(i).getTeacherName()+"\","
 						  + "\"teacherPay\":\""+telist.get(i).getTeacherPay()+"\","
+						  + "\"filename\":\""+telist.get(i).getFilename()+"\","
+						  + "\"tidx\":\""+telist.get(i).getTidx()+"\","
 						  + "\"cateName\":\""+telist.get(i).getCateName()+"\""
 						  + "}"+strr; 
 		

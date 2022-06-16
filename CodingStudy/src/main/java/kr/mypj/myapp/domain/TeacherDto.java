@@ -10,8 +10,15 @@ public class TeacherDto {
 	private String cateName;
 	private String areaName;
 	private String filename;
+	private int tidx;
 	
 	
+	public int getTidx() {
+		return tidx;
+	}
+	public void setTidx(int tidx) {
+		this.tidx = tidx;
+	}
 	public String getFilename() {
 		return filename;
 	}

@@ -105,13 +105,13 @@ $(function(){
 				
 				 $.each(data, function (i, item) {
 	     //              alert("i : "+i);
-	    //               alert("item : "+item.areaName);
+	    //               alert("item : "+item.filename);
 	    //               alert("item : "+item.cateName);
 	             str = str + "<table border=1 style='width:650px;vertical-align:top;'><tr>"
-	             +"<td style='width:100px;''><img src='test.jpg' width='100px' height='30px' alt='사진'></td>"
+	             +"<td style='width:100px;'><img src='<%=request.getContextPath()%>/displayFile.do?fileName="+item.filename+"' width='100px' height='100px' alt='사진'></td>"
 	             +"<td>"+item.teacherName+" <br>"+item.cateName+" <br>"+item.teacherExp+" <br>"+item.teacherGender+"<br>"+item.areaName+" <br>"+item.teacherPay+"  <br>"+item.teacherInfo+"   </td>"
-	             +"<td width='100px'><button onclick='location.href=/review/reviewList.do'>리뷰보기</button>"
-	             +"<button onclick='location.href=/apply/applyJoin.do'>과외 신청</button></td>"
+	             +"<td width='100px'><button onclick=location.href='<%=request.getContextPath()%>/review/reviewList.do'>리뷰보기</button>"
+	             +"<button onclick=location.href='<%=request.getContextPath()%>/apply/applyJoin.do?tidx="+item.tidx+"'>과외 신청</button></td>"
 	             +"</tr></table>"; 
 				 });
 				
@@ -213,7 +213,7 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 <% for (TeacherDto tedto : telist){ %>
 <table border=1 style='width:650px;vertical-align:top;'>
 <tr>
-<td style='width:100px;''><img src='test.jpg' width='100px' height='30px' alt='사진'></td>
+<td style='width:100px;''><img src='<%=request.getContextPath()%>/displayFile.do?fileName=<%=tedto.getFilename() %>'  width="100px" height="100px"></td>
 <td><%=tedto.getTeacherName()%>
 <br><%=tedto.getCateName() %> 
 <br><%=tedto.getTeacherExp() %> 
@@ -223,8 +223,8 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 <br><%=tedto.getTeacherInfo() %>
  </td>
 <td width='100px'>
-<button onclick='location.href=/review/reviewList.do'>리뷰보기</button>
-<button onclick='location.href=/apply/applyJoin.do'>과외 신청</button>
+<button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do'">리뷰보기</button>
+<button onclick="location.href='<%=request.getContextPath()%>/apply/applyJoin.do?tidx=<%=tedto.getTidx()%>'">과외 신청</button>
 </td>
 </tr>
 </table>
