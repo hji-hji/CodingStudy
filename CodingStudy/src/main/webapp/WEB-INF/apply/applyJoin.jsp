@@ -86,7 +86,7 @@ body
 <td><%=tedto.getCateName() %></td>
 </tr>
 <tr>
-<td>학습시간</td>
+<td>희망학습시간</td>
 <td> 
 <select name="studytime">
 <option value="1">1시간</option>
@@ -100,7 +100,7 @@ body
 </td>
 </tr>
 <tr>
-<td>과외학습비</td>
+<td>희망학습비</td>
 <td>
 
 <select name="amount">
@@ -120,7 +120,7 @@ body
 </td>
 </tr>
 <tr>
-<td>학습지역</td>
+<td>희망학습지역</td>
 <td>
 <select name="area">
 <% for (StudyareaVo sv : slist ) {%>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.BoardVo;
 import kr.mypj.myapp.domain.MemberVo;
 import kr.mypj.myapp.service.BoardService;
@@ -179,7 +180,13 @@ public class MemberController {
 	
 
 	@RequestMapping(value = "/member/memberApplyList.do", method = RequestMethod.GET)
-	public String memberApplyList() {						
+	public String memberApplyList(Model model, HttpSession session) {	
+		
+		int midx = Integer.parseInt(session.getAttribute("midx").toString());
+		
+		ArrayList<ApplyDto> aplist =  memberService.memberApplyList(midx);
+		
+		model.addAttribute("aplist", aplist);
 		
 		return "/WEB-INF/member/memberApplyList";
 	}

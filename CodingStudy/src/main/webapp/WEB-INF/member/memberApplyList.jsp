@@ -3,7 +3,7 @@
 <%@ page import ="kr.mypj.myapp.domain.*" %>   
 <%@ page import = "java.util.*" %> 
 
-    
+<% ArrayList<ApplyDto> aplist = (ArrayList<ApplyDto>)request.getAttribute("aplist"); %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +20,11 @@ body
   width: 800px;
 }
 </style>
+<script>
+<%	if (request.getAttribute("msg") != null) { %>
+		alert('<%=request.getAttribute("msg")%>');
+<%	} %>
+</script>
 </head>
 <body>
 <table border="1" style="width:800px;">
@@ -62,82 +67,42 @@ body
 <table border=1 style="width:600px">
 <tr style="color:green;">
 <th>번호</th>
-<th>과정</th>
-<th>선생님</th>
-<th>연락처</th>
+<th>과목/과정</th>
+<th>선생님 이름</th>
+<th>본인 연락처</th>
 </tr>
 <tr style="color:green;">
-<th>지역</th>
-<th>금액</th>
-<th>과외날짜</th>
+<th>희망 학습지역</th>
+<th>희망 학습금액</th>
+<th>희망 학습시간</th>
 <th>작성일/확인여부</th>
 </tr>
 <tr style="color:green;">
 <th colspan=4>요청내용</th>
 </tr>
-<tr style="hegith:10px;">
-<th colspan=4></th>
-</tr>
-<tr>
-<td>1</td>
-<td>자바</td>
-<td>홍길동</td>
-<td>010 2222 5555</td>
-</tr>
-<tr>
-<td>서울</td>
-<td>10만원</td>
-<td>2021.06.01</td>
-<td>2022.06.01/N</td>
-</tr>
-<tr>
-<td colspan=4>안녕하세요</td>
-</tr>
 
 
+<% for (ApplyDto apdto : aplist) { %>
 <tr>
-<td>1</td>
-<td>자바</td>
-<td>홍길동</td>
-<td>010 2222 5555</td>
+<td><%=apdto.getApidx() %></td>
+<td><%=apdto.getCateName() %></td>
+<td><%=apdto.getTeacherName() %></td>
+<td><%=apdto.getContact() %></td>
 </tr>
 <tr>
-<td>서울</td>
-<td>10만원</td>
-<td>2021.06.01</td>
-<td>2022.06.01/N</td>
+<td><%=apdto.getArea() %></td>
+<td><%=apdto.getAmount() %><%if (!apdto.getAmount().equals("협의")) { %>만원<% }%></td>
+<td><%=apdto.getStudyTime() %><%if (!apdto.getStudyTime().equals("협의")) { %>시간<% }%></td>
+<td><%=apdto.getWriteday() %>/ <%=apdto.getCheckYn() %></td>
 </tr>
 <tr>
-<td colspan=4>안녕하세요</td>
+<td colspan=4 height="30"><%=apdto.getContents() %></td>
 </tr>
-
-<tr>
-<td>1</td>
-<td>자바</td>
-<td>홍길동</td>
-<td>010 2222 5555</td>
-</tr>
-<tr>
-<td>서울</td>
-<td>10만원</td>
-<td>2021.06.01</td>
-<td>2022.06.01/N</td>
-</tr>
-<tr>
-<td colspan=4>안녕하세요</td>
-</tr>
-
-
-
+<%} %>
 </table>
 </td>
 </tr>
 </table> 
-
-
-
-
-
 
 </body>
 </html>

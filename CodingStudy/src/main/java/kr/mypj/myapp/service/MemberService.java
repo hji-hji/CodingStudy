@@ -1,5 +1,8 @@
 package kr.mypj.myapp.service;
 
+import java.util.ArrayList;
+
+import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.MemberVo;
 
 public interface MemberService {
@@ -21,4 +24,6 @@ public interface MemberService {
 	public String memberIdFind(String memberName, String memberEmail);
 	
 	public String memberPwdFind(String memberId, String memberEmail);
+	
+	public ArrayList<ApplyDto> memberApplyList(int midx);
 }

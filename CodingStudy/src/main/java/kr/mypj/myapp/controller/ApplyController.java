@@ -61,7 +61,7 @@ public class ApplyController {
 	public String memberJoinAction(
 			@RequestParam("tidx") int tidx,
 			@RequestParam("studytime") String studytime,
-			@RequestParam("amount") int amount,
+			@RequestParam("amount") String amount,
 			@RequestParam("area") String area,
 			@RequestParam("contact") String contact,
 			@RequestParam("contents") String contents,			

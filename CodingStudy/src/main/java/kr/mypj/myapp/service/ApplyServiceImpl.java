@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.TeacherDto;
 import kr.mypj.myapp.domain.TeacherVo;
 import kr.mypj.myapp.persistence.ApplyService_Mapper;
@@ -24,7 +25,7 @@ public class ApplyServiceImpl implements ApplyService{
 	
 	
 	@Override
-	public int applyInsert(int tidx, int midx,  String studytime, int amount, String area, String contact, String contents) {
+	public int applyInsert(int tidx, int midx,  String studytime, String amount, String area, String contact, String contents) {
 					
 		int value = 0;		
 		HashMap<String,Object> hm = new HashMap<String,Object>();
@@ -41,36 +42,6 @@ public class ApplyServiceImpl implements ApplyService{
 		return value;		
 		
 	}
-
-	
-	
-
-
-//	@Override
-//	public ArrayList<TeacherVo> teacherSelectAll(int midx) {
-//		ArrayList<TeacherVo> tlist = new ArrayList<TeacherVo>();
-//		
-//		tlist = tsm.teacherSelectAll(midx);
-//		
-//		return tlist;
-//	}
-//
-//
-//	@Override
-//	public int teacherDelete(int tidx, int midx) {
-//		
-//		int value = tsm.teacherDelete(tidx, midx);
-//		
-//		return value;
-//	}
-//
-//
-//	@Override
-//	public TeacherDto teacherSelectOne(int tidx) {
-//		TeacherDto tedto  = tsm.teacherSelectOne(tidx);
-//		
-//		return tedto;
-//	}
 
 
 	

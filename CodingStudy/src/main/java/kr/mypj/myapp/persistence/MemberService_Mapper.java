@@ -1,8 +1,10 @@
 package kr.mypj.myapp.persistence;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.MemberVo;
 
 
@@ -29,7 +31,7 @@ public interface MemberService_Mapper {
 	
 	public String memberPwdFind(String memberId, String memberEmail);
 
-	
+	public ArrayList<ApplyDto> memberApplyList(int midx);
 	
 	
 	}

@@ -1,11 +1,13 @@
 package kr.mypj.myapp.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.MemberVo;
 import kr.mypj.myapp.persistence.MemberService_Mapper;
 
@@ -118,6 +120,12 @@ public class MemberServiceImpl implements MemberService  {
 		return memberPwd;
 	}
 	
-	
+	@Override
+	public ArrayList<ApplyDto> memberApplyList(int midx) {
+		
+		ArrayList<ApplyDto> aplist = msm.memberApplyList(midx);
+		
+		return aplist;
+	}
 	
 }

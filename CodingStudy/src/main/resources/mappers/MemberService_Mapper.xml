@@ -42,7 +42,13 @@ select memberid from member where delyn='N' and membername = #{0} and memberemai
 select memberpwd from member where delyn='N' and memberid = #{0} and memberemail = #{1}
 </select>
 
+<select id="memberApplyList" parameterType="Integer" resultType="apdto">
+select a.apidx,b.teachername,a.contact,a.area,a.amount,a.studytime,a.contents,a.writeday,a.checkyn,
+(select c.cateName FROM category c where c.caidx = b.caidx) as catename 
+from apply a inner join teacher b on a.tidx=b.tidx 
+where a.midx = #{midx}
 
+</select>
 
 
 <!-- 
