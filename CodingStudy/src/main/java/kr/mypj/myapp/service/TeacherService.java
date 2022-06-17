@@ -3,6 +3,7 @@ package kr.mypj.myapp.service;
 
 import java.util.ArrayList;
 
+import kr.mypj.myapp.domain.TeacherDto;
 import kr.mypj.myapp.domain.TeacherVo;
 
 public interface TeacherService {
@@ -16,4 +17,6 @@ public interface TeacherService {
 	public ArrayList<TeacherVo> teacherSelectAll(int midx);
 	
 	public int teacherDelete(int tidx, int midx);
+	
+	public TeacherDto teacherSelectOne(int tidx);
 }

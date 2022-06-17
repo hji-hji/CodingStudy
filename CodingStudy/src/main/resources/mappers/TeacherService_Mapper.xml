@@ -12,6 +12,10 @@ values(#{teacherName},#{teacherEmail},#{teacherPhone},#{filename},#{teacherIp},#
 select * from teacher where delyn='N' and midx = #{midx} order by tidx desc
 </select>
 
+<select id="teacherSelectOne"  parameterType="Integer" resultType="tedto">
+select a.tidx, a.teachername, a.filename, b.catename from teacher a inner join category b on a.caidx= b.caidx where a.delyn='N' and a.tidx = #{tidx} 
+</select>
+
 
 <update id="teacherDelete" parameterType="Integer">
 update teacher set delyn='Y' where tidx=#{0} and midx=#{1}

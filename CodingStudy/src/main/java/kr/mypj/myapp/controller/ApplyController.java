@@ -1,10 +1,13 @@
 package kr.mypj.myapp.controller;
 
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,57 +15,81 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.mypj.myapp.domain.MemberVo;
+import kr.mypj.myapp.domain.StudyareaVo;
+import kr.mypj.myapp.domain.TeacherDto;
+import kr.mypj.myapp.domain.TeacherVo;
+import kr.mypj.myapp.service.ApplyService;
+import kr.mypj.myapp.service.MainService;
 import kr.mypj.myapp.service.MemberService;
+import kr.mypj.myapp.service.TeacherService;
 
 
 @Controller
 public class ApplyController {
+	
+	@Autowired
+	TeacherService teacherService;
+	
+	@Autowired
+	ApplyService applyService;
+	
+	@Autowired
+	MainService mainservice;
+	
 		
 	@RequestMapping(value = "/apply/applyJoin.do", method = RequestMethod.GET)
-	public String memberJoin() {						
+	public String applyJoin(@RequestParam("tidx") int tidx, Model model) {
+		
+		
+		ArrayList<StudyareaVo> slist = mainservice.studyareaSelectAll();
+		TeacherDto  tedto  = teacherService.teacherSelectOne(tidx);
+		
+		model.addAttribute("tedto", tedto);
+		model.addAttribute("slist", slist);
 		
 		return "/WEB-INF/apply/applyJoin";
 	}
 	
 	
 	@RequestMapping(value = "/apply/applyList.do", method = RequestMethod.GET)
-	public String memberList() {						
+	public String applyList() {						
 		
 		return "/WEB-INF/apply/applyList";
 	}
 	
-//	@RequestMapping(value = "/member/memberJoinAction.do")
-//	public String memberJoinAction(
-//			@RequestParam("memberId") String memberId,
-//			@RequestParam("memberPwd") String memberPwd,
-//			@RequestParam("memberName") String memberName,
-//			@RequestParam("memberPhone") String memberPhone,
-//			@RequestParam("memberEmail") String memberEmail,
-//			@RequestParam("memberGender") String memberGender,
-//			@RequestParam("memberBirth") String memberBirth,
-//			RedirectAttributes rttr
-//			) {	
-//		
-//		int value= 0;
-//		String path= "";
-//		try {			
-//			value = memberService.insertMember(memberId, memberPwd, memberName, memberPhone, memberEmail, memberGender, memberBirth);
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//	//	System.out.println("value"+value);
-//		
-//		if (value == 1) {	
-//			
-//			rttr.addFlashAttribute("msg", "회원가입 되었습니다.");	
-//			path = "redirect:/main/main.do";
-//		}else {
-//			path="redirect:/member/memberJoin.do";
-//		}
-//		return path;
-//	}
-//	
+	@RequestMapping(value = "/apply/applyJoinAction.do")
+	public String memberJoinAction(
+			@RequestParam("tidx") int tidx,
+			@RequestParam("studytime") String studytime,
+			@RequestParam("amount") int amount,
+			@RequestParam("area") String area,
+			@RequestParam("contact") String contact,
+			@RequestParam("contents") String contents,			
+			RedirectAttributes rttr,
+			HttpSession session
+			) {	
+		
+		int midx = Integer.parseInt(session.getAttribute("midx").toString());
+		int value= 0;
+		String path= "";
+		try {			
+			value = applyService.applyInsert(tidx, midx, studytime, amount, area, contact, contents);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	//	System.out.println("value"+value);
+		
+		if (value == 1) {	
+			
+			rttr.addFlashAttribute("msg", "과외 신청이 되었습니다.");	
+			path = "redirect:/member/memberApplyList.do";
+		}else {
+			path="redirect:/apply/applyJoin.do";
+		}
+		return path;
+	}
+	
 //	@ResponseBody
 //	@RequestMapping(value = "/member/memberIdCheck.do")
 //	public String memberIdCheck(

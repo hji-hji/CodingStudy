@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.mypj.myapp.domain.TeacherDto;
 import kr.mypj.myapp.domain.TeacherVo;
 import kr.mypj.myapp.persistence.TeacherService_Mapper;
 
@@ -65,6 +66,14 @@ public class TeacherServiceImpl implements TeacherService{
 		int value = tsm.teacherDelete(tidx, midx);
 		
 		return value;
+	}
+
+
+	@Override
+	public TeacherDto teacherSelectOne(int tidx) {
+		TeacherDto tedto  = tsm.teacherSelectOne(tidx);
+		
+		return tedto;
 	}
 
 
