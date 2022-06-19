@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" %>
  <%@ page import="java.util.*" %>   
  <%@ page import = "kr.mypj.myapp.domain.*" %>    
- <% ArrayList<TeacherVo> tlist = (ArrayList<TeacherVo>)request.getAttribute("tlist"); %>      
+ <% ArrayList<TeacherDto> tlist = (ArrayList<TeacherDto>)request.getAttribute("tlist"); %>      
               
 <!DOCTYPE HTML>
 <HTML>
@@ -20,14 +20,13 @@ a{
 text-decoration:none;
 }
 </style> 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.0.js"></script>
 <script>
 <%	if (request.getAttribute("msg") != null) { %>
 		alert('<%=request.getAttribute("msg")%>');
 <%	} %>
 
-function check(i){
-	
-		
+function memberDelete(i){		
 	
 	if (confirm("선생님 회원 등록을 삭제하시겠습니까?")){
 		
@@ -44,6 +43,55 @@ function check(i){
 	
 }
 
+function apply(i){
+	
+	var t_idx = document.getElementsByName("t_idx")[i].value;	
+	var flag = document.getElementsByName("flag")[i].value;	
+//	alert(flag);
+	if (flag ==1){
+		document.getElementById("cont"+i).style.display = "none";
+		document.getElementById("flag"+i).value=0;
+		return;
+		
+	}else{
+		document.getElementById("cont"+i).style.display = "";
+		document.getElementById("flag"+i).value=1;
+		
+	}
+	
+	 var str = "";
+	
+	 $.ajax({ 
+			type: 'post',        	
+			url: '<%=request.getContextPath()%>/teacher/teacherMyApplyList.do', 
+			data: {"tidx" : t_idx},
+			dataType : 'json', 			
+			success: function(data) {				
+		
+			//	alert(data.length);
+				
+				 $.each(data, function (i, item) {	   
+		//		 alert("신청인 : "+item.memberName);	 
+					 
+	            str = str + "<table border=1 style='width:500px;vertical-align:top;'><tr><td>"	  
+	            +"신청인: "+item.memberName+"<br>"
+	            +"지역: "+item.area+"<br>"
+	            +"연락처:"+item.contact+"<br>"
+	            +"희망수업시간:"+item.studyTime+"시간/주<br>"
+	            +"희망과외금액:"+item.amount+" 만원/시간<br>"
+	            +"요청사항:"+item.contents+"<br>"
+	            +"등록일:"+item.writeday+"<br>"
+	            +"</td></tr></table>"; 
+	    		 });			 
+			
+				$("#cont"+[i]).html(str); 					
+			},
+			error : function(){
+				alert('서버요청실패');
+			}
+		}); 	  
+	
+}
 
 </script> 
  </HEAD>
@@ -80,8 +128,8 @@ function check(i){
 <a href="<%=request.getContextPath() %>/member/memberApplyList.do">내가 신청한 과외</a><br><br> 
 <a href="<%=request.getContextPath() %>/member/memberReviewList.do">내가 남긴 리뷰</a><br><br> 
 <a href="<%=request.getContextPath() %>/member/memberBoardList.do">내가 남긴 문의</a><br><br>
-<a href="<%=request.getContextPath() %>/teacher/teacherMypage.do">선생님 등록정보<br><br>
-<a href="<%=request.getContextPath() %>/member/memberOut.do">회원탈퇴<br><br>
+<a href="<%=request.getContextPath() %>/teacher/teacherMypage.do">선생님 등록정보</a><br><br>
+<a href="<%=request.getContextPath() %>/member/memberOut.do">회원탈퇴</a><br><br>
 </td>
 
 <td>
@@ -89,77 +137,92 @@ function check(i){
 <input type="hidden" name="tidx">
 <% 
 int i = 0;
-for (TeacherVo tevo : tlist)  {%>
+for (TeacherDto tedto : tlist)  {%>
 <table border="1" style="text-align:left;height:300px">
 <tr>
-<td style="width:150px">사진 및 이름</td>
+<td style="width:150px">선생님 정보</td>
 <td colspan=3>
-<img src='<%=request.getContextPath()%>/displayFile.do?fileName=<%=tevo.getFilename() %>'  width="100px" height="100px">
-   <%=tevo.getTeacherName() %>
+<img src='<%=request.getContextPath()%>/displayFile.do?fileName=<%=tedto.getFilename() %>'  width="100px" height="100px"><br>
+<%=tedto.getTeacherName() %>
 </td>
 </tr>
 <tr>
 <td>과정</td>
-<td><%=tevo.getCaidx() %></td>
+<td><%=tedto.getCateName() %></td>
 <td>과외비</td>
-<td>시간당 <%=tevo.getTeacherpay() %></td>
+<td><%=tedto.getTeacherPay() %> 만원/시간</td>
 </tr>
 <tr>
 <td>등록일</td>
-<td colspan=3><%=tevo.getWriteday().substring(0,10) %></td>
+<td colspan=3><%=tedto.getWriteday().substring(0,10) %></td>
 </tr>
 <tr>
 <td>성별</td>
 <td colspan=3>
-<%=tevo.getTeachergender() %>
+<% 
+if (tedto.getTeacherGender().equals("M")) {
+out.println("남성");	
+}else{
+out.println("여성");		
+}
+%>
 </td>
 </tr>
 <tr>
 <td>연락처</td>
 <td colspan=3>
-<%=tevo.getTeacherPhone() %>
+<%=tedto.getTeacherPhone() %>
 </td>
 </tr>
 <tr>
 <td>지역</td>
 <td colspan=3>
-<%=tevo.getStidx() %>
+<%=tedto.getAreaName() %>
 </td>
 </tr>
 <tr>
 <td>경력 및 경험</td>
 <td colspan=3>
-<%=tevo.getTeacherexp() %>
+<% if (tedto.getTeacherExp().equals("6")){
+	out.println("5년이상");	
+}else{
+	out.println(tedto.getTeacherExp()+"년");
+} 
+
+%> 
 </td>
 </tr>
 <tr>
 <td>자기소개</td>
-<td colspan=3><%=tevo.getTeacherinfo() %></td> 
+<td colspan=3><%=tedto.getTeacherInfo() %></td> 
 </tr>
 
 <tr>
 <td></td>
 <td colspan=3>
-<button onclick="location.href='<%=request.getContextPath()%>/apply/applyList.do';">과외 신청정보 확인</button> 
-<button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do';">과정 리뷰보기</button> 
-<input type="hidden" name="t_idx" value="<%=tevo.getTidx() %>">
-<input type="button" value="선생님 회원등록 삭제" onclick="check(<%=i %>)">
+<input type="button"  value="과외 신청정보 확인하기" onclick="apply(<%=i %>)">
+<button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do';">과정 리뷰보기</button>
+ <input type="hidden" name="flag" id="flag<%=i %>" value="0">
+ <input type="hidden" name="t_idx" value="<%=tedto.getTidx() %>">
+<input type="button" value="선생님 회원등록 삭제" onclick="memberDelete(<%=i %>)">
 
 </td>
 </tr>
+<tr>
+<td  colspan=4 id="cont<%=i %>" wdith="600px"></td>
+</tr>
+
+
 </table>
  <%
 i = i+1; 
 }
 %>
  </form>
-
 </td>
-
 </tr>
-
 </table>
 
- 
+
  </BODY>
 </HTML>

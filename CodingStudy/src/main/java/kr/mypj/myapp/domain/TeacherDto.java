@@ -11,8 +11,28 @@ public class TeacherDto {
 	private String areaName;
 	private String filename;
 	private int tidx;
+	private String writeday;
+	private String teacherPhone;
+	private int midx;	
 	
-	
+	public int getMidx() {
+		return midx;
+	}
+	public void setMidx(int midx) {
+		this.midx = midx;
+	}
+	public String getTeacherPhone() {
+		return teacherPhone;
+	}
+	public void setTeacherPhone(String teacherPhone) {
+		this.teacherPhone = teacherPhone;
+	}
+	public String getWriteday() {
+		return writeday;
+	}
+	public void setWriteday(String writeday) {
+		this.writeday = writeday;
+	}
 	public int getTidx() {
 		return tidx;
 	}

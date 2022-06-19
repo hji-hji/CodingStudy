@@ -44,7 +44,13 @@ public class ApplyServiceImpl implements ApplyService{
 	}
 
 
-	
+	@Override
+	public ArrayList<ApplyDto> teacherMyApplyList(int tidx) {
+		ArrayList<ApplyDto> aplist =  asm.teacherMyApplyList(tidx);
+		
+		return aplist;
+	}
+
 
 
 	

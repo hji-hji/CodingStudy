@@ -221,10 +221,10 @@ color:gray;
 <form name="frm"> 
  <table border="1" style="text-align:left;width:800px;height:300px">
 <tr>
-<td style="width:150px">사진등록<br>(사진을 드래그해서 올려주세요)</td>
-<td>
+<td style="width:150px">사진등록<br>(1.사진을 드래그해서 올려주세요 2.jpg/gif/png 파일만 가능합니다)</td>
+<td class="fileDrop">
 <input type="hidden" id ="uploadfile" name="uploadfile">
-<div class="fileDrop"></div>
+
 <div class="uploadedList"></div>
 
 </td>

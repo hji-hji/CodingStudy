@@ -47,7 +47,7 @@ select a.apidx,b.teachername,a.contact,a.area,a.amount,a.studytime,a.contents,a.
 (select c.cateName FROM category c where c.caidx = b.caidx) as catename 
 from apply a inner join teacher b on a.tidx=b.tidx 
 where a.midx = #{midx}
-
+order by a.apidx desc
 </select>
 
 

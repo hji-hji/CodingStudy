@@ -6,7 +6,14 @@
 		ArrayList<CategoryVo> clist  = (ArrayList<CategoryVo>)request.getAttribute("clist");
 		ArrayList<StudyareaVo> slist  = (ArrayList<StudyareaVo>)request.getAttribute("slist");
 		ArrayList<TeacherDto> telist  = (ArrayList<TeacherDto>)request.getAttribute("telist");
-%>      
+
+		int midx = 0;
+		if (session.getAttribute("midx") != null){
+				midx = Integer.parseInt(session.getAttribute("midx").toString());
+		}
+
+%>
+
     
 <!DOCTYPE html>
 <html>
@@ -91,7 +98,11 @@ $(function(){
 	  var cateNameReq = $('#cateNameReq').val();
 	  var areaNameReq = $('#areaNameReq').val();
   	  var str = "";
-	  
+  	  var midx = <%=midx%>;
+  	  var sttr="";
+  	  var teacherExp="";
+  	  var teacherGender="";
+	  var teacherPayStr="";
 //	  alert(cateNameReq);
 //	  alert(areaNameReq);
 	  $.ajax({ 
@@ -104,20 +115,48 @@ $(function(){
 		//		alert("data");
 				
 				 $.each(data, function (i, item) {
-	     //              alert("i : "+i);
-	    //               alert("item : "+item.filename);
-	    //               alert("item : "+item.cateName);
+					 
+					 sttr = "";
+					 if(item.midx !=midx){
+			          sttr = "<button onclick=location.href='<%=request.getContextPath()%>/apply/applyJoin.do?tidx="+item.tidx+"'>과외 신청</button>";
+			             }	
+					 teacherExp ="";
+					 if(item.teacherExp =="6"){
+						 teacherExp = "5년이상";
+				     }else if (item.teacherExp =="0"){
+				    	 teacherExp = "1년이내";
+				     }else {
+				    	 teacherExp = item.teacherExp+"년";
+				     }	
+					 teacherGender="";
+					 if(item.teacherGender =="M"){
+						 teacherGender = "남성";
+					 }else{
+						 teacherGender = "여성";
+					 }
+					 teacherPayStr="";
+					 if (item.teacherPay !="협의"){
+						 teacherPayStr ="만원/시간";
+					 }						 
+					 
 	             str = str + "<table border=1 style='width:650px;vertical-align:top;'><tr>"
 	             +"<td style='width:100px;'><img src='<%=request.getContextPath()%>/displayFile.do?fileName="+item.filename+"' width='100px' height='100px' alt='사진'></td>"
-	             +"<td>"+item.teacherName+" <br>"+item.cateName+" <br>"+item.teacherExp+" <br>"+item.teacherGender+"<br>"+item.areaName+" <br>"+item.teacherPay+"  <br>"+item.teacherInfo+"   </td>"
-	             +"<td width='100px'><button onclick=location.href='<%=request.getContextPath()%>/review/reviewList.do'>리뷰보기</button>"
-	             +"<button onclick=location.href='<%=request.getContextPath()%>/apply/applyJoin.do?tidx="+item.tidx+"'>과외 신청</button></td>"
-	             +"</tr></table>"; 
+	             +"<td>이름:"+item.teacherName 
+	             +"<br>과목:"+item.cateName
+	             +" <br>경력:"+teacherExp
+	             +"<br>성별:"+teacherGender
+	             +"<br>지역:"+item.areaName
+	             +"<br>학습비:"+item.teacherPay + teacherPayStr
+	             +"<br>자기소개:"+item.teacherInfo
+	             +"</td>"
+	             +"<td width='100px'>"
+	             +"<button onclick=location.href='<%=request.getContextPath()%>/review/reviewList.do'>리뷰보기</button>"
+	             + sttr   
+	             +"</td></tr></table>"; 
 				 });
 				
 		//		alert(str);		
-				$("#cont").html(str); 
-				
+				$("#cont").html(str); 				
 				
 			},
 			error : function(){
@@ -214,17 +253,25 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 <table border=1 style='width:650px;vertical-align:top;'>
 <tr>
 <td style='width:100px;''><img src='<%=request.getContextPath()%>/displayFile.do?fileName=<%=tedto.getFilename() %>'  width="100px" height="100px"></td>
-<td><%=tedto.getTeacherName()%>
-<br><%=tedto.getCateName() %> 
-<br><%=tedto.getTeacherExp() %> 
-<br><%=tedto.getTeacherGender() %>
-<br><%=tedto.getAreaName() %> 
-<br><%=tedto.getTeacherPay() %> 
-<br><%=tedto.getTeacherInfo() %>
+<td>이름 : <%=tedto.getTeacherName()%>
+<br>과목 : <%=tedto.getCateName() %> 
+<br>경력 :<% if (tedto.getTeacherExp().equals("6")) {
+	        	  out.println("5년이상");
+               }else if(tedto.getTeacherExp().equals("0")){
+            	   out.println("1년이내");
+			  }else{ 
+	        	  out.println(tedto.getTeacherExp()+"년");
+	          } %> 
+<br>성별:<% if (tedto.getTeacherGender().equals("M")){out.println("남성");}else{out.println("여성");} %>
+<br>지역: <%=tedto.getAreaName() %> 
+<br>학습비:<%=tedto.getTeacherPay() %> <% if (!tedto.getTeacherPay().equals("협의")) {%>만원/시간<%} %> 
+<br>자기소개:<%=tedto.getTeacherInfo() %>
  </td>
 <td width='100px'>
 <button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do'">리뷰보기</button>
-<button onclick="location.href='<%=request.getContextPath()%>/apply/applyJoin.do?tidx=<%=tedto.getTidx()%>'">과외 신청</button>
+<%if (tedto.getMidx() != midx){%>
+<button onclick="location.href='<%=request.getContextPath()%>/apply/applyJoin.do?tidx=<%=tedto.getTidx()%>'">과외신청</button>
+<%} %>
 </td>
 </tr>
 </table>

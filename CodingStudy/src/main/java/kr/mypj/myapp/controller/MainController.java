@@ -30,7 +30,7 @@ public class MainController {
 	@RequestMapping(value = "/main/main.do", method = RequestMethod.GET)
 	public String main(Model model) {	
 		
-		System.out.println("main.do");
+	//	System.out.println("main.do");
 		
 		ArrayList<CategoryVo> clist = mainservice.categorySelectAll();
 		
@@ -52,8 +52,8 @@ public class MainController {
 			@RequestParam(value="areaNameReq", required = false, defaultValue="") String areaNameReq,
 			Model model) throws Exception {
 		
-		System.out.println("cateNameReq"+cateNameReq);
-		System.out.println("areaNameReq"+areaNameReq);
+	//	System.out.println("cateNameReq"+cateNameReq);
+	//	System.out.println("areaNameReq"+areaNameReq);
 		
 		ArrayList<TeacherDto> telist = mainservice.teacherSelectAll(cateNameReq, areaNameReq );
 		//System.out.println("telist:"+telist);
@@ -77,6 +77,7 @@ public class MainController {
 						  + "\"teacherPay\":\""+telist.get(i).getTeacherPay()+"\","
 						  + "\"filename\":\""+telist.get(i).getFilename()+"\","
 						  + "\"tidx\":\""+telist.get(i).getTidx()+"\","
+						  + "\"midx\":\""+telist.get(i).getMidx()+"\","
 						  + "\"cateName\":\""+telist.get(i).getCateName()+"\""
 						  + "}"+strr; 
 		

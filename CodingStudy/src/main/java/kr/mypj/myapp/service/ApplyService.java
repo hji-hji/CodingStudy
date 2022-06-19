@@ -12,11 +12,9 @@ public interface ApplyService {
 	
 	public int applyInsert(int tidx, int midx, String studytime, String amount, String area, String contact, String contents);
 	
-	
+	public ArrayList<ApplyDto> teacherMyApplyList(int tidx);
 	
 
 	
-//	public int teacherDelete(int tidx, int midx);
-//	
-//	public TeacherDto teacherSelectOne(int tidx);
+
 }

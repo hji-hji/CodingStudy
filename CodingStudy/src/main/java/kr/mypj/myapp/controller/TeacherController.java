@@ -5,11 +5,14 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,10 +29,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.mypj.myapp.util.MediaUtils;
 import kr.mypj.myapp.util.UploadFileUtiles;
-
+import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.CategoryVo;
 import kr.mypj.myapp.domain.StudyareaVo;
+import kr.mypj.myapp.domain.TeacherDto;
 import kr.mypj.myapp.domain.TeacherVo;
+import kr.mypj.myapp.service.ApplyService;
 import kr.mypj.myapp.service.MainService;
 import kr.mypj.myapp.service.TeacherService;
 
@@ -42,6 +47,9 @@ public class TeacherController {
 	
 	@Autowired
 	TeacherService teacherService;
+	
+	@Autowired
+	ApplyService applyService;
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;	
@@ -66,7 +74,7 @@ public class TeacherController {
 		
 		int midx = Integer.parseInt(session.getAttribute("midx").toString());
 		
-		ArrayList<TeacherVo> tlist = teacherService.teacherSelectAll(midx);
+		ArrayList<TeacherDto> tlist = teacherService.teacherSelectAll(midx);
 		
 		model.addAttribute("tlist", tlist);
 		
@@ -148,16 +156,11 @@ public class TeacherController {
 			@RequestParam("teacherEmail") String teacherEmail,
 			HttpSession session,
 			RedirectAttributes rttr
-			) {	
-		
-		
+			) {		
 		
 		String teacherIp = null;
 		int midx = Integer.parseInt(session.getAttribute("midx").toString());
-		
-		
-		
-		
+					
 		int value= 0;
 		String path= "";
 		try {			
@@ -179,9 +182,7 @@ public class TeacherController {
 			path="redirect:/teacher/teacherJoin.do";
 		}
 		return path;
-	}
-	
-	
+	}	
 	
 	@RequestMapping(value = "/teacher/teacherDeleteAction.do", method=RequestMethod.POST)
 	public String teacherDeleteAction(
@@ -202,85 +203,43 @@ public class TeacherController {
 		path="redirect:/teacher/teacherMypage.do";
 		return path;
 	}
-	
-	
-	
-	
-//	@ResponseBody
-//	@RequestMapping(value = "/member/memberIdCheck.do")
-//	public String memberIdCheck(
-//			@RequestParam("memberId") String memberId) {	
-//		
-//		int value = memberService.idCheck(memberId);		
-////		System.out.println("value"+value);
-//		
-//		String str = "{\"checkValue\":"+value+"}";
-//		
-//		return str;
-//	}
-//	
-//	@RequestMapping(value="/member/memberLogin.do")
-//	public String memberLogin() {
-//				
-//		return "/WEB-INF/member/memberLogin";
-//	}
-//	
-//	@RequestMapping(value="/member/memberLoginAction.do")
-//	public String memberLoginAction(
-//			@RequestParam("memberId") String memberId,
-//			@RequestParam("memberPwd") String memberPwd,
-//			RedirectAttributes rttr,
-//			HttpSession session			
-//			
-//			) throws Exception {		
-//			
-//		MemberVo mv = memberService.memberLogin(memberId,memberPwd);
-//
-//		String path= "";			
-//		
-//		if (mv != null) {
-//			
-//			rttr.addAttribute("midx", mv.getMidx());	
-//			
-//			if (session.getAttribute("saveUrl") != null) {
-//				String pj[] = session.getAttribute("saveUrl").toString().split("/");
-//				String saveUrl = session.getAttribute("saveUrl").toString().substring(pj[1].length()+1 ) ;
-//				path = "redirect:"+saveUrl;	
-//			}else {
-//				path = "redirect:/main/main.do";
-//			}		
-//	
-//		}else {
-//			rttr.addFlashAttribute("msg", "아이디 및 비밀번호를 확인해주세요");		
-//			path = "redirect:/member/memberLogin.do";	
-//		}			
-//
-//		return path;
-//	}	
-//	
-//	
-//	@RequestMapping(value="/member/memberLogout.do")
-//	public String memberLogout(HttpSession session) {	
-//				
-//		//세션 삭제
-//		session.removeAttribute("midx");
-//		session.invalidate();		
-//		
-//		return "/WEB-INF/member/memberLogout";
-//	}
-//	
-//	
-//	@RequestMapping(value="/member/memberMypage.do")
-//	public String memberMypage() {
-//				
-//		return "/WEB-INF/member/memberMypage";
-//	}
-//	
-//	@RequestMapping(value = "/member/memberModify.do", method = RequestMethod.GET)
-//	public String memberModify() {						
-//		
-//		return "/WEB-INF/member/memberModify";
-//	}
-//	
+		
+	@ResponseBody
+	@RequestMapping(value = "/teacher/teacherMyApplyList.do", produces="text/plain;charset=UTF-8")
+	public String teacherMyApplyList(	@RequestParam("tidx") int tidx) {	
+		
+		ArrayList<ApplyDto> aplist = applyService.teacherMyApplyList(tidx);			
+		
+		String str = "";
+		String strr = null;		
+		int cnt  = aplist.size();				
+		
+		for( int i =0; i<cnt;i++) {
+			
+			 strr = "";
+			if (i !=cnt-1) {
+				strr = ",";
+			}
+			str = str + "{"
+						  + "\"apidx\":\""+aplist.get(i).getApidx()+"\","
+						  + "\"amount\":\""+aplist.get(i).getAmount()+"\","
+						  + "\"area\":\""+aplist.get(i).getArea()+"\","						 
+						  + "\"checkYn\":\""+aplist.get(i).getCheckYn()+"\","
+						  + "\"contact\":\""+aplist.get(i).getContact()+"\","
+						  + "\"contents\":\""+aplist.get(i).getContents()+"\","
+						  + "\"studyTime\":\""+aplist.get(i).getStudyTime()+"\","
+						  + "\"memberName\":\""+aplist.get(i).getMemberName()+"\","
+						  + "\"writeday\":\""+aplist.get(i).getWriteday()+"\""						
+						  + "}"+strr; 
+		
+		}		
+		
+		String strObject = " ["+str+"]";	 	
+		System.out.println("strObject"+strObject);
+		
+		
+		return strObject;
+	}
+
 	
 }

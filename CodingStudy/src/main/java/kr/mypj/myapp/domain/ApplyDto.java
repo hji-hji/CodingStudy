@@ -3,8 +3,8 @@ package kr.mypj.myapp.domain;
 public class ApplyDto {
 	
 	private int apidx; 
-	private String cateName;
-	private String teacherName;
+	private String cateName;    //과외과목
+	private String teacherName; //과외선생님이름
 	private String contact;
 	private String area;
 	private String amount;
@@ -12,6 +12,14 @@ public class ApplyDto {
 	private String contents;
 	private String writeday;
 	private String checkYn;
+	private String memberName;
+	
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
 	
 	public int getApidx() {
 		return apidx;

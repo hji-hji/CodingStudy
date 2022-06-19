@@ -8,74 +8,21 @@ insert into teacher(teacherName,teacherEmail,teacherPhone,filename,teacherip,mid
 values(#{teacherName},#{teacherEmail},#{teacherPhone},#{filename},#{teacherIp},#{midx},#{caidx},#{stidx},#{teacherGender},#{teacherExp},#{teacherPay},#{teacherInfo})
 </insert>
 
-<select id="teacherSelectAll"  parameterType="Integer" resultType="tevo">
-select * from teacher where delyn='N' and midx = #{midx} order by tidx desc
+<select id="teacherSelectAll"  parameterType="Integer" resultType="tedto">
+select * from teacher a inner join category b on a.caidx= b.caidx inner join studyarea c on a.stidx = c.stidx 
+where a.delyn='N' and a.midx = #{midx} order by a.tidx desc
 </select>
 
 <select id="teacherSelectOne"  parameterType="Integer" resultType="tedto">
 select a.tidx, a.teachername, a.filename, b.catename from teacher a inner join category b on a.caidx= b.caidx where a.delyn='N' and a.tidx = #{tidx} 
 </select>
 
-
 <update id="teacherDelete" parameterType="Integer">
 update teacher set delyn='Y' where tidx=#{0} and midx=#{1}
 </update>
-<!-- 
-
-<select id="idCheck" parameterType="String" resultType="int">
-select count(*) from member where memberId = #{memberId}
-</select>
-
-<select id="memberLogin" parameterType="String" resultType="mvo">
-select * from member where memberid= #{0} and memberpwd= #{1}
-</select>
-
-<select id="memberSelectOne" parameterType="Integer" resultType="mvo">
-select * from member where midx = #{midx} 
-</select>
-
-<update id="memberModify"  parameterType="HashMap">
-update member set membername = #{memberName}, memberphone=#{memberPhone},
-memberemail = #{memberEmail},membergender=#{memberGender},memberbirth=#{memberBirth},writeday = now() where midx =#{midx}
-</update>
-
-<update id="passwordChange" parameterType="HashMap">
-update member set memberPwd=#{memberPwd} where midx = #{midx}
-</update>
 
 
-<delete id="stockNewsDelete">
-delete from StocksNews
-</delete>
 
-<sql id="search">    
-	    <if test="searchType != null and searchType.equals('stockName')">	
-			and b.stockname like CONCAT('%', #{keyword}, '%')
-		</if>	
-		<if test="searchType != null and searchType.equals('stockNumber')">	
-			 and b.stocknumber like CONCAT('%', #{keyword}, '%')
-		</if> 
-			<if test="searchType != null and searchType.equals('newsTitle')">	
-			 and a.newstitle like CONCAT('%', #{keyword}, '%')
-		</if> 
-    </sql> 
-
-<select id="stockNewsSelectAll"  parameterType="HashMap" resultType="sndto">
-
-select DISTINCT a.newstitle, a.newscompany, a.newsdate, a.newstime,b.stocknumber,b.stockname,a.newscontentsurl 
-from StocksNews a, Stocks b 
-where b.sidx=a.sidx 
-and a.delyn='N'
-
-<if test="keyword!=null and keyword!=''">
-<include refid="search" />
-</if>
-	
-order by a.newsdate desc, a.newstime desc
-
-</select>
-
--->
 </mapper>
 
 

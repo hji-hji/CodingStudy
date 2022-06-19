@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.TeacherDto;
 import kr.mypj.myapp.domain.TeacherVo;
 import kr.mypj.myapp.persistence.TeacherService_Mapper;
@@ -51,8 +52,8 @@ public class TeacherServiceImpl implements TeacherService{
 
 
 	@Override
-	public ArrayList<TeacherVo> teacherSelectAll(int midx) {
-		ArrayList<TeacherVo> tlist = new ArrayList<TeacherVo>();
+	public ArrayList<TeacherDto> teacherSelectAll(int midx) {
+		ArrayList<TeacherDto> tlist = new ArrayList<TeacherDto>();
 		
 		tlist = tsm.teacherSelectAll(midx);
 		
@@ -76,6 +77,8 @@ public class TeacherServiceImpl implements TeacherService{
 		return tedto;
 	}
 
+
+	
 
 	
 

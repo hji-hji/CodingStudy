@@ -91,8 +91,8 @@ body
 </tr>
 <tr>
 <td><%=apdto.getArea() %></td>
-<td><%=apdto.getAmount() %><%if (!apdto.getAmount().equals("협의")) { %>만원<% }%></td>
-<td><%=apdto.getStudyTime() %><%if (!apdto.getStudyTime().equals("협의")) { %>시간<% }%></td>
+<td><%=apdto.getAmount() %><%if (!apdto.getAmount().equals("협의")) { %>만원/시간<% }%></td>
+<td><%=apdto.getStudyTime() %><%if (!apdto.getStudyTime().equals("협의")) { %>시간/주<% }%></td>
 <td><%=apdto.getWriteday() %>/ <%=apdto.getCheckYn() %></td>
 </tr>
 <tr>

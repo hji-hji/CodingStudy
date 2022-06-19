@@ -13,9 +13,6 @@ public interface ApplyService_Mapper {
 	
 	public int applyInsert(HashMap<String,Object> hm);
 	
-	
-//	
-//	public int teacherDelete(int tidx, int midx);
-//	
-//	public TeacherDto teacherSelectOne(int tidx);
+	public ArrayList<ApplyDto> teacherMyApplyList(int tidx);
+
 }

@@ -27,20 +27,25 @@ body
 
   <script>
   function check(){
-  //	alert("테스트");
-  	
-  	var fm = document.frm;
-  	
-  	if (fm.contact.value ==""){
-  		alert("연락처를 입력하세요");
-  		fm.contact.focus();
-  		return;
-  	}  
-  		fm.action = "<%=request.getContextPath()%>/apply/applyJoinAction.do";
-  		fm.method = "post";
-  		fm.submit();  	
-  
-  		return;
+ 
+	if (confirm("신청하시면 회원님 이름과 회신 연락처는 코딩쌤에게 전달됩니다.")) {
+		var fm = document.frm;
+	  	
+	  	if (fm.contact.value ==""){
+	  		alert("연락처를 입력하세요");
+	  		fm.contact.focus();
+	  		return;
+	  	}  
+	  		fm.action = "<%=request.getContextPath()%>/apply/applyJoinAction.do";
+	  		fm.method = "post";
+	  		fm.submit();  	
+	  
+	  		return;
+		
+		
+	}else{
+		alert('취소되었습니다.');
+	}  
   }
   
   </script>
@@ -130,9 +135,10 @@ body
 </td>
 </tr>
 <tr>
-<td>연락처</td>
+<td>회신 연락처</td>
 <td>
 <input type="text" name="contact" size="20" placeholder="010-xxxx-xxxx">
+
 </td>
 </tr>
 <tr>
