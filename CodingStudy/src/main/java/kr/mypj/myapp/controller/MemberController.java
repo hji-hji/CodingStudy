@@ -331,6 +331,23 @@ public class MemberController {
 		
 	}	
 	
+	@RequestMapping(value="/member/memberAuth.do")
+	public String memberAuth(HttpSession session, RedirectAttributes rttr) {	
+		
+		int midx = Integer.parseInt(session.getAttribute("midx").toString());
+		int value = memberService.memberApproveYnUpdate(midx);
+		
+		String path= "";
+		
+		if (value == 1) {				
+			rttr.addFlashAttribute("msg", "인증되었습니다.");				
+		}
+		path = "redirect:/member/memberMypage.do";
+		return path;
+	}
+	
+	
+	
 	
 	
 }

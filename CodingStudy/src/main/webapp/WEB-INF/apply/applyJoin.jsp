@@ -28,7 +28,7 @@ body
   <script>
   function check(){
  
-	if (confirm("신청하시면 회원님 이름과 회신 연락처는 코딩쌤에게 전달됩니다.")) {
+//	if (confirm("신청하시면 회원님 이름과 회신 연락처는 코딩쌤에게 전달됩니다.")) {
 		var fm = document.frm;
 	  	
 	  	if (fm.contact.value ==""){
@@ -43,9 +43,9 @@ body
 	  		return;
 		
 		
-	}else{
-		alert('취소되었습니다.');
-	}  
+//	}else{
+//		alert('취소되었습니다.');
+//	}  
   }
   
   </script>

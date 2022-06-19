@@ -60,7 +60,8 @@ function apply(i){
 	}
 	
 	 var str = "";
-	
+	 var amountStr= "";
+	 var studyTimeStr="";
 	 $.ajax({ 
 			type: 'post',        	
 			url: '<%=request.getContextPath()%>/teacher/teacherMyApplyList.do', 
@@ -71,14 +72,23 @@ function apply(i){
 			//	alert(data.length);
 				
 				 $.each(data, function (i, item) {	   
-		//		 alert("신청인 : "+item.memberName);	 
+		//		 alert("신청인 : "+item.memberName);
+		
+				 studyTimeStr="";
+				 if (item.studyTime !="협의"){
+					 studyTimeStr ="시간/주";
+				 }	
+				 amountStr="";
+				 if (item.amount !="협의"){
+					 amountStr ="만원/시간";
+				 }	
 					 
 	            str = str + "<table border=1 style='width:500px;vertical-align:top;'><tr><td>"	  
-	            +"신청인: "+item.memberName+"<br>"
+	 //           +"신청인: "+item.memberName+"<br>"
 	            +"지역: "+item.area+"<br>"
 	            +"연락처:"+item.contact+"<br>"
-	            +"희망수업시간:"+item.studyTime+"시간/주<br>"
-	            +"희망과외금액:"+item.amount+" 만원/시간<br>"
+	            +"희망수업시간:"+item.studyTime+studyTimeStr+"<br>"
+	            +"희망과외금액:"+item.amount+amountStr+" <br>"
 	            +"요청사항:"+item.contents+"<br>"
 	            +"등록일:"+item.writeday+"<br>"
 	            +"</td></tr></table>"; 

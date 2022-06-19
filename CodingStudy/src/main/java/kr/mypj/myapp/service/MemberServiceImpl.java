@@ -127,5 +127,11 @@ public class MemberServiceImpl implements MemberService  {
 		
 		return aplist;
 	}
+
+	@Override
+	public int memberApproveYnUpdate(int midx) {
+		int value = msm.memberApproveYnUpdate(midx);
+		return value;
+	}
 	
 }

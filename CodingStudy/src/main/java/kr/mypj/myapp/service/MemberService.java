@@ -26,4 +26,6 @@ public interface MemberService {
 	public String memberPwdFind(String memberId, String memberEmail);
 	
 	public ArrayList<ApplyDto> memberApplyList(int midx);
+	
+	public int memberApproveYnUpdate(int midx);
 }

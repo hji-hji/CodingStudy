@@ -114,7 +114,7 @@ body
 </tr>
 <tr>
 <td>이름</td>
-<td><input type="text" name="memberName" size="20" value="<%=mv.getMemberName()%>"></td>
+<td><input type="text" name="memberName" size="20" value="<%=mv.getMemberName()%>" <%if (mv.getMemberApproveYn().equals("Y")) {out.println("readonly style='background-color:#808080'");} %>></td>
 </tr>
 <tr>
 <td>이메일</td>
@@ -130,7 +130,7 @@ body
 <tr>
 <td>연락처</td>
 <td>
-<input type="text" name="memberPhone" size="15" value="<%=mv.getMemberPhone()%>">
+<input type="text" name="memberPhone" size="15" value="<%=mv.getMemberPhone()%>"  <%if (mv.getMemberApproveYn().equals("Y")) {out.println("readonly style='background-color:#808080'");} %> >
 </td>
 </tr>
 <tr>

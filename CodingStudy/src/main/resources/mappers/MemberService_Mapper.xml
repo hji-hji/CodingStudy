@@ -51,6 +51,12 @@ order by a.apidx desc
 </select>
 
 
+<update id="memberApproveYnUpdate" parameterType="Integer">
+update member set memberApproveYn='Y' where midx = #{midx}
+</update>
+
+
+
 <!-- 
 <delete id="stockNewsDelete">
 delete from StocksNews

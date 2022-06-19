@@ -33,5 +33,5 @@ public interface MemberService_Mapper {
 
 	public ArrayList<ApplyDto> memberApplyList(int midx);
 	
-	
+	public int memberApproveYnUpdate(int midx);
 	}

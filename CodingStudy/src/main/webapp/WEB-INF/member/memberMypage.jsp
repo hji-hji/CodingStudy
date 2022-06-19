@@ -96,7 +96,10 @@ text-decoration:none;
 </tr>
 <tr>
 <td>회원인증여부</td>
-<td><%=mv.getMemberApproveYn() %><button>인증하기</button><br>
+<td><%=mv.getMemberApproveYn() %>
+<% if (mv.getMemberApproveYn().equals("N")){ %>
+<button onclick="location.href='<%=request.getContextPath() %>/member/memberAuth.do'">인증하기</button><br>
+<%} %>
 </td>
 </tr>
  </table>
