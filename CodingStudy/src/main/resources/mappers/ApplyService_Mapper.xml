@@ -11,6 +11,11 @@ values(#{tidx},#{midx},#{amount},#{studytime},#{contents},#{contact},#{area})
 <select id="teacherMyApplyList" parameterType="Integer" resultType="apdto">
 select * from apply a inner join member b on a.midx=b.midx where tidx = #{tidx} order by a.apidx desc
 </select>
+
+<update id="applyCheckYnUpdate" parameterType="Integer">
+update apply set checkYn="Y" where apidx = #{apidx}
+
+</update>
 </mapper>
 
 

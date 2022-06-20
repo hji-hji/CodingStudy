@@ -14,7 +14,7 @@ public interface ApplyService {
 	
 	public ArrayList<ApplyDto> teacherMyApplyList(int tidx);
 	
-
+	public int applyCheckYnUpdate(int apidx);
 	
 
 }

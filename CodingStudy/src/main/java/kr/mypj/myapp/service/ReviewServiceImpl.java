@@ -66,6 +66,9 @@ public class ReviewServiceImpl implements ReviewService{
 		value = rsm.reviewDelete(hm);
 		return value;
 	}
+
+
+
 	
 
 }

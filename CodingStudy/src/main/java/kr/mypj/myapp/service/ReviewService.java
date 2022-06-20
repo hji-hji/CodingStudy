@@ -15,8 +15,6 @@ public interface ReviewService {
 	public int reviewInsert(String writer, String content, int tidx,int midx, String ip);
 	
 	public int reviewDelete(int ridx, int tidx, int midx, String ip);
-//	
-//	public TeacherDto teacherSelectOne(int tidx);
-	
+
 	
 }

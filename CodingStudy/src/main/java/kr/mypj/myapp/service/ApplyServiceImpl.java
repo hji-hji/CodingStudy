@@ -52,6 +52,13 @@ public class ApplyServiceImpl implements ApplyService{
 	}
 
 
+	@Override
+	public int applyCheckYnUpdate(int apidx) {
+		int value = asm.applyCheckYnUpdate(apidx);
+		return value;
+	}
+
+
 
 	
 

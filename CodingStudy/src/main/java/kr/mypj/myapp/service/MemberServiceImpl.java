@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService  {
 	
 	@Override
 	public int memberInsert(String memberId, String memberPwd, String memberName, String memberPhone,
-			String memberEmail, String memberGender, String memberBirth) {
+			String memberEmail, String memberGender, String memberBirth,String memberApproveYn) {
 			
 		int value = 0;		
 		HashMap<String,String> hm = new HashMap<String,String>();
@@ -34,7 +34,8 @@ public class MemberServiceImpl implements MemberService  {
 		hm.put("memberEmail", memberEmail);
 		hm.put("memberGender", memberGender);
 		hm.put("memberBirth", memberBirth);		
-
+		hm.put("memberApproveYn", memberApproveYn);		
+		
 		value = msm.memberInsert(hm);
 		return value;		
 	}

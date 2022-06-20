@@ -31,11 +31,13 @@ import kr.mypj.myapp.util.MediaUtils;
 import kr.mypj.myapp.util.UploadFileUtiles;
 import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.CategoryVo;
+import kr.mypj.myapp.domain.ReviewVo;
 import kr.mypj.myapp.domain.StudyareaVo;
 import kr.mypj.myapp.domain.TeacherDto;
 import kr.mypj.myapp.domain.TeacherVo;
 import kr.mypj.myapp.service.ApplyService;
 import kr.mypj.myapp.service.MainService;
+import kr.mypj.myapp.service.ReviewService;
 import kr.mypj.myapp.service.TeacherService;
 
 
@@ -50,6 +52,9 @@ public class TeacherController {
 	
 	@Autowired
 	ApplyService applyService;
+	
+	@Autowired
+	ReviewService reviewService;
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;	
@@ -241,5 +246,44 @@ public class TeacherController {
 		return strObject;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/teacher/teacherReviewList.do", produces="text/plain;charset=UTF-8")
+	public String teacherReviewList(@RequestParam("tidx") int tidx) {	
+	//	System.out.println("tidx"+tidx);
+		ArrayList<ReviewVo> rlist = reviewService.reviewSelectAll(tidx);			
+	//	System.out.println("rlist"+rlist);
+		
+		
+		String str = "";
+		String strr = null;		
+		int cnt  = rlist.size();				
+		
+		for( int i =0; i<cnt;i++) {
+			
+			 strr = "";
+			if (i !=cnt-1) {
+				strr = ",";
+			}
+			str = str + "{"
+						  + "\"writer\":\""+rlist.get(i).getWriter()+"\","
+						  + "\"content\":\""+rlist.get(i).getContent()+"\","
+						  + "\"writeday\":\""+rlist.get(i).getWriteday()+"\""						
+						  + "}"+strr; 
+		
+		}		
+		
+		String strObject = " ["+str+"]";	 	
+		System.out.println("strObject"+strObject);
+		
+		
+		return strObject;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

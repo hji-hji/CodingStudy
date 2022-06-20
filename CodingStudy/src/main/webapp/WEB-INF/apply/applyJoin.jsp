@@ -91,6 +91,10 @@ body
 <td><%=tedto.getCateName() %></td>
 </tr>
 <tr>
+<td>신청인</td>
+<td><%=session.getAttribute("memberName") %></td>
+</tr>
+<tr>
 <td>희망학습시간</td>
 <td> 
 <select name="studytime">

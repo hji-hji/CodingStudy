@@ -15,4 +15,5 @@ public interface ApplyService_Mapper {
 	
 	public ArrayList<ApplyDto> teacherMyApplyList(int tidx);
 
+	public int applyCheckYnUpdate(int apidx);
 }

@@ -42,8 +42,57 @@ function memberDelete(i){
 	}
 	
 }
+function review(i){
+	
+	$("#cont"+[i]).html(""); 	
+	
+	var t_idx = document.getElementsByName("t_idx")[i].value;	
+	var flag = document.getElementsByName("flag")[i].value;	
+//	alert(t_idx);
+	if (flag ==1){
+		document.getElementById("cont"+i).style.display = "none";
+		document.getElementById("flag"+i).value=0;
+		return;
+		
+	}else{
+		document.getElementById("cont"+i).style.display = "";
+		document.getElementById("flag"+i).value=1;
+		
+	}
+	
+	 var str = "";
+	
+	 $.ajax({ 
+			type: 'post',        	
+			url: '<%=request.getContextPath()%>/teacher/teacherReviewList.do', 
+			data: {"tidx" : t_idx},
+			dataType : 'json', 			
+			success: function(data) {				
+						
+	//			alert(data.length);
+				
+				 $.each(data, function (i, item) {	   
+					 
+				 str = str + "<table border=1 style='width:500px;vertical-align:top;'><tr><td>"	  
+	            +" 작성자: "+item.writer+"<br>"
+	            +"내용: "+item.content+"<br>"	           
+	            +"등록일:"+item.writeday+"<br>"
+	            +"</td></tr></table>"; 
+	    		 });			 
+			
+				$("#cont"+[i]).html(str); 					
+			},
+			error : function(){
+				alert('서버요청실패');
+			}
+		}); 	  
+	
+}
+
 
 function apply(i){
+	
+	$("#cont"+[i]).html(""); 	
 	
 	var t_idx = document.getElementsByName("t_idx")[i].value;	
 	var flag = document.getElementsByName("flag")[i].value;	
@@ -62,6 +111,7 @@ function apply(i){
 	 var str = "";
 	 var amountStr= "";
 	 var studyTimeStr="";
+	 var checkYnStr="";
 	 $.ajax({ 
 			type: 'post',        	
 			url: '<%=request.getContextPath()%>/teacher/teacherMyApplyList.do', 
@@ -82,12 +132,16 @@ function apply(i){
 				 if (item.amount !="협의"){
 					 amountStr ="만원/시간";
 				 }	
+				 checkYnStr="";
+				 if (item.checkYn =="N"){
+					 checkYnStr ="<button id =chk"+item.apidx+"  onclick='checkUpdate("+item.apidx+");return false; '>신청확인</button>";
+				 }	
 					 
 	            str = str + "<table border=1 style='width:500px;vertical-align:top;'><tr><td>"	  
-	 //           +"신청인: "+item.memberName+"<br>"
+	            +"신청인: "+item.memberName+"<br>"
 	            +"지역: "+item.area+"<br>"
 	            +"연락처:"+item.contact+"<br>"
-	            +"희망수업시간:"+item.studyTime+studyTimeStr+"<br>"
+	            +"희망수업시간:"+item.studyTime+studyTimeStr+"&nbsp;&nbsp;&nbsp;&nbsp;"+checkYnStr+"<br>"
 	            +"희망과외금액:"+item.amount+amountStr+" <br>"
 	            +"요청사항:"+item.contents+"<br>"
 	            +"등록일:"+item.writeday+"<br>"
@@ -101,6 +155,32 @@ function apply(i){
 			}
 		}); 	  
 	
+}
+
+function checkUpdate(apidx){
+//	alert(apidx);
+	
+	 $.ajax({ 
+			type: 'post',        	
+			url: '<%=request.getContextPath()%>/apply/applyCheckYnUpdate.do', 
+			data: {"apidx" : apidx},
+			dataType : 'json', 			
+			success: function(data) {				
+		
+		//		alert("신청 확인하였습니다.");
+			
+				if (data.check ==1){
+					$("#chk"+[apidx]).hide();
+				}
+			},
+			error : function(){
+				alert('서버요청실패');
+			}
+		}); 	  
+	
+	
+
+	return;
 }
 
 </script> 
@@ -211,7 +291,8 @@ out.println("여성");
 <td></td>
 <td colspan=3>
 <input type="button"  value="과외 신청정보 확인하기" onclick="apply(<%=i %>)">
-<button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do';">과정 리뷰보기</button>
+<input type="button"  value="과정 리뷰보기" onclick="review(<%=i %>)">
+
  <input type="hidden" name="flag" id="flag<%=i %>" value="0">
  <input type="hidden" name="t_idx" value="<%=tedto.getTidx() %>">
 <input type="button" value="선생님 회원등록 삭제" onclick="memberDelete(<%=i %>)">
@@ -219,7 +300,7 @@ out.println("여성");
 </td>
 </tr>
 <tr>
-<td  colspan=4 id="cont<%=i %>" wdith="600px"></td>
+<td  colspan=4  id="cont<%=i %>" wdith="600px"></td>
 </tr>
 
 

@@ -45,11 +45,12 @@ public class MemberController {
 			@RequestParam("memberEmail") String memberEmail,
 			@RequestParam("memberGender") String memberGender,
 			@RequestParam("memberBirth") String memberBirth,
+			@RequestParam("memberApproveYn") String memberApproveYn,
 			RedirectAttributes rttr
 			) throws Exception {			
 	
 		String path= "";			
-		int value = memberService.memberInsert(memberId, memberPwd, memberName, memberPhone, memberEmail, memberGender, memberBirth);
+		int value = memberService.memberInsert(memberId, memberPwd, memberName, memberPhone, memberEmail, memberGender, memberBirth,memberApproveYn);
 			
 		if (value == 1) {	
 			

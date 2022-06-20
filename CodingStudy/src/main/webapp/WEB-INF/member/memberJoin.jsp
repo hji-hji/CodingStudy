@@ -96,13 +96,23 @@ body
   		alert("생년월일을 입력하세요");  		
   		fm.memberBirth.focus();
   		return;
-  	} 	  	
+  	}else if (fm.memberApproveYn.value == "N"){
+  		alert("회원인증을 해주세요");  		
+  		fm.memberApproveYn.focus();
+  		return;
+  	} 	 	  	
   
   		fm.action = "<%=request.getContextPath()%>/member/memberJoinAction.do";
   		fm.method = "post";
   		fm.submit();  	
   
   		return;
+  }
+  
+  function approve(){
+	  alert('인증되었습니다');
+	  document.frm.memberApproveYn.value="Y";
+	  return;
   }
   
   </script>
@@ -174,6 +184,11 @@ body
 <tr>
 <td>생년월일</td>
 <td><input type="text" name="memberBirth" size="10" placeholder="xxxxxx">	
+</td>
+</tr>
+<tr>
+<td>회원인증</td>
+<td><input type="text" name="memberApproveYn" size="10" value="N" readonly>	<button onclick="approve();return false;">회원인증</button>
 </td>
 </tr>
 <tr>

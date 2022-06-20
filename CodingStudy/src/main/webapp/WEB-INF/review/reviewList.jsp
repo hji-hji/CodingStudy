@@ -6,10 +6,16 @@
 TeacherDto tedto = (TeacherDto)request.getAttribute("tedto");
 ArrayList<ReviewVo> rlist = (ArrayList<ReviewVo>)request.getAttribute("rlist");
 
-String memberName= "";
-if (session.getAttribute("memberName") != null){
+	String memberName= "";
+	if (session.getAttribute("memberName") != null){
 	memberName = (String)session.getAttribute("memberName");
-}
+	}
+	int midx = 0;
+	if (session.getAttribute("midx") != null){
+			midx = Integer.parseInt(session.getAttribute("midx").toString());
+	}	
+	
+
 %>
 <!DOCTYPE html>
 <html>
@@ -104,7 +110,7 @@ function reviewDelete(tidx,ridx){
 <table border="1" style="text-align:left;width:800px;">
 <tr>
 <td style="width:100px;height:30px">작성자</td>
-<td><input type="text" name="writer" value="<%=memberName%>"></td>
+<td><input type="text" name="writer" value="<%=memberName%>" readonly></td>
 <td rowspan=2><input type="button" name="btn" value="저장" onclick="save();"> </td>
 </tr>
 <tr>
@@ -118,13 +124,14 @@ function reviewDelete(tidx,ridx){
 <% for (ReviewVo rv : rlist) {%>
 <hr>
 <%=rv.getWriter() %>:<br>
-<%=rv.getContent()%><button onclick="reviewDelete(<%=rv.getTidx()%>,<%=rv.getRidx()%>);">삭제</button><br>
+<%=rv.getContent()%>
+<% if (rv.getMidx() == midx) {%>
+<button onclick="reviewDelete(<%=rv.getTidx()%>,<%=rv.getRidx()%>);">삭제</button>
+<%} %>
+<br>
 
 <%} %>
 
-<hr>
-홍길남:<br>
-안녕하세요 수고하셨습니다..&nbsp;&nbsp;<button>삭제</button><br>
 <hr>
 
 

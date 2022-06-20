@@ -90,19 +90,21 @@ public class ApplyController {
 		return path;
 	}
 	
-//	@ResponseBody
-//	@RequestMapping(value = "/member/memberIdCheck.do")
-//	public String memberIdCheck(
-//			@RequestParam("memberId") String memberId) {	
-//		
-//		int value = memberService.idCheck(memberId);		
-////		System.out.println("value"+value);
-//		
-//		String str = "{\"checkValue\":"+value+"}";
-//		
-//		return str;
-//	}
-//	
+	@ResponseBody
+	@RequestMapping(value = "/apply/applyCheckYnUpdate.do")
+	public String applyCheckYnUpdate(
+			@RequestParam("apidx") int apidx) {	
+		
+		String checkYn = "N";
+		int value = applyService.applyCheckYnUpdate(apidx);		
+//		System.out.println("value"+value);
+		
+		
+		String str = "{\"check\":"+value+"}";
+		
+		return str;
+	}
+	
 //	@RequestMapping(value="/member/memberLogin.do")
 //	public String memberLogin() {
 //				

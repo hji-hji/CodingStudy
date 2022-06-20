@@ -4,8 +4,8 @@
 <mapper namespace="kr.mypj.myapp.persistence.MemberService_Mapper">
 
 <insert id="memberInsert"  parameterType="HashMap">
-insert into member(memberId,memberPwd,memberName,memberPhone,memberEmail,memberGender,memberBirth) 
-values(#{memberId},#{memberPwd},#{memberName},#{memberPhone},#{memberEmail},#{memberGender},#{memberBirth})
+insert into member(memberId,memberPwd,memberName,memberPhone,memberEmail,memberGender,memberBirth,memberApproveYn) 
+values(#{memberId},#{memberPwd},#{memberName},#{memberPhone},#{memberEmail},#{memberGender},#{memberBirth},#{memberApproveYn})
 </insert>
 
 <select id="idCheck" parameterType="String" resultType="int">

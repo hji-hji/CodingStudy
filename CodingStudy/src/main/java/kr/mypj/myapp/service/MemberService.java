@@ -7,7 +7,7 @@ import kr.mypj.myapp.domain.MemberVo;
 
 public interface MemberService {
 
-	public int memberInsert(String memberId,String memberPwd,String memberName,String memberPhone,String memberEmail,String memberGender,String memberBirth);
+	public int memberInsert(String memberId,String memberPwd,String memberName,String memberPhone,String memberEmail,String memberGender,String memberBirth,String memberApproveYn);
 		
 	public int idCheck(String memberId);
 	
