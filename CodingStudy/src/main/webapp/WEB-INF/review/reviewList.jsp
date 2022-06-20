@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   
+<%@ page import="kr.mypj.myapp.domain.*" %>
+<%@ page import="java.util.*" %>   
+<% 
+TeacherDto tedto = (TeacherDto)request.getAttribute("tedto");
+ArrayList<ReviewVo> rlist = (ArrayList<ReviewVo>)request.getAttribute("rlist");
 
+String memberName= "";
+if (session.getAttribute("memberName") != null){
+	memberName = (String)session.getAttribute("memberName");
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +27,47 @@ body
   width: 800px;
 }
 </style>
+<script>
+<%	if (request.getAttribute("msg") != null) { %>
+		alert('<%=request.getAttribute("msg")%>');
+<%	} %>
+</script>
+<script type="text/javascript">
+
+function save(){
+	
+	var memberApproveYn = "<%=session.getAttribute("memberApproveYn")%>";
+	
+	if (memberApproveYn != "Y"){
+		alert("인증하신 회원만 글을 작성하실수 있습니다.");
+		return;
+	}
+	
+	var fm = document.frm;
+  	
+  	if (fm.content.value ==""){
+  		alert("내용을 등록 해주세요");
+  		fm.content.focus();
+  		return;
+  	}	
+	
+  	fm.action = "<%=request.getContextPath()%>/review/reviewWriteAction.do";
+  	fm.method = "post";
+  	fm.submit();
+	return;
+}
+
+function reviewDelete(tidx,ridx){
+	
+	if (confirm("삭제하시겠습니까?")){
+		
+		location.href="<%=request.getContextPath()%>/review/reviewDeleteAction.do?tidx="+tidx+"&ridx="+ridx;
+	}
+}
+
+
+</script>
+
 </head>
 <body>
 <table border="1" style="width:800px;">
@@ -43,30 +93,35 @@ body
 <h1>리뷰</h1>
 <table border="1" style="text-align:left;width:800px;height:100px">
 <tr>
-<td style="width:400px;height:50px">자바 </td>
-<td>홍길동 선생님</td>
+<td style="width:400px;height:50px"><%=tedto.getCateName() %> </td>
+<td><%=tedto.getTeacherName() %> </td>
 </tr>
 
 </table>
 
+<form name="frm">
+<input type="hidden" name="tidx" value="<%=tedto.getTidx()%>">
 <table border="1" style="text-align:left;width:800px;">
 <tr>
 <td style="width:100px;height:30px">작성자</td>
-<td><input type="text" name="anem" value="홍길동"></td>
-<td rowspan=2><button>저장</button></td>
+<td><input type="text" name="writer" value="<%=memberName%>"></td>
+<td rowspan=2><input type="button" name="btn" value="저장" onclick="save();"> </td>
 </tr>
 <tr>
 <td style="width:100px;height:50px">내용</td>
 <td  style="width:600px;height:50px">
-<textarea cols=80 rows=3 placeholder="회원 인증한 회원만 작성할수 있어요"></textarea>
+<textarea name="content" cols=80 rows=3 placeholder="회원 인증한 회원만 작성할수 있어요"></textarea>
 </td>
 </tr>
 </table>
-
-
+</form>
+<% for (ReviewVo rv : rlist) {%>
 <hr>
-홍길순:<br>
-안녕하세요 수고하셨습니다..&nbsp;&nbsp;<button>삭제</button><br>
+<%=rv.getWriter() %>:<br>
+<%=rv.getContent()%><button onclick="reviewDelete(<%=rv.getTidx()%>,<%=rv.getRidx()%>);">삭제</button><br>
+
+<%} %>
+
 <hr>
 홍길남:<br>
 안녕하세요 수고하셨습니다..&nbsp;&nbsp;<button>삭제</button><br>

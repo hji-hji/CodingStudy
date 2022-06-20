@@ -12,5 +12,6 @@
   	<typeAlias alias="tevo" type="kr.mypj.myapp.domain.TeacherVo"/>
   	<typeAlias alias="tedto" type="kr.mypj.myapp.domain.TeacherDto"/>
   	<typeAlias alias="apdto" type="kr.mypj.myapp.domain.ApplyDto"/>
+  	<typeAlias alias="revo" type="kr.mypj.myapp.domain.ReviewVo"/>
   </typeAliases> 
  </configuration>

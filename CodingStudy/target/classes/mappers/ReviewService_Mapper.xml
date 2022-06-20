@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.mypj.myapp.persistence.ReviewService_Mapper">
+
+<select id="reviewSelectAll"  parameterType="Integer" resultType="revo">
+select * from review where delyn='N' and tidx = #{tidx} order by ridx desc
+</select>
+
+ 
+<insert id="reviewInsert" parameterType="HashMap">
+insert into review(writer, content,tidx, midx, ip) values(#{writer},#{content},#{tidx},#{midx},#{ip})
+</insert>
+
+
+<update id="reviewDelete" parameterType="HashMap">
+update review set delyn='Y', writeday= now(), ip= #{ip} where tidx=#{tidx} and midx=#{midx} and ridx=#{ridx}
+</update>
+
+<!--
+<select id="teacherSelectOne"  parameterType="Integer" resultType="tedto">
+select a.tidx, a.teachername, a.filename, b.catename from teacher a inner join category b on a.caidx= b.caidx where a.delyn='N' and a.tidx = #{tidx} 
+</select>
+
+<update id="teacherDelete" parameterType="Integer">
+update teacher set delyn='Y' where tidx=#{0} and midx=#{1}
+</update>
+-->
+
+
+</mapper>
+
+

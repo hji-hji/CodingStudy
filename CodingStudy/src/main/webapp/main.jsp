@@ -12,9 +12,7 @@
 				midx = Integer.parseInt(session.getAttribute("midx").toString());
 		}
 
-%>
-
-    
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -150,7 +148,7 @@ $(function(){
 	             +"<br>자기소개:"+item.teacherInfo
 	             +"</td>"
 	             +"<td width='100px'>"
-	             +"<button onclick=location.href='<%=request.getContextPath()%>/review/reviewList.do'>리뷰보기</button>"
+	             +"<button onclick=location.href='<%=request.getContextPath()%>/review/reviewList.do?fileName="+item.filename+"'>리뷰보기</button>"
 	             + sttr   
 	             +"</td></tr></table>"; 
 				 });
@@ -268,7 +266,7 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 <br>자기소개:<%=tedto.getTeacherInfo() %>
  </td>
 <td width='100px'>
-<button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do'">리뷰보기</button>
+<button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do?tidx=<%=tedto.getTidx()%>'">리뷰보기</button>
 <%if (tedto.getMidx() != midx){%>
 <button onclick="location.href='<%=request.getContextPath()%>/apply/applyJoin.do?tidx=<%=tedto.getTidx()%>'">과외신청</button>
 <%} %>

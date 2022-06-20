@@ -15,6 +15,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				
 	 Object midx = modelAndView.getModel().get("midx");
 	 Object memberApproveYn = modelAndView.getModel().get("memberApproveYn");
+	 Object memberName = modelAndView.getModel().get("memberName");
 	 
 	 modelAndView.getModel().clear();  //파리미터 model 값 지우기
 	
@@ -22,6 +23,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		 //컨트롤러에서 담은 모델값 꺼내서 세션에 담기
 		 request.getSession().setAttribute("midx", midx);
 		 request.getSession().setAttribute("memberApproveYn", memberApproveYn);
+		 request.getSession().setAttribute("memberName", memberName);
 		 
 //		 if (request.getParameter("useCookie").equals("on") ) {
 //		 

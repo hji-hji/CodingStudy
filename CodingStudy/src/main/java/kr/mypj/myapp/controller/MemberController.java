@@ -97,6 +97,7 @@ public class MemberController {
 			
 			rttr.addAttribute("midx", mv.getMidx());	
 			rttr.addAttribute("memberApproveYn", mv.getMemberApproveYn());
+			rttr.addAttribute("memberName", mv.getMemberName());
 			
 			if (session.getAttribute("saveUrl") != null) {
 				String pj[] = session.getAttribute("saveUrl").toString().split("/");
