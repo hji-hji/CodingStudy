@@ -54,12 +54,11 @@ public class ReviewServiceImpl implements ReviewService{
 
 
 	@Override
-	public int reviewDelete(int ridx, int tidx, int midx, String ip) {
+	public int reviewDelete(int ridx, int midx, String ip) {
 	
 		int value = 0;	
 		HashMap<String,Object> hm = new HashMap<String,Object>();
-		hm.put("ridx", ridx);
-		hm.put("tidx", tidx);
+		hm.put("ridx", ridx);		
 		hm.put("midx", midx);
 		hm.put("ip", ip);
 		

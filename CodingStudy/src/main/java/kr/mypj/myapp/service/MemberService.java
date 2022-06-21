@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.MemberVo;
+import kr.mypj.myapp.domain.ReviewDto;
 
 public interface MemberService {
 
@@ -28,4 +29,11 @@ public interface MemberService {
 	public ArrayList<ApplyDto> memberApplyList(int midx);
 	
 	public int memberApproveYnUpdate(int midx);
+	
+	public ArrayList<ReviewDto> memberReviewList(int midx);
+	
+	
+	
+	
+	
 }

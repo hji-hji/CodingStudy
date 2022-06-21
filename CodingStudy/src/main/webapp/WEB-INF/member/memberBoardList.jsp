@@ -53,7 +53,7 @@ body
 
 <table border="1" style="width:800px;">
 <tr>
-<td style="width:200px">
+<td style="width:200px;vertical-align:top;">
 <a href="<%=request.getContextPath()%>/member/memberModify.do">회원정보수정</a><br><br>
 <a href="<%=request.getContextPath()%>/member/memberPwdChange.do">비밀번호 변경</a><br><br> 
 <a href="<%=request.getContextPath() %>/member/memberApplyList.do">내가 신청한 과외</a><br><br> 

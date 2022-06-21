@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.MemberVo;
+import kr.mypj.myapp.domain.ReviewDto;
 
 
 
@@ -34,4 +35,6 @@ public interface MemberService_Mapper {
 	public ArrayList<ApplyDto> memberApplyList(int midx);
 	
 	public int memberApproveYnUpdate(int midx);
+	
+	public ArrayList<ReviewDto> memberReviewList(int midx);
 	}

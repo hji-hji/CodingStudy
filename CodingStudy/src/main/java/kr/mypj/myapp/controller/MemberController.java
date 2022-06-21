@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.BoardVo;
 import kr.mypj.myapp.domain.MemberVo;
+import kr.mypj.myapp.domain.ReviewDto;
 import kr.mypj.myapp.service.BoardService;
 import kr.mypj.myapp.service.MemberService;
 
@@ -194,7 +195,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/member/memberReviewList.do", method = RequestMethod.GET)
-	public String memberReviewList() {						
+	public String memberReviewList(HttpSession session, Model model) {		
+		
+		int midx = Integer.parseInt(session.getAttribute("midx").toString());
+		
+		ArrayList<ReviewDto> relist = memberService.memberReviewList(midx);
+		
+		model.addAttribute("relist", relist);
 		
 		return "/WEB-INF/member/memberReviewList";
 	}
@@ -342,7 +349,8 @@ public class MemberController {
 		String path= "";
 		
 		if (value == 1) {				
-			rttr.addFlashAttribute("msg", "인증되었습니다.");				
+			rttr.addFlashAttribute("msg", "인증되었습니다.");	
+			session.setAttribute("memberApproveYn", "Y");
 		}
 		path = "redirect:/member/memberMypage.do";
 		return path;

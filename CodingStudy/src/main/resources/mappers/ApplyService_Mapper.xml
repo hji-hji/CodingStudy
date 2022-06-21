@@ -18,7 +18,7 @@ update apply set checkYn="Y" where apidx = #{apidx}
 
 
 <select id="applyWriteCheck" parameterType="HashMap" resultType="apdto">
-select tidx, midx, checkYn,count(*) as cnt from apply where midx =#{midx} and tidx=#{tidx} group by tidx, midx,checkYn
+select tidx, midx, checkYn,count(*) as cnt from apply where midx =#{midx} and tidx=#{tidx} group by tidx, midx,checkYn order by checkYn desc
 </select>
 </mapper>
 

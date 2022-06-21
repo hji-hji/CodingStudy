@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.MemberVo;
+import kr.mypj.myapp.domain.ReviewDto;
 import kr.mypj.myapp.persistence.MemberService_Mapper;
 
 @Service
@@ -133,6 +134,12 @@ public class MemberServiceImpl implements MemberService  {
 	public int memberApproveYnUpdate(int midx) {
 		int value = msm.memberApproveYnUpdate(midx);
 		return value;
+	}
+
+	@Override
+	public ArrayList<ReviewDto> memberReviewList(int midx) {
+		ArrayList<ReviewDto> relist = msm.memberReviewList(midx);
+		return relist;
 	}
 	
 }

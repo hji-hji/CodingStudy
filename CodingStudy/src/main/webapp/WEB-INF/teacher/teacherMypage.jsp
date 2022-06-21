@@ -85,10 +85,8 @@ function review(i){
 			error : function(){
 				alert('서버요청실패');
 			}
-		}); 	  
-	
+		}); 	  	
 }
-
 
 function apply(i){
 	
@@ -153,8 +151,7 @@ function apply(i){
 			error : function(){
 				alert('서버요청실패');
 			}
-		}); 	  
-	
+		}); 	  	
 }
 
 function checkUpdate(apidx){
@@ -176,9 +173,7 @@ function checkUpdate(apidx){
 			error : function(){
 				alert('서버요청실패');
 			}
-		}); 	  
-	
-	
+		}); 	  	
 
 	return;
 }

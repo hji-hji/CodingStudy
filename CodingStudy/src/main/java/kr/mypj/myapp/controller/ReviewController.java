@@ -89,9 +89,9 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/review/reviewDeleteAction.do")
-	public String reviewDeleteAction(
-			@RequestParam("tidx") int tidx,	
-			@RequestParam("ridx") int ridx,
+	public String reviewDeleteAction(	
+			@RequestParam(value="tidx", required = false, defaultValue="0") int tidx,
+			@RequestParam(value="ridx", required = false, defaultValue="0") int ridx,
 			RedirectAttributes rttr,
 			HttpSession session
 			) throws UnknownHostException {	
@@ -102,7 +102,7 @@ public class ReviewController {
 		int value= 0;
 		String path= "";
 		try {			
-			value = reviewService.reviewDelete(ridx, tidx, midx, ip);
+			value = reviewService.reviewDelete(ridx, midx, ip);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -110,7 +110,11 @@ public class ReviewController {
 		if (value == 1) {				
 			rttr.addFlashAttribute("msg", "리뷰가 삭제 되었습니다.");				
 		}
-		path = "redirect:/review/reviewList.do?tidx="+tidx;
+		if (tidx != 0) {
+			path = "redirect:/review/reviewList.do?tidx="+tidx;
+		}else {
+			path = "redirect:/member/memberReviewList.do";
+		}
 		return path;
 	}
 	

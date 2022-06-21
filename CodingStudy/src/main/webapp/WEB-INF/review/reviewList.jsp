@@ -6,23 +6,22 @@
 TeacherDto tedto = (TeacherDto)request.getAttribute("tedto");
 ArrayList<ReviewVo> rlist = (ArrayList<ReviewVo>)request.getAttribute("rlist");
 ArrayList<ApplyDto> aplist = (ArrayList<ApplyDto>)request.getAttribute("aplist");
-int apidx= 0;
+
+int cnt= 0;
 String checkYn= "N";
 
 for (ApplyDto apdto : aplist){
 	
-	apidx = apdto.getApidx();
+	cnt = apdto.getCnt();
+	System.out.println("cnt"+cnt);
+	
 	if (apdto.getCheckYn().equals("Y")){
 		checkYn = apdto.getCheckYn();		
 		break;
-	}
-	
-	
-}
+	}	
+}	
 
-
-
-	String memberName= "";
+String memberName= "";
 	if (session.getAttribute("memberName") != null){
 	memberName = (String)session.getAttribute("memberName");
 	}
@@ -50,27 +49,28 @@ body
 }
 </style>
 <script>
-<%	if (request.getAttribute("msg") != null) { %>
-		alert('<%=request.getAttribute("msg")%>');
-<%	} %>
+<%//	if (request.getAttribute("msg") != null) { %>
+	//	alert('<%//=request.getAttribute("msg")%>');
+<%	//} %>
 </script>
 <script type="text/javascript">
 
 function save(){
 	
 	var memberApproveYn = "<%=session.getAttribute("memberApproveYn")%>";
-	var apidx = <%=apidx%>;
+	var cnt = <%=cnt%>;
+	var checkYn = "<%=checkYn%>";
 	
 	if (memberApproveYn != "Y"){
 		alert("인증하신 회원만 글을 작성하실수 있습니다.");
 		return;
 	}
-	if (apidx ==0){
+	if (cnt ==0){
 		alert("과외 신청을 해야 등록이 가능합니다.");
 		return;
 	}
 	if (checkYn =='N'){
-		alert("코딩쌤이 과외 신청정보를 확인중입니다.");
+		alert("과외 신청 정보가 확인되면 작성이 가능합니다.");
 		return;
 	}
 	

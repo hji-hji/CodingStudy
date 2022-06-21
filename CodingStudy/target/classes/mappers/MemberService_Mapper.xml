@@ -55,41 +55,13 @@ order by a.apidx desc
 update member set memberApproveYn='Y' where midx = #{midx}
 </update>
 
-
-
-<!-- 
-<delete id="stockNewsDelete">
-delete from StocksNews
-</delete>
-
-<sql id="search">    
-	    <if test="searchType != null and searchType.equals('stockName')">	
-			and b.stockname like CONCAT('%', #{keyword}, '%')
-		</if>	
-		<if test="searchType != null and searchType.equals('stockNumber')">	
-			 and b.stocknumber like CONCAT('%', #{keyword}, '%')
-		</if> 
-			<if test="searchType != null and searchType.equals('newsTitle')">	
-			 and a.newstitle like CONCAT('%', #{keyword}, '%')
-		</if> 
-    </sql> 
-
-<select id="stockNewsSelectAll"  parameterType="HashMap" resultType="sndto">
-
-select DISTINCT a.newstitle, a.newscompany, a.newsdate, a.newstime,b.stocknumber,b.stockname,a.newscontentsurl 
-from StocksNews a, Stocks b 
-where b.sidx=a.sidx 
-and a.delyn='N'
-
-<if test="keyword!=null and keyword!=''">
-<include refid="search" />
-</if>
-	
-order by a.newsdate desc, a.newstime desc
-
+<select id="memberReviewList" parameterType="Integer" resultType="redto">
+select a.ridx, c.catename, b.teacherName, a.writer,a.content from review a inner join teacher b on a.tidx=b.tidx 
+inner join category c on b.caidx = c.caidx
+where a.delyn='N' and a.midx =#{midx};
 </select>
 
--->
+
 </mapper>
 
 

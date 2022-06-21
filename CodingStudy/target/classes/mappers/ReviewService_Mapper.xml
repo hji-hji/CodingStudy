@@ -14,7 +14,7 @@ insert into review(writer, content,tidx, midx, ip) values(#{writer},#{content},#
 
 
 <update id="reviewDelete" parameterType="HashMap">
-update review set delyn='Y', writeday= now(), ip= #{ip} where tidx=#{tidx} and midx=#{midx} and ridx=#{ridx}
+update review set delyn='Y', writeday= now(), ip= #{ip} where midx=#{midx} and ridx=#{ridx}
 </update>
 
 <!--

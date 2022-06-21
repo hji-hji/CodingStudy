@@ -3,6 +3,9 @@
 <%@ page import ="kr.mypj.myapp.domain.*" %>   
 <%@ page import = "java.util.*" %> 
 
+<%
+ArrayList<ReviewDto> relist = (ArrayList<ReviewDto>)request.getAttribute("relist");
+%>
     
 <!DOCTYPE html>
 <html>
@@ -20,6 +23,17 @@ body
   width: 800px;
 }
 </style>
+<script type="text/javascript">
+function reviewDelete(ridx){
+	
+	if (confirm("삭제하시겠습니까?")){
+		
+		location.href="<%=request.getContextPath()%>/review/reviewDeleteAction.do?ridx="+ridx;
+	}
+}
+
+</script>
+
 </head>
 <body>
 <table border="1" style="width:800px;">
@@ -48,7 +62,7 @@ body
 
 <table border="1" style="width:800px;">
 <tr>
-<td style="width:200px">
+<td style="width:200px;vertical-align:top;">
 <a href="<%=request.getContextPath()%>/member/memberModify.do">회원정보수정</a><br><br>
 <a href="<%=request.getContextPath()%>/member/memberPwdChange.do">비밀번호 변경</a><br><br> 
 <a href="<%=request.getContextPath() %>/member/memberApplyList.do">내가 신청한 과외</a><br><br> 
@@ -59,27 +73,18 @@ body
 </td>
 
 <td>
+<% for (ReviewDto redto : relist){ %>
 <table border="1" style="text-align:left;width:600px;height:100px">
 <tr>
-<td style="width:400px;height:50px">자바 </td>
-<td>홍길동 선생님</td>
+<td style="width:400px;height:50px"><%=redto.getCatename() %> </td>
+<td><%=redto.getTeacherName() %></td>
 </tr>
-
-</table>
-<hr>
-홍길순:<br>
-안녕하세요 수고하셨습니다..&nbsp;&nbsp;<button>삭제</button><br>
-<hr>
-<table border="1" style="text-align:left;width:600px;height:100px">
 <tr>
-<td style="width:400px;height:50px">자바 </td>
-<td>홍길동 선생님</td>
+<td style="width:400px;height:50px"><%=redto.getWriter() %>:<br><%=redto.getContent() %> </td>
+<td><button onclick="reviewDelete(<%=redto.getRidx()%>);">삭제</button></td>
 </tr>
-
 </table>
-홍길순:<br>
-안녕하세요 수고하셨습니다..&nbsp;&nbsp;<button>삭제</button><br>
-<hr>
+<% } %>
 </td>
 </tr>
 </table> 
