@@ -42,7 +42,7 @@ public class MainServiceImpl implements MainService  {
 	}
 
 	@Override
-	public ArrayList<TeacherDto> teacherSelectAll(String cateNameReq, String areaNameReq) {
+	public HashMap<String, Object> teacherSelectAll(String cateNameReq, String areaNameReq, int block) {
 		
 		String[] cateName = null;
 		if (!cateNameReq.equals("")) {
@@ -54,14 +54,22 @@ public class MainServiceImpl implements MainService  {
 			areaName = areaNameReq.split(",");	
 		}	
 		
+		int perBlockNum = 20;
+		
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put("cateName", cateName);
 		hm.put("areaName", areaName);
+		hm.put("blockCnt", block*perBlockNum);
+		
+		int cnt = msm.teacherSelectTotal(hm);
 		
 		ArrayList<TeacherDto> telist = msm.teacherSelectAll(hm);
-//		System.out.println("t==>"+telist);
 		
-		return telist;
+		HashMap<String, Object> hm2 = new HashMap<String, Object>();
+		hm2.put("cnt", cnt);
+		hm2.put("telist", telist);
+		
+		return hm2;
 	}
 
 	@Override

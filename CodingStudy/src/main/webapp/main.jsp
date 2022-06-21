@@ -49,6 +49,10 @@ var arr=[];
 var arr2=[];
 var arr3=[];
 $(function(){
+	
+	$("#more").css('display','none');
+	
+	
   $('input[name=cateName]').click(function(){
     var value = $(this).val();
     
@@ -89,31 +93,46 @@ $(function(){
 	    $('.view-box').text(arr3.join(','));	    
 	    
 	    $('input[name=areaNameReq]').val(arr2.join(','));
-	  });
-  
-  $('#btn').click(function(){
+	  });  
+})
+</script>
+<script type="text/javascript">
+function teacherSelectAll(i){	
+	  
+	var block = 0;
+	 if (i ==1){
+		 block = $("#nextBlock").val();  
+	  }else{
+		 block= 1; 
+	  }	
 	  
 	  var cateNameReq = $('#cateNameReq').val();
 	  var areaNameReq = $('#areaNameReq').val();
-  	  var str = "";
-  	  var midx = <%=midx%>;
-  	  var sttr="";
-  	  var teacherExp="";
-  	  var teacherGender="";
+ 	  var str = "";
+ 	  var midx = <%=midx%>;
+ 	  var sttr="";
+ 	  var teacherExp="";
+ 	  var teacherGender="";
 	  var teacherPayStr="";
-//	  alert(cateNameReq);
-//	  alert(areaNameReq);
+	  var index=0;
+	  
 	  $.ajax({ 
-  			type: 'post',        	
+ 			type: 'post',        	
 			url: '<%=request.getContextPath()%>/main/mainSearch.do', 
-			data: {"cateNameReq" : cateNameReq,"areaNameReq" : areaNameReq},
+			data: {"cateNameReq" : cateNameReq,"areaNameReq" : areaNameReq, "block" :block},
 			dataType : 'json', 			
 			success: function(data) {				
 		
-		//		alert("data");
+				$("#nextBlock").val(data.nextBlock);
 				
-				 $.each(data, function (i, item) {
-					 
+				if (data.nextBlock !=0){
+					  $("#more").css('display','block');
+				}else{
+					  $("#more").css('display','none');
+				}
+				
+				 $.each(data.telist, function (i, item) {				
+				
 					 sttr = "";
 					 if(item.midx !=midx){
 			          sttr = "<button onclick=location.href='<%=request.getContextPath()%>/apply/applyJoin.do?tidx="+item.tidx+"'>과외 신청</button>";
@@ -153,21 +172,18 @@ $(function(){
 	             +"</td></tr></table>"; 
 				 });
 				
-		//		alert(str);		
+				
 				$("#cont").html(str); 				
 				
 			},
 			error : function(){
 				alert('서버요청실패');
 			}
-		}); 
-	  
-	  
-  
-  });
-})
-</script>
+		}); 	 
+ 
+ }
 
+</script>
 </head>
 <body>
 
@@ -220,7 +236,7 @@ for(int j = i; j<i+5; j++) {
 <input type="hidden" name="areaNameReq" id="areaNameReq" size=35>
 <tr>
 <td class="view-box"></td>
-<td><input type="button" name="btn" id="btn" value="검색"></td>
+<td><input type="button" name="btn" id="btn" value="검색" onclick="teacherSelectAll(0);"></td>
 </tr>
 </form>
 </table> 
@@ -280,12 +296,10 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 
 
 <tr>
-<td style="text-align:left;" colspan="3">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button>더보기</button>
+<td></td>
+<td>
+<input id='nextBlock' type='hidden' />
+<input type="button" id='more' onclick="teacherSelectAll(1);" value="더보기">
 </td>
 </tr>
 </table>

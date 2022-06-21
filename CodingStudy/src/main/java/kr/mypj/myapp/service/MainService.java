@@ -1,6 +1,7 @@
 package kr.mypj.myapp.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kr.mypj.myapp.domain.CategoryVo;
 import kr.mypj.myapp.domain.StudyareaVo;
@@ -13,7 +14,7 @@ public interface MainService {
 	
 	public ArrayList<StudyareaVo> studyareaSelectAll();
 	
-	public ArrayList<TeacherDto> teacherSelectAll(String cateNameReq, String areaNameReq);
+	public HashMap<String, Object> teacherSelectAll(String cateNameReq, String areaNameReq, int block);
 	
 	public ArrayList<TeacherDto> teacherRandomSelectAll();
 }

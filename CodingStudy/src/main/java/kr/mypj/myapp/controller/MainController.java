@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,15 +49,23 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping(value = "/main/mainSearch.do", produces="text/plain;charset=UTF-8")
 	public String mainSearch(
+			@RequestParam("block") int block,
 			@RequestParam(value="cateNameReq", required = false, defaultValue="") String cateNameReq,
 			@RequestParam(value="areaNameReq", required = false, defaultValue="") String areaNameReq,
 			Model model) throws Exception {
 		
-	//	System.out.println("cateNameReq"+cateNameReq);
-	//	System.out.println("areaNameReq"+areaNameReq);
+		System.out.println("cateNameReq"+cateNameReq);
+		System.out.println("areaNameReq"+areaNameReq);
 		
-		ArrayList<TeacherDto> telist = mainservice.teacherSelectAll(cateNameReq, areaNameReq );
-		//System.out.println("telist:"+telist);
+		HashMap<String, Object> hm2  = mainservice.teacherSelectAll(cateNameReq, areaNameReq,block);
+		ArrayList<TeacherDto> telist = (ArrayList<TeacherDto>) hm2.get("telist");
+		int totalCnt = (int)hm2.get("cnt");
+		
+		int nextBlock = 0;
+		int perBlockNum = 20;
+		if (totalCnt > block*perBlockNum ) {
+			nextBlock = block+1;	
+		}
 				
 		String str = "";
 		String strr = null;		
@@ -78,13 +87,13 @@ public class MainController {
 						  + "\"filename\":\""+telist.get(i).getFilename()+"\","
 						  + "\"tidx\":\""+telist.get(i).getTidx()+"\","
 						  + "\"midx\":\""+telist.get(i).getMidx()+"\","
-						  + "\"cateName\":\""+telist.get(i).getCateName()+"\""
+						  + "\"cateName\":\""+telist.get(i).getCateName()+"\""					
 						  + "}"+strr; 
-		
+			
 		}
 		
 		
-		String strB = " ["+str+"]";	 	
+		String strB = "{\"nextBlock\":"+nextBlock+" ,\"telist\":["+str+"]}";	 	
 		System.out.println("strB"+strB);
 		
 		return strB; 

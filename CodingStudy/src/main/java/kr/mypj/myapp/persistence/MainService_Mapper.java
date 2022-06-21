@@ -18,5 +18,7 @@ public interface MainService_Mapper {
 	
 	public ArrayList<TeacherDto> teacherSelectAll(HashMap<String, Object> hm);
 	
+	public int teacherSelectTotal(HashMap<String, Object> hm);
+	
 	public ArrayList<TeacherDto> teacherRandomSelectAll();
 	}

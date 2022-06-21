@@ -30,7 +30,26 @@ and c.areaName in
  #{arr2}
 </foreach>
 </if>
-order by a.tidx desc
+order by a.tidx desc limit 0, #{blockCnt}
+</select>
+
+<select id="teacherSelectTotal" parameterType="HashMap"  resultType="Integer">
+select count(*) as cnt from teacher a 
+inner join category b on a.caidx=b.caidx 
+inner join studyarea c on a.stidx = c.stidx
+where a.delyn='N' 
+<if test='cateName !=null' >
+and b.cateName in
+<foreach collection="cateName" item="arr" open="(" close=")" separator=",">
+ #{arr}
+</foreach>
+</if>
+<if test='areaName !=null' >
+and c.areaName in
+<foreach collection="areaName"  item="arr2" open="(" close=")" separator=",">
+ #{arr2}
+</foreach>
+</if>
 </select>
 
 
