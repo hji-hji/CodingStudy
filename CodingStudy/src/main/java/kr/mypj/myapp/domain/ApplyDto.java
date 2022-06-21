@@ -13,7 +13,21 @@ public class ApplyDto {
 	private String writeday;
 	private String checkYn;
 	private String memberName;
+	private int tidx;
+	private int cnt;
 	
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	public int getTidx() {
+		return tidx;
+	}
+	public void setTidx(int tidx) {
+		this.tidx = tidx;
+	}
 	public String getMemberName() {
 		return memberName;
 	}

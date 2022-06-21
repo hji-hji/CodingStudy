@@ -14,8 +14,12 @@ select * from apply a inner join member b on a.midx=b.midx where tidx = #{tidx} 
 
 <update id="applyCheckYnUpdate" parameterType="Integer">
 update apply set checkYn="Y" where apidx = #{apidx}
-
 </update>
+
+
+<select id="applyWriteCheck" parameterType="HashMap" resultType="apdto">
+select tidx, midx, checkYn,count(*) as cnt from apply where midx =#{midx} and tidx=#{tidx} group by tidx, midx,checkYn
+</select>
 </mapper>
 
 

@@ -16,4 +16,6 @@ public interface ApplyService_Mapper {
 	public ArrayList<ApplyDto> teacherMyApplyList(int tidx);
 
 	public int applyCheckYnUpdate(int apidx);
+	
+	public ArrayList<ApplyDto> applyWriteCheck(HashMap<String,Integer> hm);
 }

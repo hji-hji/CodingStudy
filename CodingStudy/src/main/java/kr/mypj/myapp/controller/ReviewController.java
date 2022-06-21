@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.MemberVo;
 import kr.mypj.myapp.domain.ReviewVo;
 import kr.mypj.myapp.domain.TeacherDto;
+import kr.mypj.myapp.service.ApplyService;
 import kr.mypj.myapp.service.MemberService;
 import kr.mypj.myapp.service.ReviewService;
 import kr.mypj.myapp.service.TeacherService;
@@ -33,15 +35,27 @@ public class ReviewController {
 	@Autowired
 	ReviewService reviewService;
 	
+	@Autowired
+	ApplyService applyService;
+	
 	@RequestMapping(value = "/review/reviewList.do", method = RequestMethod.GET)
-	public String reviewList(@RequestParam("tidx") int tidx, Model model) {						
-	//	System.out.println("reviewList");
+	public String reviewList(@RequestParam("tidx") int tidx, Model model,HttpSession session) {						
+		System.out.println("reviewList");
 		
+		int midx = 0;
+		if (session.getAttribute("midx") != null) {
+			midx = Integer.parseInt(session.getAttribute("midx").toString());
+		}
 		TeacherDto tedto = teacherService.teacherSelectOne(tidx);
 		ArrayList<ReviewVo> rlist = reviewService.reviewSelectAll(tidx); 
 		
+		ArrayList<ApplyDto> aplist = applyService.applyWriteCheck(midx,tidx);
+		System.out.println("aplist:"+aplist);
+		
+		
 		model.addAttribute("tedto", tedto);
 		model.addAttribute("rlist", rlist);
+		model.addAttribute("aplist",aplist);
 		
 		return "/WEB-INF/review/reviewList";
 	}

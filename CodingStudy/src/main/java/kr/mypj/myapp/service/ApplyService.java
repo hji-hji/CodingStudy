@@ -16,5 +16,5 @@ public interface ApplyService {
 	
 	public int applyCheckYnUpdate(int apidx);
 	
-
+	public ArrayList<ApplyDto> applyWriteCheck(int midx,int tidx);
 }

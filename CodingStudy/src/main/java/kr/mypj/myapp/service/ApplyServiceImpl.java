@@ -59,6 +59,18 @@ public class ApplyServiceImpl implements ApplyService{
 	}
 
 
+	@Override
+	public ArrayList<ApplyDto> applyWriteCheck(int midx, int tidx) {
+		
+		HashMap<String,Integer> hm = new HashMap<String,Integer>();
+		hm.put("tidx", tidx);
+		hm.put("midx", midx);
+		
+		ArrayList<ApplyDto> aplist = asm.applyWriteCheck(hm);
+		return aplist;
+	}
+
+
 
 	
 
