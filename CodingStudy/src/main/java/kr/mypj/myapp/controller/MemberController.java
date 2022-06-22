@@ -225,8 +225,9 @@ public class MemberController {
 			RedirectAttributes rttr) {	
 				
 		int midx = Integer.parseInt(session.getAttribute("midx").toString());
+		String memberPwd2 =  bcryptPasswordEncoder.encode(memberPwd);
 		
-		int value = memberService.passwordChange(memberPwd,midx);
+		int value = memberService.passwordChange(memberPwd2,midx);
 				
 		String path= "";
 		
