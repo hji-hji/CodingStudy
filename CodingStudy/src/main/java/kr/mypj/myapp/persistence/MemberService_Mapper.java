@@ -18,7 +18,7 @@ public interface MemberService_Mapper {
 	
 	//public ArrayList<StockNewsDto> stockNewsSelectAll(HashMap<String,String> hm);	
 
-	public MemberVo memberLogin(String memberId, String memberPwd);
+	public MemberVo memberLogin(String memberId);
 	
 	public MemberVo memberSelectOne(int midx);
 	

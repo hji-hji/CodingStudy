@@ -13,7 +13,7 @@ select count(*) from member where memberId = #{memberId}
 </select>
 
 <select id="memberLogin" parameterType="String" resultType="mvo">
-select * from member where delyn='N' and memberid= #{0} and memberpwd= #{1}
+select * from member where delyn='N' and memberid= #{0}
 </select>
 
 <select id="memberSelectOne" parameterType="Integer" resultType="mvo">

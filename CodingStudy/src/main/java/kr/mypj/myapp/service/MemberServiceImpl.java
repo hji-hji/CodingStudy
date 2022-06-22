@@ -50,9 +50,9 @@ public class MemberServiceImpl implements MemberService  {
 	}	
 	
 	@Override
-	public MemberVo memberLogin(String memberId, String memberPwd) {
+	public MemberVo memberLogin(String memberId) {
 		
-		MemberVo mv = msm.memberLogin(memberId,memberPwd);		
+		MemberVo mv = msm.memberLogin(memberId);		
 		
 		return mv;
 	}

@@ -52,10 +52,7 @@
 			<mapping path="/member/memberLoginAction.do" />
 			<beans:ref bean="loginInterceptor" />			
 		</interceptor>			
-	</interceptors>	
-	
-	
-	
+	</interceptors>		
 	
 	<context:component-scan base-package="kr.mypj.myapp" />
 	

@@ -12,7 +12,7 @@ public interface MemberService {
 		
 	public int idCheck(String memberId);
 	
-	public MemberVo memberLogin(String memberId, String memberPwd);	
+	public MemberVo memberLogin(String memberId);	
 	
 	public MemberVo memberSelectOne(int midx);
 	

@@ -296,7 +296,7 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 
 
 <tr>
-<td></td>
+<td height="20"></td>
 <td>
 <input id='nextBlock' type='hidden' />
 <input type="button" id='more' onclick="teacherSelectAll(1);" value="더보기">

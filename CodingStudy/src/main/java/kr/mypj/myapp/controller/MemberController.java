@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,9 @@ public class MemberController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 		
 	@RequestMapping(value = "/member/memberJoin.do", method = RequestMethod.GET)
 	public String memberJoin() {						
@@ -51,7 +55,8 @@ public class MemberController {
 			) throws Exception {			
 	
 		String path= "";			
-		int value = memberService.memberInsert(memberId, memberPwd, memberName, memberPhone, memberEmail, memberGender, memberBirth,memberApproveYn);
+		String memberPwd2 =  bcryptPasswordEncoder.encode(memberPwd);
+		int value = memberService.memberInsert(memberId, memberPwd2, memberName, memberPhone, memberEmail, memberGender, memberBirth,memberApproveYn);
 			
 		if (value == 1) {	
 			
@@ -91,11 +96,11 @@ public class MemberController {
 			
 			) throws Exception {		
 			
-		MemberVo mv = memberService.memberLogin(memberId,memberPwd);
-
+		MemberVo mv = memberService.memberLogin(memberId);
+		
 		String path= "";			
 		
-		if (mv != null) {
+		if (mv != null &&  bcryptPasswordEncoder.matches(memberPwd, mv.getMemberPwd())) {
 			
 			rttr.addAttribute("midx", mv.getMidx());	
 			rttr.addAttribute("memberApproveYn", mv.getMemberApproveYn());
