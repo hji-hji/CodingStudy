@@ -1,8 +1,10 @@
 package kr.mypj.myapp.controller;
 
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -326,17 +328,37 @@ public class MemberController {
 	public String memberPwdFindAction(
 			@RequestParam("memberId") String memberId,
 			@RequestParam("memberEmail") String memberEmail,
-			RedirectAttributes rttr) {
-		
+			MemberVo mv,
+			RedirectAttributes rttr,
+			HttpServletResponse response) throws Exception {		
 	
 		String memberPwd = null;
 		String path= "";
 		
-		memberPwd = memberService.memberPwdFind(memberId,memberEmail);
-		System.out.println("memberPwd"+memberPwd);
+		memberPwd = memberService.memberPwdFind(memberId,memberEmail);		
 		
+		//회원이 존재한다면
 		if (memberPwd != null) {	
-			rttr.addFlashAttribute("memberPwd", memberPwd);			
+		//	rttr.addFlashAttribute("memberPwd", memberPwd);		
+						
+			// 임시 비밀번호 생성
+			String randomPwd = "";
+			for (int i = 0; i < 12; i++) {
+				randomPwd += (char) ((Math.random() * 26) + 97);
+			}
+			//암호화해서 저장
+			String memberPwd2 =  bcryptPasswordEncoder.encode(randomPwd);
+			// 비밀번호 변경
+			int value = memberService.updatePwd(memberId,memberPwd2);
+						
+			mv.setMemberId(memberId);
+			mv.setMemberPwd(randomPwd);
+			mv.setMemberEmail(memberEmail);
+			
+			// 비밀번호 변경 메일 발송
+			memberService.sendEmail(mv, "findpw");			
+			
+			
 		}else {
 			rttr.addFlashAttribute("msg", "해당하는 아이디/이메일이 없습니다.");			
 		}		

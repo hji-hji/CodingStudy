@@ -3,19 +3,28 @@ package kr.mypj.myapp.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.inject.Inject;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import kr.mypj.myapp.domain.ApplyDto;
 import kr.mypj.myapp.domain.MemberVo;
 import kr.mypj.myapp.domain.ReviewDto;
 import kr.mypj.myapp.persistence.MemberService_Mapper;
+import kr.mypj.myapp.util.MailHandler;
+
 
 @Service
 public class MemberServiceImpl implements MemberService  {
 
 	MemberService_Mapper msm;
+	
+	@Autowired(required=false)
+	JavaMailSender mailSender;
+	 
 	
 	@Autowired
 	public MemberServiceImpl(SqlSession sqlSession) {		
@@ -140,6 +149,45 @@ public class MemberServiceImpl implements MemberService  {
 	public ArrayList<ReviewDto> memberReviewList(int midx) {
 		ArrayList<ReviewDto> relist = msm.memberReviewList(midx);
 		return relist;
+	}
+
+	@Override
+	public int updatePwd(String memberId, String randomPwd) {
+		int value = msm.updatePwd(memberId, randomPwd);
+		return value;
+	}
+
+	@Override
+	public void sendEmail(MemberVo mv, String div) throws Exception {
+		
+	//	System.out.println("mailSender"+mailSender);
+		
+		String FROM_ADDRESS = "reiga303@gmail.com";
+		
+		String subject = "";
+		String msg = "";
+		
+		if(div.equals("findpw")) {
+			subject = "코딩쌤 임시 비밀번호 입니다.";
+			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+			msg += "<h3 style='color: blue;'>";
+			msg += mv.getMemberId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+			msg += "<p>임시 비밀번호 : ";
+			msg += mv.getMemberPwd() + "</p></div>";		
+		}
+		try {
+			MailHandler mailHandler = new MailHandler(mailSender);
+			mailHandler.setTo(mv.getMemberEmail());
+			mailHandler.setFrom(FROM_ADDRESS);
+			mailHandler.setSubject(subject);
+			String htmlContent =  msg;
+			mailHandler.setText(htmlContent, true);
+			mailHandler.send();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+	
 	}
 	
 }

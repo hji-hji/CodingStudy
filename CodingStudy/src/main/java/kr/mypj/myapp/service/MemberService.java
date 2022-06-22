@@ -32,8 +32,9 @@ public interface MemberService {
 	
 	public ArrayList<ReviewDto> memberReviewList(int midx);
 	
+	public int updatePwd(String memberId, String randomPwd); 
 	
-	
-	
+	//이메일발송
+	public void sendEmail(MemberVo mv, String div) throws Exception;
 	
 }

@@ -37,4 +37,6 @@ public interface MemberService_Mapper {
 	public int memberApproveYnUpdate(int midx);
 	
 	public ArrayList<ReviewDto> memberReviewList(int midx);
+	
+	public int updatePwd(String memberId, String randomPwd); 
 	}

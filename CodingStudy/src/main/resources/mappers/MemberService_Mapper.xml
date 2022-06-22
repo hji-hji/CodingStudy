@@ -61,6 +61,10 @@ inner join category c on b.caidx = c.caidx
 where a.delyn='N' and a.midx =#{midx};
 </select>
 
+<update id="updatePwd" parameterType="String">
+update member set memberPwd=#{1} where memberId=#{0}
+</update>
+
 
 </mapper>
 
