@@ -100,7 +100,15 @@ body
   		alert("회원인증을 해주세요");  		
   		fm.memberApproveYn.focus();
   		return;
-  	} 	 	  	
+  	}else if (fm.termsofService.checked == false){
+  		alert("이용약관을 체크해주세요");  		
+  		fm.termsofService.focus();
+  		return;
+  	}else if (fm.personInfomation.checked == false){
+  		alert("개인정보 수집 및 이용 체크 해주세요");  		
+  		fm.personInfomation.focus();
+  		return;
+  	} 	  	
   
   		fm.action = "<%=request.getContextPath()%>/member/memberJoinAction.do";
   		fm.method = "post";
@@ -189,6 +197,13 @@ body
 <tr>
 <td>회원인증</td>
 <td><input type="text" name="memberApproveYn" size="10" value="N" readonly>	<button onclick="approve();return false;">회원인증</button>
+</td>
+</tr>
+<tr>
+<td>이용약관</td>
+<td>
+<input type="checkbox" name="termsofService" value="Y"><a href="<%=request.getContextPath()%>/member/memberTermsOfService.do">이용약관</a><br>
+<input type="checkbox" name="personInfomation" value="Y"><a href="<%=request.getContextPath()%>/member/memberPersonInformation.do">개인정보 수집 및 이용</a>
 </td>
 </tr>
 <tr>

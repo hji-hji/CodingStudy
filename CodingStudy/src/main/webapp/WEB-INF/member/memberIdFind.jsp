@@ -92,21 +92,7 @@ a {
 </td>
 </tr>
  </table>
- </form>
- 
- <%	if (request.getAttribute("memberId") != null) {
-	 out.println(request.getAttribute("memberId"));	 
- } %>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ </form>  
  
  
  </BODY>

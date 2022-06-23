@@ -261,7 +261,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/memberOut.do")
-	public String memberOut(HttpSession session) {	
+	public String memberOut() {	
 				
 		return "/WEB-INF/member/memberOut";
 	}
@@ -294,13 +294,7 @@ public class MemberController {
 		
 		return "/WEB-INF/member/memberIdFind";
 	}
-	
-	@RequestMapping(value = "/member/memberPwdFind.do", method = RequestMethod.GET)
-	public String memberPwdFind() {						
 		
-		return "/WEB-INF/member/memberPwdFind";
-	}
-	
 	@RequestMapping(value = "/member/memberIdFindAction.do", method = RequestMethod.POST)
 	public String memberIdFindAction(
 			@RequestParam("memberName") String memberName,
@@ -315,13 +309,21 @@ public class MemberController {
 		
 		
 		if (memberId != null) {	
-			rttr.addFlashAttribute("memberId", memberId);			
+			rttr.addFlashAttribute("memberId", memberId);
+			path = "redirect:/member/memberIdMessage.do";
 		}else {
 			rttr.addFlashAttribute("msg", "해당하는 아이디가 없습니다.");			
+			path = "redirect:/member/memberIdFind.do";
 		}		
-		path = "redirect:/member/memberIdFind.do";
+		
 		
 		return path;
+	}
+	
+	@RequestMapping(value = "/member/memberPwdFind.do", method = RequestMethod.GET)
+	public String memberPwdFind() {						
+		
+		return "/WEB-INF/member/memberPwdFind";
 	}
 	
 	@RequestMapping(value = "/member/memberPwdFindAction.do", method = RequestMethod.POST)
@@ -358,11 +360,12 @@ public class MemberController {
 			// 비밀번호 변경 메일 발송
 			memberService.sendEmail(mv, "findpw");			
 			
-			
+			path = "redirect:/member/memberSendEmailMessage.do";
 		}else {
 			rttr.addFlashAttribute("msg", "해당하는 아이디/이메일이 없습니다.");			
+			path = "redirect:/member/memberPwdFind.do";
 		}		
-		path = "redirect:/member/memberPwdFind.do";
+		
 		
 		return path;		
 		
@@ -385,7 +388,16 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping(value = "/member/memberSendEmailMessage.do", method = RequestMethod.GET)
+	public String memberSendEmailMessage() {						
+		
+		return "/WEB-INF/member/memberSendEmailMessage";
+	}
 	
-	
+	@RequestMapping(value = "/member/memberIdMessage.do", method = RequestMethod.GET)
+	public String memberIdMessage() {						
+		
+		return "/WEB-INF/member/memberIdMessage";
+	}
 	
 }

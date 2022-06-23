@@ -94,9 +94,7 @@ a {
  </table>
  </form>
  
-  <%	if (request.getAttribute("memberPwd") != null) {
-	 out.println(request.getAttribute("memberPwd"));	 
- } %>
+  
  
  </BODY>
 </HTML>
