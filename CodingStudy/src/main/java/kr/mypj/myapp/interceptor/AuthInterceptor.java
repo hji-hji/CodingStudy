@@ -35,17 +35,15 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		 if(session.getAttribute("midx") == null){
 			
 			//이동할 주소를 담는다
-			 saveUrl(request);
-		//	 response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");
-		//	 return false;	
+			 saveUrl(request);		
 			 
 			//본인 pc에 저장된 쿠키 정보를 꺼낸다
 			 Cookie loginCookie = WebUtils.getCookie(request,"loginCookie"); 
-			 			 
+			 
+		//	 System.out.println("uri:"+request.getRequestURI());
+			 
 			 //저장된 쿠키에 자동 로그인정보가 있으면
-			if (loginCookie  != null){ 
-				
-			
+			if (loginCookie  != null){ 			
 		
 			//쿠키에 저장된 키정보와 같은 키가 DB에 있는지 체크해서 있으면 그 회원정보를 담는다 	
 			 MemberVo mv =  ms.checkAutoLogin(loginCookie.getValue());
@@ -79,9 +77,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 				
 				 
 			 }else {
-					System.out.println("uri:"+request.getRequestURI());
-				 if (request.getRequestURI().equals("/CodingStudy/main/main.do")) {
-				//	 response.sendRedirect(request.getContextPath()+"/main/main.do");
+					
+				 if (request.getRequestURI().equals(request.getContextPath()+"/main/main.do")) {				
 					 return true;
 				 }else {
 					 response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");	
@@ -92,8 +89,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			 }
 			 
 			}else {			
-			 response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");
-			 return false;
+				 if (request.getRequestURI().equals(request.getContextPath()+"/main/main.do")) {				
+					 return true;
+				 }else {
+					 response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");	
+					 return false;
+				 }
 			}	 			 
 		 }
 		 
