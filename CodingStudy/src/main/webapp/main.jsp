@@ -163,11 +163,11 @@ function teacherSelectAll(i){
 	             +" <br>경력:"+teacherExp
 	             +"<br>성별:"+teacherGender
 	             +"<br>지역:"+item.areaName
-	             +"<br>학습비:"+item.teacherPay + teacherPayStr
+	             +"<br>과외비:"+item.teacherPay + teacherPayStr
 	             +"<br>자기소개:"+item.teacherInfo
 	             +"</td>"
 	             +"<td width='100px'>"
-	             +"<button onclick=location.href='<%=request.getContextPath()%>/review/reviewList.do?fileName="+item.filename+"'>리뷰보기</button>"
+	             +"<button onclick=location.href='<%=request.getContextPath()%>/review/reviewList.do?tidx="+item.tidx+"'>리뷰보기</button>"
 	             + sttr   
 	             +"</td></tr></table>"; 
 				 });
@@ -278,7 +278,7 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 	          } %> 
 <br>성별:<% if (tedto.getTeacherGender().equals("M")){out.println("남성");}else{out.println("여성");} %>
 <br>지역: <%=tedto.getAreaName() %> 
-<br>학습비:<%=tedto.getTeacherPay() %> <% if (!tedto.getTeacherPay().equals("협의")) {%>만원/시간<%} %> 
+<br>과외비:<%=tedto.getTeacherPay() %> <% if (!tedto.getTeacherPay().equals("협의")) {%>만원/시간<%} %> 
 <br>자기소개:<%=tedto.getTeacherInfo() %>
  </td>
 <td width='100px'>
@@ -303,19 +303,28 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 </td>
 </tr>
 </table>
-<table border="1" style="width:800px;">
+<table border="1" style="width:800px;text-align:center">
 <tr>
 <td>
-회사명 : 다락 <br>
-대표자 : 홍길동<br>
-사업자 번호 : 111-11-11111<br>
-주소 : 전북 전주시 ~<br>
-연락처 : 010-111-1111<br>
+회사소개&nbsp;&nbsp;<a href="#" onclick="window.open('<%=request.getContextPath()%>/etc/memberTermsOfService.jsp','tos','width=1200, height=600, menubar=no, status=no, toolbar=no');">이용약관</a>
+&nbsp;&nbsp; <a href="#" onclick="window.open('<%=request.getContextPath()%>/etc/memberPersonInformation.jsp','pi','width=1200, height=600, menubar=no, status=no, toolbar=no');">개인정보보호방침</a>
+&nbsp;&nbsp;이용가이드 
+
+</td></tr>
+<tr>
+<td>
+상호 : 다락 <br>
+대표자 : 황정아<br>
+사업자 번호 : 418-07-47452<br>
+주소 : 전라북도 전주시 덕진구 아중로 204 3층<br>
+고객센터 전화번호 :010-4611-3408<br>
+고객센터 이메일 : codingssam@codingssam.com
 </td>
 </tr>
 <tr>
 <td>
-@all right reserved
+Copyrightⓒ2022  다락 All rights reserved.
+
 </td>
 </tr>
  </table>

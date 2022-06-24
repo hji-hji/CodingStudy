@@ -70,7 +70,7 @@ function save(){
 		return;
 	}
 	if (checkYn =='N'){
-		alert("과외 신청 정보가 확인되면 작성이 가능합니다.");
+		alert("선생님이 과외 신청정보를 확인하면 작성이 가능합니다.");
 		return;
 	}
 	

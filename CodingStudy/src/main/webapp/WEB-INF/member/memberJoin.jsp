@@ -4,7 +4,7 @@
 <HTML>
  <HEAD>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <TITLE> New Document </TITLE>
+  <TITLE>회원가입</TITLE>
   <style>
 
 a {
@@ -162,11 +162,11 @@ body
 </tr>
 <tr>
 <td>비밀번호</td>
-<td><input type="password" name="memberPwd" size="20"></td>
+<td><input type="password" name="memberPwd" size="20">(4자리 이상 입력해주세요)</td>
 </tr>
 <tr>
 <td>비밀번호확인</td>
-<td><input type="password" name="memberPwd2" size="20"></td>
+<td><input type="password" name="memberPwd2" size="20">(4자리 이상 입력해주세요)</td>
 </tr>
 <tr>
 <td>이름</td>
@@ -190,8 +190,28 @@ body
 </td>
 </tr>
 <tr>
-<td>생년월일</td>
-<td><input type="text" name="memberBirth" size="10" placeholder="xxxxxx">	
+<td>생년월일<br>(주민번호앞6자리)</td>
+<td>
+<!-- select name="birthYear">
+<% //for (int i= 1940; i<=2020; i++) {%>
+<option value="<%//=i%>"><%//=i%></option>
+<%//} %>
+</select>
+<select name="birthMonth">
+<%// for (int i= 1; i<=12; i++) { %>
+<option value="<%//=i%>"><%//=i%></option>
+<%//} %>
+</select>
+<select name="birthDay">
+<%// for (int i= 1; i<=31; i++) { %>
+<option value="<%//=i%>"><%//=i%></option>
+<%//} %>
+</select -->
+
+
+<input type="text" name="memberBirth" maxlength="6" size="6" placeholder="xxxxxx">	
+
+
 </td>
 </tr>
 <tr>
@@ -200,10 +220,13 @@ body
 </td>
 </tr>
 <tr>
-<td>이용약관</td>
+<td>이용약관/개인정보 수집 및 이용</td>
 <td>
-<input type="checkbox" name="termsofService" value="Y"><a href="<%=request.getContextPath()%>/member/memberTermsOfService.do">이용약관</a><br>
-<input type="checkbox" name="personInfomation" value="Y"><a href="<%=request.getContextPath()%>/member/memberPersonInformation.do">개인정보 수집 및 이용</a>
+<input type="checkbox" name="termsofService" value="Y">
+<a href="#" onclick="window.open('<%=request.getContextPath()%>/etc/memberTermsOfService.jsp','tos','width=1200, height=600, menubar=no, status=no, toolbar=no');">이용약관</a><br>
+
+<input type="checkbox" name="personInfomation" value="Y">
+<a href="#" onclick="window.open('<%=request.getContextPath()%>/etc/memberPersonInformation.jsp','pi','width=1200, height=600, menubar=no, status=no, toolbar=no');">개인정보 수집 및 이용</a>
 </td>
 </tr>
 <tr>
