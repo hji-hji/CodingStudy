@@ -211,7 +211,12 @@ public class MemberServiceImpl implements MemberService  {
 	}
 	
 	
-	
+	public int memberLogOut(int midx) {
+		
+		int value = msm.memberLogOut(midx);
+		
+		return value;
+	}
 	
 	
 	

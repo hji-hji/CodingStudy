@@ -44,7 +44,7 @@ public interface MemberService_Mapper {
 	
 	public MemberVo checkAutoLogin(String sessionKey);
 	
-	
+	public int memberLogOut(int midx);
 	
 	
 	}

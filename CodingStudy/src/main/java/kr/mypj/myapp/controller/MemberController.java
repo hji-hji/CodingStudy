@@ -153,12 +153,17 @@ public class MemberController {
 	@RequestMapping(value="/member/memberLogout.do")
 	public String memberLogout(HttpSession session) {	
 				
+		int value=0;
+		int midx = Integer.parseInt(session.getAttribute("midx").toString());
+		value = memberService.memberLogOut(midx);
+		
+		if (value != 0) {
 		//세션 삭제
 		session.removeAttribute("midx");
 		session.removeAttribute("memberApproveYn");
 		session.removeAttribute("memberName");
 		session.invalidate();		
-		
+		}
 		return "/WEB-INF/member/memberLogout";
 	}
 	

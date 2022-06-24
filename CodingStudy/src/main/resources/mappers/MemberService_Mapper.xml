@@ -73,7 +73,10 @@ update member set sessionkey = #{sessionKey}, sessionlimit = #{sessionLimit} whe
 select * from member where sessionkey = #{sessionKey} and sessionlimit >= now()
 </select>
 
+<update id="memberLogOut" parameterType="Integer">
+update member set sessionkey = '', sessionlimit = '' where midx = #{midx}
 
+</update>
 
 </mapper>
 

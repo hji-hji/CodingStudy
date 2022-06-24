@@ -45,7 +45,8 @@
 			<mapping path="/board/boardList.do" />
 			<mapping path="/board/boardWrite.do" />
 			<mapping path="/apply/applyJoin.do" />
-			<mapping path="/teacher/teacherJoin.do" />		
+			<mapping path="/teacher/teacherJoin.do" />	
+			<mapping path="/main/main.do" />	
 			<beans:ref bean="authInterceptor" />			
 		</interceptor>
 		<interceptor>

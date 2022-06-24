@@ -41,7 +41,7 @@ public interface MemberService {
 	
 	public MemberVo checkAutoLogin(String sessionKey);
 	
-	
+	public int memberLogOut(int midx);
 	
 	
 	

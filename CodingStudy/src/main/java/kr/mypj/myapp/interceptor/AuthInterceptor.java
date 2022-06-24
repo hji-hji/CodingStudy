@@ -44,10 +44,14 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			 			 
 			 //저장된 쿠키에 자동 로그인정보가 있으면
 			if (loginCookie  != null){ 
+				
+			
 		
 			//쿠키에 저장된 키정보와 같은 키가 DB에 있는지 체크해서 있으면 그 회원정보를 담는다 	
 			 MemberVo mv =  ms.checkAutoLogin(loginCookie.getValue());
 			 if (mv != null) {
+				 
+				 
 				 
 				 //자동로그인 기록이 존재하면 세션에 담고
 //				 request.getSession().setAttribute("midx", mv.getMidx());
@@ -72,11 +76,19 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 				 
 				 ms.keeplogin(mv.getMidx(), loginCookie.getValue(), sessionLimit);				
 			 
-			//	System.out.println(request.getRequestURL());
+				
 				 
 			 }else {
-				 response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");
-				 return false;
+					System.out.println("uri:"+request.getRequestURI());
+				 if (request.getRequestURI().equals("/CodingStudy/main/main.do")) {
+				//	 response.sendRedirect(request.getContextPath()+"/main/main.do");
+					 return true;
+				 }else {
+					 response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");	
+					 return false;
+				 }
+				 
+				 
 			 }
 			 
 			}else {			
