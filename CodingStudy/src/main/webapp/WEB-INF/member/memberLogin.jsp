@@ -82,7 +82,8 @@ a {
 <td>
 <input type="text" name="memberId" size="30"><br>
 <input type="password" name="memberPwd" size="30"><br>
-<input type="checkbox" name="autoLogin" value="Y">자동로그인
+<input type="checkbox" name="useCookie" id="useCookie" />자동로그인
+
 </td>
 </tr>
 <tr>

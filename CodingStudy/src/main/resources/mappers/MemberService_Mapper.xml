@@ -65,6 +65,15 @@ where a.delyn='N' and a.midx =#{midx};
 update member set memberPwd=#{1} where memberId=#{0}
 </update>
 
+<update id="keepLogin" parameterType="HashMap">
+update member set sessionkey = #{sessionKey}, sessionlimit = #{sessionLimit} where midx = #{midx}
+</update>
+
+<select id="checkAutoLogin" parameterType="String" resultType="mvo">
+select * from member where sessionkey = #{sessionKey} and sessionlimit >= now()
+</select>
+
+
 
 </mapper>
 

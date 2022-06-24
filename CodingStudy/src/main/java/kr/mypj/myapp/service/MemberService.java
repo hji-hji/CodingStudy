@@ -37,4 +37,13 @@ public interface MemberService {
 	//이메일발송
 	public void sendEmail(MemberVo mv, String div) throws Exception;
 	
+	public int keeplogin(int midx, String sessionKey, String sessionLimit);
+	
+	public MemberVo checkAutoLogin(String sessionKey);
+	
+	
+	
+	
+	
+	
 }

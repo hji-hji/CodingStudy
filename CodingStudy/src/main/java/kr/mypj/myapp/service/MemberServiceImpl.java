@@ -190,4 +190,29 @@ public class MemberServiceImpl implements MemberService  {
 	
 	}
 	
+	
+	public int keeplogin(int midx, String sessionKey, String sessionLimit) {
+		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("midx", midx);
+		map.put("sessionKey", sessionKey);
+		map.put("sessionLimit", sessionLimit);				
+		
+		int result = msm.keepLogin(map);	
+		System.out.println("result"+result);
+		return result;
+	}
+	
+	public MemberVo checkAutoLogin(String sessionKey){		
+		
+		MemberVo mv = msm.checkAutoLogin(sessionKey);
+		
+		return 	mv;	
+	}
+	
+	
+	
+	
+	
+	
 }

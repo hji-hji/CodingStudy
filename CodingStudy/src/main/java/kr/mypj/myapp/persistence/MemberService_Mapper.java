@@ -39,4 +39,12 @@ public interface MemberService_Mapper {
 	public ArrayList<ReviewDto> memberReviewList(int midx);
 	
 	public int updatePwd(String memberId, String randomPwd); 
+	
+	public int keepLogin(HashMap<String,Object> map);
+	
+	public MemberVo checkAutoLogin(String sessionKey);
+	
+	
+	
+	
 	}

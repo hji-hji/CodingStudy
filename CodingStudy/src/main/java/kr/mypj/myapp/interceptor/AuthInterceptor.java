@@ -36,47 +36,53 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			
 			//이동할 주소를 담는다
 			 saveUrl(request);
+		//	 response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");
+		//	 return false;	
+			 
+			//본인 pc에 저장된 쿠키 정보를 꺼낸다
+			 Cookie loginCookie = WebUtils.getCookie(request,"loginCookie"); 
+			 			 
+			 //저장된 쿠키에 자동 로그인정보가 있으면
+			if (loginCookie  != null){ 
+		
+			//쿠키에 저장된 키정보와 같은 키가 DB에 있는지 체크해서 있으면 그 회원정보를 담는다 	
+			 MemberVo mv =  ms.checkAutoLogin(loginCookie.getValue());
+			 if (mv != null) {
+				 
+				 //자동로그인 기록이 존재하면 세션에 담고
+//				 request.getSession().setAttribute("midx", mv.getMidx());
+//				 request.getSession().setAttribute("memberApproveYn", mv.getMemberApproveYn());
+//				 request.getSession().setAttribute("memberName", mv.getMemberName());	
+				 session.setAttribute("midx", mv.getMidx());
+				 session.setAttribute("memberApproveYn", mv.getMemberApproveYn());
+				 session.setAttribute("memberName", mv.getMemberName());
+				 
+				
+				 Cookie loginCookie2 = new Cookie("loginCookie",loginCookie.getValue());
+				 loginCookie2.setPath("/");
+				 loginCookie2.setMaxAge(60*60*24*7);
+				 response.addCookie(loginCookie2);	
+				 
+				 // DB 테이블에도 날짜 갱신
+				 Calendar cal = Calendar.getInstance();
+				 cal.setTime(new Date());
+				 cal.add(Calendar.DATE, 7);
+				 DateFormat df1 = new SimpleDateFormat("yy-MM-dd");   
+				 String sessionLimit = df1.format(cal.getTime());
+				 
+				 ms.keeplogin(mv.getMidx(), loginCookie.getValue(), sessionLimit);				
+			 
+			//	System.out.println(request.getRequestURL());
+				 
+			 }else {
+				 response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");
+				 return false;
+			 }
+			 
+			}else {			
 			 response.sendRedirect(request.getContextPath()+"/member/memberLogin.do");
 			 return false;
-			//본인 pc에 저장된 쿠키 정보를 꺼낸다
-//			 Cookie loginCookie = WebUtils.getCookie(request,"loginCookie"); 
-			 			 
-//			 //저장된 쿠키에 자동 로그인정보가 있으면
-//			if (loginCookie  != null){ 
-//		
-//			//쿠키에 저장된 키정보와 같은 키가 DB에 있는지 체크해서 있으면 그 회원정보를 담는다 	
-//			 MemberVo mv =  ms.checkAutoLogin(loginCookie.getValue());
-//			 if (mv != null) {
-//				 
-//				 //자동로그인 기록이 존재하면 세션에 담고
-//				 request.getSession().setAttribute("sMemberId", mv.getMemberId());
-//				 request.getSession().setAttribute("sMemberMidx", mv.getMemberMidx());
-//				 request.getSession().setAttribute("sMemberName", mv.getMemberName());	
-//				
-//				 Cookie loginCookie2 = new Cookie("loginCookie",loginCookie.getValue());
-//				 loginCookie2.setPath("/");
-//				 loginCookie2.setMaxAge(60*60*24*7);
-//				 response.addCookie(loginCookie2);	
-//				 
-//				 // DB 테이블에도 날짜 갱신
-//				 Calendar cal = Calendar.getInstance();
-//				 cal.setTime(new Date());
-//				 cal.add(Calendar.DATE, 7);
-//				 DateFormat df1 = new SimpleDateFormat("yy-MM-dd");   
-//				 String sessionLimit = df1.format(cal.getTime());
-//				 
-//				 ms.keeplogin(mv.getMemberMidx(), loginCookie.getValue(), sessionLimit);				
-//			 
-//			 }else {
-//				 response.sendRedirect(request.getContextPath()+"/MemberLoginController");
-//				 return false;
-//			 }
-//			 
-//			}else {			
-//			 response.sendRedirect(request.getContextPath()+"/MemberLoginController");
-//			 return false;
-//			}
-			 
+			}	 			 
 		 }
 		 
 		 return true;		

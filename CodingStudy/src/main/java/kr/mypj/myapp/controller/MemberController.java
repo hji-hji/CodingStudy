@@ -2,7 +2,11 @@ package kr.mypj.myapp.controller;
 
 
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -93,6 +97,7 @@ public class MemberController {
 	public String memberLoginAction(
 			@RequestParam("memberId") String memberId,
 			@RequestParam("memberPwd") String memberPwd,
+			@RequestParam(name="useCookie",required=false) String useCookie,
 			RedirectAttributes rttr,
 			HttpSession session			
 			
@@ -107,6 +112,26 @@ public class MemberController {
 			rttr.addAttribute("midx", mv.getMidx());	
 			rttr.addAttribute("memberApproveYn", mv.getMemberApproveYn());
 			rttr.addAttribute("memberName", mv.getMemberName());
+			
+			System.out.println("useCookie:"+useCookie);
+			
+			
+			if (useCookie != null){
+				
+				//impl keeplogin 불러서 db입력					
+				Calendar cal = Calendar.getInstance();
+			    cal.setTime(new Date());
+			    cal.add(Calendar.DATE, 7);
+			    DateFormat df = new SimpleDateFormat("yy-MM-dd");   
+			    String sessionLimit = df.format(cal.getTime());
+			   
+				System.out.println(mv.getMidx());
+				System.out.println(session.getId());
+				System.out.println(sessionLimit);
+				
+			    memberService.keeplogin(mv.getMidx(), session.getId(), sessionLimit);
+				
+			}					
 			
 			if (session.getAttribute("saveUrl") != null) {
 				String pj[] = session.getAttribute("saveUrl").toString().split("/");
@@ -130,6 +155,8 @@ public class MemberController {
 				
 		//세션 삭제
 		session.removeAttribute("midx");
+		session.removeAttribute("memberApproveYn");
+		session.removeAttribute("memberName");
 		session.invalidate();		
 		
 		return "/WEB-INF/member/memberLogout";
