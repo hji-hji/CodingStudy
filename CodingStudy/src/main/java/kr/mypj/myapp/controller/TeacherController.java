@@ -5,14 +5,9 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.IOUtils;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import kr.mypj.myapp.util.MediaUtils;
 import kr.mypj.myapp.util.UploadFileUtiles;
 import kr.mypj.myapp.domain.ApplyDto;
@@ -34,7 +28,6 @@ import kr.mypj.myapp.domain.CategoryVo;
 import kr.mypj.myapp.domain.ReviewVo;
 import kr.mypj.myapp.domain.StudyareaVo;
 import kr.mypj.myapp.domain.TeacherDto;
-import kr.mypj.myapp.domain.TeacherVo;
 import kr.mypj.myapp.service.ApplyService;
 import kr.mypj.myapp.service.MainService;
 import kr.mypj.myapp.service.ReviewService;
@@ -106,7 +99,7 @@ public class TeacherController {
 	
 	@ResponseBody
 	@RequestMapping(value="/displayFile.do", method=RequestMethod.GET)
-	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
+	public ResponseEntity<byte[]> displayFile(String fileName,@RequestParam(value="down",defaultValue="0" ) int down ) throws Exception{
 		
 	//	System.out.println("fileName:"+fileName);
 		
@@ -125,7 +118,17 @@ public class TeacherController {
 			
 			
 			if(mType != null){
-				headers.setContentType(mType);
+				
+				if (down==1) {
+					fileName = fileName.substring(fileName.indexOf("_")+1);
+					headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+					headers.add("Content-Disposition", "attachment; filename=\""+
+							new String(fileName.getBytes("UTF-8"),"ISO-8859-1")+"\"");	
+					
+				}else {
+					headers.setContentType(mType);	
+				}
+				
 			}else{
 				
 				fileName = fileName.substring(fileName.indexOf("_")+1);

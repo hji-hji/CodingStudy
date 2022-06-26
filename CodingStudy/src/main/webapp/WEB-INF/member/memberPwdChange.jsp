@@ -55,7 +55,7 @@ body
 <tr>
 <td style="width:300px"><a href="<%=request.getContextPath() %>/main/main.do"><img src="test.jpg" width="300px" height="100px" alt="로고이미지"></a></td>
 <td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=c">커뮤니티</a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do">문의게시판</a></td>
+<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=q">문의게시판</a></td>
 <td><a href="<%=request.getContextPath() %>/teacher/teacherJoin.do">선생님등록</a></td>
 <%if(session.getAttribute("midx") == null) {%>
 <td><a href="<%=request.getContextPath() %>/member/memberJoin.do">회원가입</a></td>

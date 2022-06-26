@@ -14,5 +14,6 @@
   	<typeAlias alias="apdto" type="kr.mypj.myapp.domain.ApplyDto"/>
   	<typeAlias alias="revo" type="kr.mypj.myapp.domain.ReviewVo"/>
   	<typeAlias alias="redto" type="kr.mypj.myapp.domain.ReviewDto"/>
+  	<typeAlias alias="cvo" type="kr.mypj.myapp.domain.CommentsVo"/>
   </typeAliases> 
  </configuration>

@@ -1,24 +1,31 @@
 package kr.mypj.myapp.controller;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.mypj.myapp.domain.BoardVo;
 import kr.mypj.myapp.domain.PageMaker;
 import kr.mypj.myapp.domain.SearchCriteria;
 import kr.mypj.myapp.service.BoardService;
+import kr.mypj.myapp.util.UploadFileUtiles;
 
 
 @Controller
@@ -30,14 +37,20 @@ public class BoardController  {
 	@Autowired(required= false)
 	PageMaker pageMaker;
 	
+	
+	@Resource(name="uploadPath")
+	private String uploadPath;	
+
+	
 	@RequestMapping(value = "/board/boardList.do")
 	public String boardList(
-			@RequestParam(value="gubun", required=false, defaultValue="q") String gubun,
+			@RequestParam(value="gubun", required=false, defaultValue="c") String gubun,
 			SearchCriteria scri, 
 			Model model) {
 			
 	//	System.out.println("gubun"+gubun);
-		
+	
+		scri.setGubun(gubun);
 		int cnt = bd.boardTotal(scri);					
 	
 		pageMaker.setScri(scri);		
@@ -53,7 +66,7 @@ public class BoardController  {
 	}
 	
 	@RequestMapping(value="/board/boardWrite.do")
-	public String boardWrite(@RequestParam(value="gubun", required=false, defaultValue="q") String gubun,
+	public String boardWrite(@RequestParam(value="gubun", required=false, defaultValue="c") String gubun,
 			Model model) {
 		
 		model.addAttribute("gubun", gubun);
@@ -63,28 +76,42 @@ public class BoardController  {
 	
 	@RequestMapping(value="/board/boardWriteAction.do")
 	public String boardWriteAction(
-			@RequestParam(value="gubun", required=true) String gubun,
+			@RequestParam(value="gubun", required=false, defaultValue="c") String gubun,
 			@RequestParam("subject") String subject,
 			@RequestParam("contents") String contents,
 			@RequestParam("writer") String writer,	
-			@RequestParam("password") String password
+			@RequestParam("password") String password,
+			@RequestParam("uploadfile") MultipartFile  uploadfile,
+			Model model,
+			HttpSession session
 			) throws Exception {		
-				
-			String ip= null;
-			try {
-				ip = InetAddress.getLocalHost().getHostAddress();
-			} catch (UnknownHostException e) {				
-				e.printStackTrace();
+			
+		
+			MultipartFile file =uploadfile;
+			System.out.println("ÏõêÎ≥∏ÌååÏùºÏù¥Î¶Ñ:"+file.getOriginalFilename());
+			
+			//Î≥µÏÇ¨ÌïòÍ≥† Ï†ÄÏû•Îêú ÌååÏùºÏù¥Î¶ÑÏ∞æÍ∏∞ 
+//			String savedName = uploadFile(file.getOriginalFilename(),file.getBytes());
+//			System.out.println("savedName:"+savedName);
+//			
+//			model.addAttribute("savedName", savedName);
+			String uploadedFileName= "";
+			if (!file.getOriginalFilename().equals("")) {
+			uploadedFileName = UploadFileUtiles.uploadFile(uploadPath, 
+															file.getOriginalFilename(), 
+															file.getBytes());		
 			}
-			int midx = 1;	
-			int value = bd.boardInsert(subject,contents,writer,ip,password,midx);
+			String ip= InetAddress.getLocalHost().getHostAddress();
+			int midx = Integer.parseInt(session.getAttribute("midx").toString());
+				
+			int value = bd.boardInsert(subject,contents,writer,ip,password,midx,gubun,uploadedFileName);
 		
 		return "redirect:/board/boardList.do?gubun="+gubun;
-	}
+	}	
 	
 	@RequestMapping(value="/board/boardContent.do")
 	public String boardContent(
-			@RequestParam(value="gubun", required=false, defaultValue="q") String gubun,
+			@RequestParam(value="gubun", required=false, defaultValue="c") String gubun,
 			@RequestParam("bidx") int bidx,
 			Model model
 			) {			
@@ -100,7 +127,7 @@ public class BoardController  {
 	
 	@RequestMapping(value="/board/boardModify.do")	
 	public String boardModify(
-			@RequestParam(value="gubun", required=false, defaultValue="q") String gubun,
+			@RequestParam(value="gubun", required=false, defaultValue="c") String gubun,
 			@RequestParam("bidx") int bidx,
 			Model model
 			) {
@@ -114,7 +141,7 @@ public class BoardController  {
 	
 	@RequestMapping(value="/board/boardModifyAction.do")
 	public String boardModifyAction(
-			@RequestParam(value="gubun", required=true) String gubun,
+			@RequestParam(value="gubun", required=false, defaultValue="c") String gubun,
 			@RequestParam("subject") String subject,
 			@RequestParam("contents") String contents,
 			@RequestParam("writer") String writer,
@@ -130,7 +157,7 @@ public class BoardController  {
 		if (value==1) {		
 		path = "/board/boardContent.do?gubun="+gubun+"&bidx="+bidx;
 		}else {
-		rttr.addFlashAttribute("msg", "∫Òπ–π¯»£∞° ¿œƒ°«œ¡ˆ æ Ω¿¥œ¥Ÿ.");		
+		rttr.addFlashAttribute("msg", "ÎπÑÎ∞ÄÎ≤àÌò∏Í∞Ä ÏùºÏπòÌïòÏßÄ ÏïäÏäµÎãàÎã§.");		
 		path = "/board/boardModify.do?gubun="+gubun+"&bidx="+bidx;
 		}
 		return "redirect:"+path;
@@ -138,7 +165,7 @@ public class BoardController  {
 	
 	@RequestMapping(value="/board/boardDelete.do")	
 	public String boardDelete(
-			@RequestParam(value="gubun", required=false, defaultValue="q") String gubun,
+			@RequestParam(value="gubun", required=false, defaultValue="c") String gubun,
 			@RequestParam("bidx") int bidx,
 			Model model
 			) {				
@@ -151,7 +178,7 @@ public class BoardController  {
 	
 	@RequestMapping(value="/board/boardDeleteAction.do")
 	public String boardDeleteAction(			
-			@RequestParam(value="gubun", required=true) String gubun,
+			@RequestParam(value="gubun", required=false, defaultValue="c") String gubun,
 			@RequestParam("bidx") int bidx,
 			@RequestParam("password") String password,
 			RedirectAttributes rttr
@@ -163,7 +190,7 @@ public class BoardController  {
 		if (value==1) {
 		path = "/board/boardList.do?gubun="+gubun;
 		}else {
-		rttr.addFlashAttribute("msg", "∫Òπ–π¯»£∞° ¿œƒ°«œ¡ˆ æ Ω¿¥œ¥Ÿ.");			
+		rttr.addFlashAttribute("msg", "ÎπÑÎ∞ÄÎ≤àÌò∏Í∞Ä ÏùºÏπòÌïòÏßÄ ÏïäÏäµÎãàÎã§.");			
 		path = "/board/boardDelete.do?gubun="+gubun+"&bidx="+bidx;
 		}
 		return "redirect:"+path;
@@ -171,7 +198,7 @@ public class BoardController  {
 	
 	@RequestMapping(value="/board/boardReply.do")
 	public String boardReply(
-			@RequestParam(value="gubun", required=false, defaultValue="q") String gubun,
+			@RequestParam(value="gubun", required=false, defaultValue="c") String gubun,
 			@RequestParam("bidx") int bidx,
 			@RequestParam("originbidx") int originbidx,
 			@RequestParam("depth") int depth,
@@ -189,7 +216,7 @@ public class BoardController  {
 	
 	@RequestMapping(value="/board/boardReplyAction.do")
 	public String boardReplyAction(
-			@RequestParam(value="gubun", required=true) String gubun,
+			@RequestParam(value="gubun", required=false, defaultValue="c") String gubun,
 			@RequestParam("bidx") int bidx,
 			@RequestParam("originbidx") int originbidx,
 			@RequestParam("depth") int depth,
@@ -198,16 +225,15 @@ public class BoardController  {
 			@RequestParam("contents") String contents,
 			@RequestParam("writer") String writer,	
 			@RequestParam("password") String password,	
-			Model model) {
+			Model model,
+			HttpSession session) throws UnknownHostException {
 		
-			String ip = null;
-			try {
-				ip = InetAddress.getLocalHost().getHostAddress();
-			} catch (UnknownHostException e) {				
-				e.printStackTrace();
-			}
-			int midx = 1;
-			int value = bd.boardReply(bidx,originbidx,depth,level_,subject,contents,writer,password,ip,midx);
+			String ip = InetAddress.getLocalHost().getHostAddress();
+			
+			System.out.println("gubun:"+gubun);
+			
+			int midx = Integer.parseInt(session.getAttribute("midx").toString());
+			int value = bd.boardReply(bidx,originbidx,depth,level_,subject,contents,writer,password,ip,midx,gubun);
 					
 			String path = null;
 			if (value==1)

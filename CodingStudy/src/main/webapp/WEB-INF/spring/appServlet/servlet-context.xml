@@ -34,6 +34,7 @@
 	<!--  beans:constructor-arg value="/home/hosting_users/yesstocks/uploadFiles" /-->
 	</beans:bean>	
 	
+	
 	<beans:bean id="loginInterceptor" class="kr.mypj.myapp.interceptor.LoginInterceptor">
 	</beans:bean>
 	
@@ -56,5 +57,5 @@
 	</interceptors>		
 	
 	<context:component-scan base-package="kr.mypj.myapp" />
-	
+	<context:component-scan base-package="kr.mypj.myapp.controller" />
 </beans:beans>

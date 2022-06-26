@@ -2,13 +2,21 @@ package kr.mypj.myapp.domain;
 
 public class Criteria {
 
-	private int page;			// 페이지
-	private int perPageNum;  // 화면리스트 출력개수
-	
 	public Criteria(){
 		this.page = 1;
 		this.perPageNum = 15;
+	}	
+	
+	private int page;			// 페이지
+	private int perPageNum;  // 화면리스트 출력개수
+	private String gubun;	
+	
+	public String getGubun() {
+		return gubun;
 	}
+	public void setGubun(String gubun) {
+		this.gubun = gubun;
+	}	
 	
 	public int getPage() {
 		return page;

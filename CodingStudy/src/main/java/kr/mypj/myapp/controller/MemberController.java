@@ -97,7 +97,7 @@ public class MemberController {
 	public String memberLoginAction(
 			@RequestParam("memberId") String memberId,
 			@RequestParam("memberPwd") String memberPwd,
-			@RequestParam(name="useCookie",required=false) String useCookie,
+			@RequestParam(value="useCookie",required=false) String useCookie,
 			RedirectAttributes rttr,
 			HttpSession session			
 			

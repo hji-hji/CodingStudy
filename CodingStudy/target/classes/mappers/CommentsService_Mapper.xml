@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.mypj.myapp.persistence.CommentsService_Mapper">
+
+<select id="selectCommentsAll" parameterType="Integer" resultType="cvo">
+select * from comments  where bidx=#{bidx} and delyn='N' order by cidx desc limit 0,10
+</select>
+
+<select id="commentsCnt" parameterType="Integer" resultType="Integer">
+select count(*) from comments  where bidx=#{bidx} and delyn='N' 
+</select>
+
+<select id="getCommentsMore" parameterType="Integer" resultType="cvo">
+select * from comments where bidx=#{0} and delyn='N' order by cidx desc limit 0, #{1} 
+</select>
+
+<update id="deleteComments" parameterType="cvo">
+update comments set delyn='Y',deleteday=now(),ip=#{ip} where cidx=#{cidx} and midx=#{midx} 
+</update>
+
+<insert id="insertComments" parameterType="cvo">
+insert into comments(cwriter,ccontent,ip,bidx,midx) values(#{cwriter},#{ccontent},#{ip},#{bidx},#{midx})
+</insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

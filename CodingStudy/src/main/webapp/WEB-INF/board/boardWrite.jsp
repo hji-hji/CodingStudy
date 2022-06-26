@@ -46,6 +46,7 @@ body
 		return;
 	}
 		document.frm.action ="<%=request.getContextPath()%>/board/boardWriteAction.do";
+		document.frm.enctype="multipart/form-data";
 		document.frm.method = "post";
 		document.frm.submit();	
 
@@ -58,7 +59,7 @@ body
 <tr>
 <td style="width:300px"><a href="<%=request.getContextPath() %>/main/main.do"><img src="test.jpg" width="300px" height="100px" alt="로고이미지"></a></td>
 <td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=c">커뮤니티</a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do">문의게시판</a></td>
+<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=q">문의게시판</a></td>
 <td><a href="<%=request.getContextPath() %>/teacher/teacherJoin.do">선생님등록</a></td>
 <%if(session.getAttribute("midx") == null) {%>
 <td><a href="<%=request.getContextPath() %>/member/memberJoin.do">회원가입</a></td>
@@ -95,7 +96,12 @@ body
 <td>비밀번호</td>
 <td><input type="password" name="password" size="30"></td>
 </tr>
-
+<tr>
+<td>파일업로드</td>
+<td>
+<input type="file" id ="uploadfile" name="uploadfile">
+</td>
+</tr>
 <tr>
 <td colspan=2>
 <input type="button" value="저장" onclick="check();"> 

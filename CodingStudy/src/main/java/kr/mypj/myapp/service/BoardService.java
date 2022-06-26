@@ -13,7 +13,7 @@ public interface BoardService {
 	
 	public ArrayList<BoardVo> boardselectAll(SearchCriteria scri);
 	
-	public int boardInsert(String subject,String contents,String writer,String ip, String password, int midx);
+	public int boardInsert(String subject,String contents,String writer,String ip, String password, int midx,String gubun,String filename);
 	
 	public int boardView(int bidx);
 	
@@ -24,7 +24,7 @@ public interface BoardService {
 	public int boardDelete(int bidx, String password);
 	
 	public int boardReply(int bidx, int originbidx, int depth, int level_, String subject,
-			String content, String writer, String password, String ip, int midx);
+			String content, String writer, String password, String ip, int midx,String gubun);
 	
 	public int boardRecommend(int bidx);
 	

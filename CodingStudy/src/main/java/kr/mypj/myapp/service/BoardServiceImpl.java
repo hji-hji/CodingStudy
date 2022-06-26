@@ -40,7 +40,7 @@ public class BoardServiceImpl implements BoardService{
 	}	
 	
 	
-	public int boardInsert(String subject,String contents,String writer,String ip, String password, int midx) {
+	public int boardInsert(String subject,String contents,String writer,String ip, String password, int midx,String gubun,String filename) {
 		
 		int value = 0;
 		
@@ -54,10 +54,10 @@ public class BoardServiceImpl implements BoardService{
 		map.put("ip", ip);	
 		map.put("password", password);
 		map.put("midx", midx);
-	//	map.put("bidx",0);
-		value  = bsm.boardInsert(map);
-	//	System.out.println("value"+map.get("bidx"));
+		map.put("gubun", gubun);
+		map.put("filename",filename);
 		
+		bsm.boardInsert(map);		
 		value = bsm.boardBidxUpdate(map.get("bidx"));				 
 				 
 		return value;
@@ -109,7 +109,9 @@ public class BoardServiceImpl implements BoardService{
 	@Transactional
 	@Override
 	public int boardReply(int bidx, int originbidx, int depth, int level_, String subject, String content,
-			String writer, String password, String ip, int midx) {
+			String writer, String password, String ip, int midx,String gubun) {
+		
+		System.out.println("gubun:"+gubun);
 		
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("bidx", bidx);
@@ -121,7 +123,9 @@ public class BoardServiceImpl implements BoardService{
 		map.put("writer", writer);
 		map.put("password", password);
 		map.put("ip", ip);	
-		map.put("midx", midx);	
+		map.put("midx", midx);
+		map.put("gubun", gubun);
+		map.put("filename","");
 		
 		bsm.boardReplyUpdate(originbidx, depth);
 		int value  = bsm.boardReplyInsert(map);				

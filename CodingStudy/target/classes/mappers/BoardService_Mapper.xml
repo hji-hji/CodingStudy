@@ -12,19 +12,18 @@
 		</if> 
 </sql>  
 
-
- <select id="rtnOriginbidx" resultType="int">
-     <!--    SELECT ifnull(max(bidx),0)+1 FROM board  -->
+<!-- 
+ <select id="rtnOriginbidx" resultType="int">    
      SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'board' AND table_schema = DATABASE()      
     </select>
-
+-->
 <insert id="boardInsert" parameterType="HashMap">
 <selectKey resultType="int" keyProperty="bidx" order="AFTER">
   SELECT MAX(bidx) FROM board        
 </selectKey>
   
-insert into board(depth,level_,subject,contents,writer,ip,password,midx) 
-values(0,0,#{subject},#{contents},#{writer},#{ip},#{password},#{midx})
+insert into board(depth,level_,subject,contents,writer,ip,password,midx,gubun,filename) 
+values(0,0,#{subject},#{contents},#{writer},#{ip},#{password},#{midx},#{gubun},#{filename})
 </insert>
 
 <update id="boardBidxUpdate" parameterType ="Integer">
@@ -32,13 +31,13 @@ update board set originbidx= #{bidx} where bidx=#{bidx}
 </update>
 
 <select id="boardselectAll" parameterType="scri" resultType="bvo">
-select * from board where delyn='N' 
+select * from board where delyn='N' and gubun = #{gubun} 
 <include refid="search" />	
 order by originbidx desc, depth asc limit #{pageStart},15
 </select>
 
 <select id="boardTotal" parameterType="scri" resultType="Integer">
-select count(*) from board where delyn='N' 
+select count(*) from board where delyn='N' and gubun = #{gubun}
 <include refid="search" />	
 </select>
 
@@ -51,8 +50,8 @@ select * from board where delyn='N' and bidx= #{bidx}
 </select>
 
 <select id="boardMyQuestion" parameterType="Integer" resultType="bvo">
-select a.*, (select b.contents from board b where b.originbidx = a.bidx and b.depth = 1 ) as answer
-from board a where a.delyn='N' and a.midx= #{midx} and a.depth=0
+select a.*, (select b.contents from board b where b.originbidx = a.bidx and b.depth = 1 and a.gubun ='q' ) as answer
+from board a where a.delyn='N' and a.midx= #{midx} and a.depth=0 and a.gubun ='q'
 </select>
 
 
@@ -69,8 +68,8 @@ update board set delyn='Y' where bidx=#{bidx} and password=#{password}
 </update>
 
 <insert id="boardReplyInsert" parameterType="HashMap">
-insert into board(originbidx,depth,level_,subject,contents,writer,password,delyn,ip,writeday,midx) 
-values(#{originbidx},#{depth}+1,#{level_}+1,#{subject},#{contents},#{writer},#{password},default,#{ip},default,#{midx})
+insert into board(originbidx,depth,level_,subject,contents,writer,password,delyn,ip,writeday,midx,gubun,filename) 
+values(#{originbidx},#{depth}+1,#{level_}+1,#{subject},#{contents},#{writer},#{password},default,#{ip},default,#{midx},#{gubun},#{filename})
 </insert>
 <!--
 <update id="boardRecommend" parameterType="Integer">

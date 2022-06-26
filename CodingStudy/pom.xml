@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>4.3.3.RELEASE</version>
 			<exclusions>
 				<!-- Exclude Commons Logging in favor of SLF4j -->
 				<exclusion>
@@ -30,8 +30,10 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>4.3.3.RELEASE</version>
 		</dependency>
+		
+		
 
 		<!-- AspectJ -->
 		<dependency>
@@ -147,7 +149,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>4.3.3.RELEASE</version>
 		</dependency>
 
 		<!-- Spring-test -->
@@ -155,14 +157,14 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>4.3.3.RELEASE</version>
 		</dependency>
 		
 		  <!-- (추가) Spring core -->
 	 	<dependency>
 	        <groupId>org.springframework</groupId>
 	        <artifactId>spring-core</artifactId>
-	        <version>${org.springframework-version}</version>
+	        <version>4.3.3.RELEASE</version>
 	 	</dependency>		
 		
 		<!--(추가) https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
@@ -250,7 +252,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>4.3.3.RELEASE</version>
 		</dependency>
 
 	</dependencies>
