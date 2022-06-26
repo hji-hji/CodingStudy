@@ -12,7 +12,7 @@ if (gubun.equals("c")){
 }
 int midx = 0 ;
 if (session.getAttribute("midx") != null){
-	midx = (int)session.getAttribute("midx");
+	midx =  Integer.parseInt(session.getAttribute("midx").toString());
 }
 %>    
 
