@@ -51,13 +51,23 @@ public class CommentsController {
 //		int defaultBlock = cc.getBlock();
 		int perBlockNum =  cc.getPerBlockNum();	
 		
+		
 		ArrayList<CommentsVo> alist =  commentsService.getCommentsMore(bidx,nextBlock,perBlockNum);
 		int totalCnt = commentsService.commentsCnt(bidx);
 		
-		int nextBlock_ = 0;		
+		int nextBlock1 = nextBlock;		
+		int nextBlock2 = 0;
 		if (totalCnt > nextBlock*perBlockNum ) {
-			nextBlock_ = nextBlock+1;	
+			nextBlock2 = nextBlock+1;	
+		}else {
+			nextBlock2 = nextBlock;
 		}
+		
+		int nextBlock_=999;
+		if (nextBlock1 !=nextBlock2) {
+			nextBlock_ = nextBlock+1;
+		}
+		
 		
 		HashMap<String,Object> hm = new HashMap<String,Object>();
 		hm.put("alist", alist);
@@ -84,7 +94,11 @@ public class CommentsController {
 		
 		int value = commentsService.deleteComments(cv);
 		
-		HashMap<String,Object> hm = moreCommentsList(bidx,nextBlock-1);			
+		ArrayList<CommentsVo> alist =  commentsService.getCommentsMore(bidx,(nextBlock-1),10);
+		
+		HashMap<String,Object> hm = new HashMap<String,Object>();
+		hm.put("alist", alist);
+		hm.put("nextBlock", nextBlock);	
 					
 		return hm;
 	}
@@ -110,7 +124,7 @@ public class CommentsController {
 		
 		int value = commentsService.insertComments(cv);
 		
-		HashMap<String,Object> hm = moreCommentsList(bidx,nextBlock-1);
+		HashMap<String,Object> hm = commentsList(bidx);
 		
 		return hm;
 	}

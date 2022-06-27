@@ -128,8 +128,8 @@ $(function(){
 					//alist와 nextBlock나온다
 					
 					$("#nextBlock").val(data.nextBlock);
-					
-					if (data.nextBlock !=0){
+					alert("다음예정페이지:"+data.nextBlock);
+					if (data.nextBlock !=999){
 						  $("#more").css('display','block');
 					}else{
 						  $("#more").css('display','none');
@@ -164,18 +164,17 @@ $(function(){
 					},
 					success : function(data){		
 							 
-							$("#nextBlock").val(data.nextBlock);
-							
-							if (data.nextBlock !=0){
-								  $("#more").css('display','block');
-							}else{
-								  $("#more").css('display','none');
-							}	
-							commentList(data.alist);
+						if (data.moreView =="N"){
+							$("#more").css('display','none');
+						}else{
+							$("#more").css('display','block');
+						}
+						commentList(data.alist);
 							
 							$("#bidx").val("");
 							$("#cwriter").val("");
-							$("#ccontent").val("")
+							$("#ccontent").val("");
+							$("#nextBlock").val("2");
 							}			
 				});	
 		});			 
@@ -219,8 +218,8 @@ $.del = function(cidx){
 			success : function(data){			
 						
 				$("#nextBlock").val(data.nextBlock);
-				
-				if (data.nextBlock !=0){
+				alert("삭제하기"+data.nextBlock);
+				if (data.nextBlock !=999){
 					  $("#more").css('display','block');
 				}else{
 					  $("#more").css('display','none');
