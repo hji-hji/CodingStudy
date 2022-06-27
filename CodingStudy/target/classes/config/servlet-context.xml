@@ -30,8 +30,8 @@
 	</beans:bean>	
 	<!-- 파일업로드시 저장폴더 지정 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-	<beans:constructor-arg value="D:/dev/uploadFiles" />
-	<!--  beans:constructor-arg value="/home/hosting_users/yesstocks/uploadFiles" /-->
+	<!-- beans:constructor-arg value="D:/dev/uploadFiles" /  -->
+	<beans:constructor-arg value="/home/hosting_users/hji740/uploadFiles" />
 	</beans:bean>	
 	
 	

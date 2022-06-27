@@ -52,7 +52,21 @@
 	    
 	     <bean id="mailSender" 
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp.gmail.com" /> <!-- gmail을 사용 -->
+        <property name="host" value="mw-002.cafe24.com" /> 
+        <property name="port" value="25" />
+        <property name="username" value="codingssam@codingssam.com" />
+        <property name="password" value="0410ca!!" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.ssl.trust">mw-002.cafe24.com</prop>
+                <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+        <!-- property name="host" value="smtp.gmail.com" /> 
         <property name="port" value="587" />
         <property name="username" value="reiga303@gmail.com" />
         <property name="password" value="ltqsgneqyzjcstam" />
@@ -65,7 +79,9 @@
                 <prop key="mail.smtp.starttls.enable">true</prop>
                 <prop key="mail.debug">true</prop>
             </props>
-        </property>
+        </property -->
+        
+        
     </bean>
 		
 </beans>

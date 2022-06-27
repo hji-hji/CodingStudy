@@ -162,7 +162,7 @@ public class MemberServiceImpl implements MemberService  {
 		
 	//	System.out.println("mailSender"+mailSender);
 		
-		String FROM_ADDRESS = "reiga303@gmail.com";
+		String FROM_ADDRESS = "codingssam@codingssam.com";
 		
 		String subject = "";
 		String msg = "";
