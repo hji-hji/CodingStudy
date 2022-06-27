@@ -94,11 +94,7 @@ public class CommentsController {
 		
 		int value = commentsService.deleteComments(cv);
 		
-		ArrayList<CommentsVo> alist =  commentsService.getCommentsMore(bidx,(nextBlock-1),10);
-		
-		HashMap<String,Object> hm = new HashMap<String,Object>();
-		hm.put("alist", alist);
-		hm.put("nextBlock", nextBlock);	
+		HashMap<String,Object> hm = moreCommentsList(bidx,nextBlock-1);	
 					
 		return hm;
 	}
