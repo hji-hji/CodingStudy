@@ -188,7 +188,33 @@ color:gray;
   }
   
   </script>
-  
+<script type="text/javascript">
+var clearChk= true;
+
+function clearMessage(){
+	//alert("test");
+	var fn = document.frm;
+	if(clearChk){
+	fn.teacherInfo.value="";
+	clearChk=false;
+	
+	return;
+	}
+	
+}
+function textlength(){
+	//alert("test");
+	var fn = document.frm;
+//	alert(fn.teacherInfo.value);
+//	alert(fn.teacherInfo.value.length);
+	if(fn.teacherInfo.value.length > 100){
+		alert("100자까지 입력이 가능합니다.");
+		fn.teacherInfo.value=fn.teacherInfo.value.substring(0,100);
+		fn.teacherInfo.focus();
+	}
+	return;
+}
+</script>
   
   
   
@@ -292,7 +318,7 @@ color:gray;
 </tr>
 <tr>
 <td>자기소개</td>
-<td><textarea name="teacherInfo" cols="50" rows="5"></textarea>	
+<td><textarea name="teacherInfo" cols="50" rows="5" onFocus="clearMessage();"  onKeyup="textlength();">100자 내외</textarea>	
 </td>
 </tr>
 <tr>

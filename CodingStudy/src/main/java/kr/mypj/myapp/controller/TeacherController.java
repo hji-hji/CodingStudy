@@ -168,14 +168,15 @@ public class TeacherController {
 		
 		String teacherIp = null;
 		int midx = Integer.parseInt(session.getAttribute("midx").toString());
+		teacherInfo = teacherInfo.replaceAll("\r\n", "<br>");
 					
 		int value= 0;
 		String path= "";
 		try {			
 			teacherIp = InetAddress.getLocalHost().getHostAddress();
-		//	System.out.println(tearchName+ caidx+ teacherPay+ teacherGender+ teacherPhone+ stidx+ teacherExp+ teacherInfo+ filename+ teacherEmail+ teacherIp+ midx);
+		
 			value = teacherService.teacherInsert(tearchName, caidx, teacherPay, teacherGender, teacherPhone, stidx, teacherExp, teacherInfo, filename, teacherEmail, teacherIp, midx);
-	//		System.out.println(value);
+	
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
