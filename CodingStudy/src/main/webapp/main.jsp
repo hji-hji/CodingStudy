@@ -187,7 +187,7 @@ function teacherSelectAll(i){
 </head>
 <body>
 
- <table border="1" style="width:800px;">
+ <table border="0" style="width:800px;">
 <tr>
 <td style="width:310px">
 <a href="<%=request.getContextPath() %>/main/main.do"><img src="test.jpg" width="300px" height="100px" alt="로고이미지"></a>
@@ -202,6 +202,9 @@ function teacherSelectAll(i){
 <td><a href="<%=request.getContextPath() %>/member/memberMypage.do">마이페이지</a></td>
 <td><a href="<%=request.getContextPath() %>/member/memberLogout.do">로그아웃</a>&nbsp;<button>검색</button></td>
 <%} %>
+</tr>
+<tr>
+<td colspan=6 style="width:800px;background-color:gray;"></td>
 </tr>
 <tr>
 <td colspan=6 style="width:800px;height:200px" >
@@ -223,27 +226,27 @@ for(int j = i; j<i+5; j++) {
 	 }
 %>
 <td>
-<input type="text" name="cateName"   value="<%=clist.get(j).getCateName() %>"  size=12  readonly >
+<input type="text" name="cateName"   value="<%=clist.get(j).getCateName() %>"  size=12  readonly style="border:none;">
 </td>
 <%} %>
 </tr>
 <%} %>
  </table>
  
-<table>
 <form name="frm">
-<input type="hidden" name="cateNameReq" id="cateNameReq" size=35>
-<input type="hidden" name="areaNameReq" id="areaNameReq" size=35>
+<input type="hidden" name="cateNameReq" id="cateNameReq">
+<input type="hidden" name="areaNameReq" id="areaNameReq"> 
+<table>
+<tr><td colspan=2 style="height:1px"></td></tr>
 <tr>
 <td class="view-box"></td>
 <td><input type="button" name="btn" id="btn" value="검색" onclick="teacherSelectAll(0);"></td>
 </tr>
-</form>
-</table> 
-
- <table border="1" style="width:800px;">
+</table>
+</form> 
+ <table border="0" style="width:800px;">
 <tr>
-<td style="width:150px;vertical-align:top;">
+<td style="width:150px;vertical-align:top;" rowspan=2>
 
 <%
 int cnt2 = slist.size();
@@ -254,7 +257,7 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 			 break;
 		 }			 
 %>
-	<input type="text" name="areaName"   value="<%=slist.get(j2).getAreaName()%>"  size=2  readonly >			
+	<input type="text" name="areaName"   value="<%=slist.get(j2).getAreaName()%>"  size=2  readonly>			
 <%		 
 	 }
 	 out.println("<br>");
@@ -264,10 +267,10 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 </td>
 <td id="cont">
 <% for (TeacherDto tedto : telist){ %>
-<table border=1 style='width:650px;vertical-align:top;'>
+<table border=0 style='width:650px;vertical-align:top;'>
 <tr>
-<td style='width:100px;''><img src='<%=request.getContextPath()%>/displayFile.do?fileName=<%=tedto.getFilename() %>'  width="100px" height="100px"></td>
-<td>이름 : <%=tedto.getTeacherName()%>
+<td style='width:100px;'><img src='<%=request.getContextPath()%>/displayFile.do?fileName=<%=tedto.getFilename() %>'  width="100px" height="100px"></td>
+<td style='width:170px;'>이름 : <%=tedto.getTeacherName()%>
 <br>과목 : <%=tedto.getCateName() %> 
 <br>경력 :<% if (tedto.getTeacherExp().equals("6")) {
 	        	  out.println("5년이상");
@@ -279,7 +282,9 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 <br>성별:<% if (tedto.getTeacherGender().equals("M")){out.println("남성");}else{out.println("여성");} %>
 <br>지역: <%=tedto.getAreaName() %> 
 <br>과외비:<%=tedto.getTeacherPay() %> <% if (!tedto.getTeacherPay().equals("협의")) {%>만원/시간<%} %> 
-<br>자기소개:<%=tedto.getTeacherInfo() %>
+</td>
+<td style="text-align:left;vertical-align:top;">
+자기소개:<br><%=tedto.getTeacherInfo() %>
  </td>
 <td width='100px'>
 <button onclick="location.href='<%=request.getContextPath()%>/review/reviewList.do?tidx=<%=tedto.getTidx()%>'">리뷰보기</button>
@@ -288,29 +293,36 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 <%} %>
 </td>
 </tr>
+<tr>
+<td colspan=4 style="background-color:gray;"></td>
+</tr>
 </table>
-
 <%} %>
 </td>
 </tr>
 
-
 <tr>
-<td height="20"></td>
-<td>
+
+<td height="20">
 <input id='nextBlock' type='hidden' />
 <input type="button" id='more' onclick="teacherSelectAll(1);" value="더보기">
 </td>
 </tr>
 </table>
-<table border="1" style="width:800px;text-align:center">
+<table border="0" style="width:800px;text-align:center">
+<tr>
+<td style="width:800px;background-color:gray;"></td>
+</tr>
 <tr>
 <td>
 회사소개&nbsp;&nbsp;<a href="#" onclick="window.open('<%=request.getContextPath()%>/etc/memberTermsOfService.jsp','tos','width=1200, height=600, menubar=no, status=no, toolbar=no');">이용약관</a>
 &nbsp;&nbsp; <a href="#" onclick="window.open('<%=request.getContextPath()%>/etc/memberPersonInformation.jsp','pi','width=1200, height=600, menubar=no, status=no, toolbar=no');">개인정보보호방침</a>
 &nbsp;&nbsp;이용가이드 
-
-</td></tr>
+</td>
+</tr>
+<tr>
+<td style="width:800px;background-color:gray;"></td>
+</tr>
 <tr>
 <td>
 상호 : 다락 <br>
