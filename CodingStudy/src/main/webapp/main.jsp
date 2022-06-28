@@ -160,20 +160,24 @@ function teacherSelectAll(i){
 						 teacherPayStr ="만원/시간";
 					 }						 
 					 
-	             str = str + "<table border=1 style='width:650px;vertical-align:top;'><tr>"
+	             str = str + "<table border=0 style='width:650px;vertical-align:top;'><tr>"
 	             +"<td style='width:100px;'><img src='<%=request.getContextPath()%>/displayFile.do?fileName="+item.filename+"' width='100px' height='100px' alt='사진'></td>"
-	             +"<td>이름:"+item.teacherName 
+	             +"<td style='width:170px;'>이름:"+item.teacherName 
 	             +"<br>과목:"+item.cateName
 	             +" <br>경력:"+teacherExp
 	             +"<br>성별:"+teacherGender
 	             +"<br>지역:"+item.areaName
 	             +"<br>과외비:"+item.teacherPay + teacherPayStr
-	             +"<br>자기소개:"+item.teacherInfo
+	             +"</td><td style='text-align:left;vertical-align:top;'>"
+	             +"자기소개:<br>"+item.teacherInfo
 	             +"</td>"
 	             +"<td width='100px'>"
 	             +"<button onclick=location.href='<%=request.getContextPath()%>/review/reviewList.do?tidx="+item.tidx+"'>리뷰보기</button>"
 	             + sttr   
-	             +"</td></tr></table>"; 
+	             +"</td></tr>"
+	             +"<tr><td colspan=4 style='background-color:gray;'></td>"
+	             +"</tr>"	             
+	             +"</table>"; 
 				 });
 				
 				
@@ -189,7 +193,7 @@ function teacherSelectAll(i){
 
 </script>
 </head>
-<body>
+<body style="background-color:#FFFAFA;">
 
  <table border="0" style="width:800px;">
 <tr>
@@ -230,7 +234,7 @@ for(int j = i; j<i+5; j++) {
 	 }
 %>
 <td style="background-color:#87CEEB">&nbsp;
-<input type="text" name="cateName"   value="<%=clist.get(j).getCateName() %>"  size=12  readonly style="border:none;background-color:#87CEEB">
+<input type="text" name="cateName"   value="<%=clist.get(j).getCateName() %>"  size=14  readonly style="border:none;background-color:#87CEEB">
 </td>
 <%} %>
 </tr>
