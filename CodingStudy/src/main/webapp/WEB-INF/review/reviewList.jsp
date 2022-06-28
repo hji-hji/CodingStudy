@@ -102,7 +102,7 @@ function reviewDelete(tidx,ridx){
 </head>
 <body>
 
- <%@include file="/WEB-INF/views/common/header.jsp"%>
+ <%@include file="/common/header.jsp"%>
 
 <h1>리뷰</h1>
 <table border="1" style="text-align:left;width:800px;height:100px">
@@ -142,7 +142,7 @@ function reviewDelete(tidx,ridx){
 
 <hr>
 
- <%@include file="/WEB-INF/views/common/footer.jsp"%>
+ <%@include file="/common/footer.jsp"%>
 
 </body>
 </html>

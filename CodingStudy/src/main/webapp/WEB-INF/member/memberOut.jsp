@@ -30,7 +30,7 @@ function check(){
 </head>
 <body>
 
- <%@include file="/WEB-INF/views/common/header.jsp"%>
+ <%@include file="/common/header.jsp"%>
 
 <center>회원 탈퇴 이유를 적어주세요.
 <form name="frm">
@@ -46,7 +46,7 @@ function check(){
 </form>
 </center>
 
- <%@include file="/WEB-INF/views/common/footer.jsp"%>
+ <%@include file="/common/footer.jsp"%>
  
 </body>
 </html>

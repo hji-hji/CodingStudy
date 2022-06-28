@@ -28,7 +28,7 @@ body
 
  <BODY>
  
-  <%@include file="/WEB-INF/views/common/header.jsp"%>
+  <%@include file="/common/header.jsp"%>
 
 <center><h1>내가 남긴 문의</h1></center>
 <hr></hr>
@@ -80,7 +80,7 @@ body
 </tr>
 </table> 
 
- <%@include file="/WEB-INF/views/common/footer.jsp"%>
+ <%@include file="/common/footer.jsp"%>
 
  </BODY>
 </HTML>

@@ -195,7 +195,7 @@ function teacherSelectAll(i){
 </head>
 <body> 
  
- <%@include file="/WEB-INF/views/common/header.jsp"%>  
+ <%@include file="/common/header.jsp"%>  
 
 <table border="1" style="width:800px;border-top: none;border-bottom: none;border-left: none;border-right: none;">
 <%
@@ -294,7 +294,7 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 </tr>
 </table>
 
- <%@include file="/WEB-INF/views/common/footer.jsp"%>
+ <%@include file="/common/footer.jsp"%>
 
 </body>
 </html>

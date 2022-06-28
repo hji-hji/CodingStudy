@@ -53,7 +53,7 @@ body
 
  <BODY>
  
-  <%@include file="/WEB-INF/views/common/header.jsp"%>  
+  <%@include file="/common/header.jsp"%>  
 
 <center><h1>과외 신청</h1></center>
 <hr></hr>
@@ -145,7 +145,7 @@ body
  </table>
  </form>
  
-  <%@include file="/WEB-INF/views/common/footer.jsp"%>
+  <%@include file="/common/footer.jsp"%>
  
  </BODY>
 </HTML>

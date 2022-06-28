@@ -292,7 +292,7 @@ function getImageLink(fileName){
 <body>
 
 
- <%@include file="/WEB-INF/views/common/header.jsp"%>
+ <%@include file="/common/header.jsp"%>
 
 <h1><%=title %> 게시판</h1>
 <table border="1" style="text-align:left;width:800px;height:300px">
@@ -365,7 +365,7 @@ function getImageLink(fileName){
 
 <%} %>
 
- <%@include file="/WEB-INF/views/common/footer.jsp"%>
+ <%@include file="/common/footer.jsp"%>
  
 </body>
 </html>

@@ -29,7 +29,7 @@ text-decoration:none;
 
  <BODY>
  
-  <%@include file="/WEB-INF/views/common/header.jsp"%>
+  <%@include file="/common/header.jsp"%>
 
 <h1><center>회원정보</center>  </h1>
 <hr></hr>
@@ -89,7 +89,7 @@ text-decoration:none;
 </tr>
 </table> 
  
-  <%@include file="/WEB-INF/views/common/footer.jsp"%>
+  <%@include file="/common/footer.jsp"%>
  
  </BODY>
 </HTML>

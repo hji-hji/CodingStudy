@@ -63,7 +63,7 @@ body
 </head>
 <body>
 
- <%@include file="/WEB-INF/views/common/header.jsp"%>
+ <%@include file="/common/header.jsp"%>
 
 <h1><%=title %> 게시판</h1>
 
@@ -95,7 +95,7 @@ body
 </td>
 </table>
 
- <%@include file="/WEB-INF/views/common/footer.jsp"%>
+ <%@include file="/common/footer.jsp"%>
 
 </body>
 </html>

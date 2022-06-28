@@ -28,7 +28,7 @@ body
 </head>
 <body>
 
- <%@include file="/WEB-INF/views/common/header.jsp"%>
+ <%@include file="/common/header.jsp"%>
 
 <H1><center>내가 신청한 과외</center></H1>
 <hr>
@@ -86,7 +86,7 @@ body
 </tr>
 </table> 
 
- <%@include file="/WEB-INF/views/common/footer.jsp"%>
+ <%@include file="/common/footer.jsp"%>
 
 </body>
 </html>

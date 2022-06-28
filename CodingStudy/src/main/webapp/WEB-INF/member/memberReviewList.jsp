@@ -37,7 +37,7 @@ function reviewDelete(ridx){
 </head>
 <body>
 
- <%@include file="/WEB-INF/views/common/header.jsp"%>
+ <%@include file="/common/header.jsp"%>
 
 
 <H1><center>내가 남긴 리뷰</center></H1>
@@ -73,7 +73,7 @@ function reviewDelete(ridx){
 </table> 
 
 
- <%@include file="/WEB-INF/views/common/footer.jsp"%>
+ <%@include file="/common/footer.jsp"%>
 
 
 

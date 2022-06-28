@@ -17,7 +17,7 @@ a {
 </head>
 <body>
 
- <%@include file="/WEB-INF/views/common/header.jsp"%>
+ <%@include file="/common/header.jsp"%>
 <table border="0" style="width:800px;">
 <tr><td>
 회원님의 아이디는 
@@ -30,7 +30,7 @@ a {
 </td>
 </tr>
 </table>
- <%@include file="/WEB-INF/views/common/footer.jsp"%>
+ <%@include file="/common/footer.jsp"%>
 
 
 </body>
