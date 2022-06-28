@@ -29,31 +29,14 @@ function check(){
 </script>
 </head>
 <body>
-<table border="1" style="width:800px;">
-<tr>
-<td style="width:300px"><a href="<%=request.getContextPath() %>/main/main.do"><img src="test.jpg" width="300px" height="100px" alt="로고이미지"></a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=c">커뮤니티</a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=q">문의게시판</a></td>
-<td><a href="<%=request.getContextPath() %>/teacher/teacherJoin.do">선생님등록</a></td>
-<%if(session.getAttribute("midx") == null) {%>
-<td><a href="<%=request.getContextPath() %>/member/memberJoin.do">회원가입</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogin.do">로그인</a>&nbsp;<button>검색</button></td>
-<%}else{ %>
-<td><a href="<%=request.getContextPath() %>/member/memberMypage.do">마이페이지</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogout.do">로그아웃</a>&nbsp;<button>검색</button></td>
-<%} %>
-</tr>
-<tr>
-<td colspan=6 style="width:800px;height:200px" >
-<img src="test.jpg" width="800px" height="200px" alt="이미지">
-</td>
-</tr>
-</table>
+
+ <%@include file="/WEB-INF/views/common/header.jsp"%>
+
 <center>회원 탈퇴 이유를 적어주세요.
 <form name="frm">
-<table style="text-align:center;">
+<table border="0" style="width:800px;text-align:center;">
 <tr><td>
-<textarea name="reason"  cols="50" rows="5"></textarea>
+<textarea name="reason"  cols="100" rows="5"></textarea>
 <br>
 <button onclick="check();">확인</button>
 <button onclick="location.href='<%=request.getContextPath() %>/member/memberMypage.do'" >취소</button>
@@ -62,5 +45,8 @@ function check(){
 </table>
 </form>
 </center>
+
+ <%@include file="/WEB-INF/views/common/footer.jsp"%>
+ 
 </body>
 </html>

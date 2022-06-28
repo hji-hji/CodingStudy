@@ -39,7 +39,7 @@ td,input {
    border-top-left-radius: 15px; border-top-right-radius: 15px;
    border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;
 }
-   
+ input:focus {outline: none;}  
 </style>
 <script>
 <%	if (request.getAttribute("msg") != null) { %>
@@ -73,7 +73,7 @@ $(function(){
       arr.push(value);
       arr3.push(value);
     }         
-    $('.view-box').text(arr3.join(','));
+    $('.view-box').html("&nbsp;&nbsp;"+arr3.join(','));
     $('input[name=cateNameReq]').val(arr.join(','));
   });
  
@@ -94,7 +94,7 @@ $(function(){
 	      arr3.push(value);
 	    }	
 	
-	    $('.view-box').text(arr3.join(','));	    
+	    $('.view-box').html("&nbsp;&nbsp;"+arr3.join(','));	    
 	    
 	    $('input[name=areaNameReq]').val(arr2.join(','));
 	  });  
@@ -193,33 +193,9 @@ function teacherSelectAll(i){
 
 </script>
 </head>
-<body style="background-color:#FFFAFA;">
-
- <table border="0" style="width:800px;">
-<tr>
-<td style="width:310px">
-<a href="<%=request.getContextPath() %>/main/main.do"><img src="test.jpg" width="300px" height="100px" alt="로고이미지"></a>
-</td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=c">커뮤니티</a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=q">문의게시판</a></td>
-<td><a href="<%=request.getContextPath() %>/teacher/teacherJoin.do">선생님등록</a></td>
-<%if(session.getAttribute("midx") == null) {%>
-<td><a href="<%=request.getContextPath() %>/member/memberJoin.do">회원가입</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogin.do">로그인</a>&nbsp;<button>검색</button></td>
-<%}else{ %>
-<td><a href="<%=request.getContextPath() %>/member/memberMypage.do">마이페이지</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogout.do">로그아웃</a>&nbsp;<button>검색</button></td>
-<%} %>
-</tr>
-<tr>
-<td colspan=6 style="width:800px;background-color:gray;"></td>
-</tr>
-<tr>
-<td colspan=6 style="width:800px;height:200px" >
-<img src="<%=request.getContextPath() %>/resources/images/coding.jpg" width="800px" height="200px" alt="이미지">
-</td>
-</tr>
-</table>
+<body> 
+ 
+ <%@include file="/WEB-INF/views/common/header.jsp"%>  
 
 <table border="1" style="width:800px;border-top: none;border-bottom: none;border-left: none;border-right: none;">
 <%
@@ -234,7 +210,7 @@ for(int j = i; j<i+5; j++) {
 	 }
 %>
 <td style="background-color:#87CEEB">&nbsp;
-<input type="text" name="cateName"   value="<%=clist.get(j).getCateName() %>"  size=14  readonly style="border:none;background-color:#87CEEB">
+<input type="text" name="cateName"  value="<%=clist.get(j).getCateName() %>"  size=15  readonly style="height:30px;border:none;background-color:#87CEEB">
 </td>
 <%} %>
 </tr>
@@ -265,7 +241,7 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 			 break;
 		 }			 
 %>
-	<input type="text" name="areaName" value="&nbsp;&nbsp;<%=slist.get(j2).getAreaName()%>"  size=2  readonly style="border:none;background-color:#87CEEB">			
+	<input type="text" name="areaName" value="<%=slist.get(j2).getAreaName()%>"  size=2  readonly style="text-align:center;height:20px;border:none;background-color:#87CEEB">			
 <%		 
 	 }
 	 out.println("<br>");
@@ -317,37 +293,8 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 </td>
 </tr>
 </table>
-<table border="0" style="width:800px;text-align:center">
-<tr>
-<td style="width:800px;background-color:gray;"></td>
-</tr>
-<tr>
-<td>
-회사소개&nbsp;&nbsp;<a href="#" onclick="window.open('<%=request.getContextPath()%>/etc/memberTermsOfService.jsp','tos','width=1200, height=600, menubar=no, status=no, toolbar=no');">이용약관</a>
-&nbsp;&nbsp; <a href="#" onclick="window.open('<%=request.getContextPath()%>/etc/memberPersonInformation.jsp','pi','width=1200, height=600, menubar=no, status=no, toolbar=no');">개인정보보호방침</a>
-&nbsp;&nbsp;이용가이드 
-</td>
-</tr>
-<tr>
-<td style="width:800px;background-color:gray;"></td>
-</tr>
-<tr>
-<td>
-상호 : 다락 <br>
-대표자 : 황정아<br>
-사업자 번호 : 418-07-47452<br>
-주소 : 전라북도 전주시 덕진구 아중로 204 3층<br>
-고객센터 전화번호 :010-4611-3408<br>
-고객센터 이메일 : codingssam@codingssam.com
-</td>
-</tr>
-<tr>
-<td>
-Copyrightⓒ2022  다락 All rights reserved.
 
-</td>
-</tr>
- </table>
+ <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
 </body>
 </html>

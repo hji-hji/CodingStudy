@@ -195,26 +195,8 @@ color:gray;
  </HEAD>
 
  <BODY>
- <table border="1" style="width:800px;">
-<tr>
-<td style="width:300px"><a href="<%=request.getContextPath() %>/main/main.do"><img src="test.jpg" width="300px" height="100px" alt="로고이미지"></a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=c">커뮤니티</a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=q">문의게시판</a></td>
-<td><a href="<%=request.getContextPath() %>/teacher/teacherJoin.do">선생님등록</a></td>
-<%if(session.getAttribute("midx") == null) {%>
-<td><a href="<%=request.getContextPath() %>/member/memberJoin.do">회원가입</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogin.do">로그인</a>&nbsp;<button>검색</button></td>
-<%}else{ %>
-<td><a href="<%=request.getContextPath() %>/member/memberMypage.do">마이페이지</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogout.do">로그아웃</a>&nbsp;<button>검색</button></td>
-<%} %>
-</tr>
-<tr>
-<td colspan=6 style="width:800px;height:200px" >
-<img src="test.jpg" width="800px" height="200px" alt="이미지">
-</td>
-</tr>
-</table>
+ 
+  <%@include file="/WEB-INF/views/common/header.jsp"%>
 
 <center><h1>선생님 회원등록</h1></center>
 <hr></hr>
@@ -247,7 +229,6 @@ color:gray;
 <tr>
 <td>금액</td>
 <td>
-시간당 
 <select name="teacherPay">
 <option value="">-선택-</option>
 <option value="1">1만원</option>
@@ -261,7 +242,7 @@ color:gray;
 <option value="9">9만원</option>
 <option value="10">10만원</option>
 <option value="협의">협의</option>
-</select>
+</select>/시간
 </td>
 </tr>
 <tr>
@@ -315,22 +296,10 @@ color:gray;
 </td>
 </tr>
 <tr>
-<td>회원인증</td>
-<td><% 
-String memberApproveYn = (String)session.getAttribute("memberApproveYn");
-if (memberApproveYn.equals("N")) {
-	out.println("N &nbsp;(회원인증을 하셔야 등록하실수 있습니다.)");	
-}
-else{
-	out.println("Y &nbsp;(회원인증이 되어 등록 가능합니다.)");	
-} 
-%>   
-<input type="hidden" name="memberApproveYn" value="<%=memberApproveYn%>">
-</td>
-</tr>
-<tr>
 <td></td>
 <td>
+<% String memberApproveYn = (String)session.getAttribute("memberApproveYn");%>   
+<input type="hidden" name="memberApproveYn" value="<%=memberApproveYn%>">
 <input type="button" name ="btn" value="확인" onclick="check();"> 
 <input type="button" value="취소" onclick="location.href='<%=request.getContextPath()%>/main/main.do';"> 
 </td>
@@ -338,6 +307,7 @@ else{
  </table>
  </form>
 
- 
+  <%@include file="/WEB-INF/views/common/footer.jsp"%>
+  
  </BODY>
 </HTML>

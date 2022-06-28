@@ -51,26 +51,8 @@ body
  </HEAD>
 
  <BODY>
- <table border="1" style="width:800px;">
-<tr>
-<td style="width:300px"><a href="<%=request.getContextPath() %>/main/main.do"><img src="test.jpg" width="300px" height="100px" alt="로고이미지"></a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=c">커뮤니티</a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=q">문의게시판</a></td>
-<td><a href="<%=request.getContextPath() %>/teacher/teacherJoin.do">선생님등록</a></td>
-<%if(session.getAttribute("midx") == null) {%>
-<td><a href="<%=request.getContextPath() %>/member/memberJoin.do">회원가입</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogin.do">로그인</a>&nbsp;<button>검색</button></td>
-<%}else{ %>
-<td><a href="<%=request.getContextPath() %>/member/memberMypage.do">마이페이지</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogout.do">로그아웃</a>&nbsp;<button>검색</button></td>
-<%} %>
-</tr>
-<tr>
-<td colspan=6 style="width:800px;height:200px" >
-<img src="test.jpg" width="800px" height="200px" alt="이미지">
-</td>
-</tr>
-</table>
+ 
+  <%@include file="/WEB-INF/views/common/header.jsp"%>
 
 <center><h1>비밀번호 변경</h1></center>
 <hr></hr>
@@ -113,7 +95,7 @@ body
  </table>
  </form>
 
-
+ <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
 </td>
 </tr>

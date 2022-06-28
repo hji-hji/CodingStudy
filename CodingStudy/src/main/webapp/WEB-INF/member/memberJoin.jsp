@@ -58,6 +58,7 @@ body
   //	alert("테스트");
   	
   	var fm = document.frm;
+  	var chk = /^[0-9]+$/; 
   	
   	if (fm.memberId.value ==""){
   		alert("아이디를 입력하세요");
@@ -71,8 +72,16 @@ body
   		alert("비밀번호를 입력하세요");
   		fm.memberPwd.focus();
   		return;
+  	}else if (fm.memberPwd.value.length < 4){
+  		alert("비밀번호는 4자리이상 입력해주세요");
+  		fm.memberPwd.focus();
+  		return;
   	}else if (fm.memberPwd2.value ==""){
   		alert("비밀번호 확인을 입력하세요");
+  		fm.memberPwd2.focus();
+  		return;
+  	}else if (fm.memberPwd2.value.length < 4){
+  		alert("비밀번호 확인은 4자리이상 입력해주세요");
   		fm.memberPwd2.focus();
   		return;
   	}else if (fm.memberPwd.value != fm.memberPwd2.value){
@@ -94,6 +103,11 @@ body
   		return;
   	}else if (fm.memberBirth.value == ""){
   		alert("생년월일을 입력하세요");  		
+  		fm.memberBirth.focus();
+  		return;
+  	}else if (!chk.test(fm.memberBirth.value)){
+  		alert("숫자만 입력하세요"); 
+  		fm.memberBirth.value = "";
   		fm.memberBirth.focus();
   		return;
   	}else if (fm.memberApproveYn.value == "N"){
@@ -120,6 +134,7 @@ body
   function approve(){
 	  alert('인증되었습니다');
 	  document.frm.memberApproveYn.value="Y";
+	 $("#appmsg").text("인증완료");
 	  return;
   }
   
@@ -127,26 +142,8 @@ body
  </HEAD>
 
  <BODY>
- <table border="1" style="width:800px;">
-<tr>
-<td style="width:300px"><a href="<%=request.getContextPath() %>/main/main.do"><img src="test.jpg" width="300px" height="100px" alt="로고이미지"></a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=c">커뮤니티</a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=q">문의게시판</a></td>
-<td><a href="<%=request.getContextPath() %>/teacher/teacherJoin.do">선생님등록</a></td>
-<%if(session.getAttribute("midx") == null) {%>
-<td><a href="<%=request.getContextPath() %>/member/memberJoin.do">회원가입</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogin.do">로그인</a>&nbsp;<button>검색</button></td>
-<%}else{ %>
-<td><a href="<%=request.getContextPath() %>/member/memberMypage.do">마이페이지</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogout.do">로그아웃</a>&nbsp;<button>검색</button></td>
-<%} %>
-</tr>
-<tr>
-<td colspan=6 style="width:800px;height:200px" >
-<img src="test.jpg" width="800px" height="200px" alt="문의게시판이미지">
-</td>
-</tr>
-</table>
+ 
+  <%@include file="/WEB-INF/views/common/header.jsp"%>
 
 <center><h1>회원가입</h1></center>
 <hr></hr>
@@ -216,7 +213,9 @@ body
 </tr>
 <tr>
 <td>회원인증</td>
-<td><input type="text" name="memberApproveYn" size="10" value="N" readonly>	<button onclick="approve();return false;">회원인증</button>
+<td id ="appmsg">미인증
+
+<button onclick="approve();return false;">회원인증</button>
 </td>
 </tr>
 <tr>
@@ -232,11 +231,15 @@ body
 <tr>
 <td></td>
 <td>
+<input type="hidden" name="memberApproveYn" size="10" value="N" readonly style="border:none;">	
 <input type="button" name ="btn" value="확인" onclick="check();"> 
 <input type="button" value="다시작성" onclick="location.href='<%=request.getContextPath()%>/member/memberJoin.do';"> 
 </td>
 </tr>
  </table>
  </form>
+ 
+  <%@include file="/WEB-INF/views/common/footer.jsp"%>
+ 
  </BODY>
 </HTML>

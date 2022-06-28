@@ -182,26 +182,8 @@ function checkUpdate(apidx){
  </HEAD>
 
  <BODY>
- <table border="1" style="width:800px;">
-<tr>
-<td style="width:300px"><a href="<%=request.getContextPath() %>/main/main.do"><img src="test.jpg" width="300px" height="100px" alt="로고이미지"></a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=c">커뮤니티</a></td>
-<td><a href="<%=request.getContextPath() %>/board/boardList.do?gubun=q">문의게시판</a></td>
-<td><a href="<%=request.getContextPath() %>/teacher/teacherJoin.do">선생님등록</a></td>
-<%if(session.getAttribute("midx") == null) {%>
-<td><a href="<%=request.getContextPath() %>/member/memberJoin.do">회원가입</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogin.do">로그인</a>&nbsp;<button>검색</button></td>
-<%}else{ %>
-<td><a href="<%=request.getContextPath() %>/member/memberMypage.do">마이페이지</a></td>
-<td><a href="<%=request.getContextPath() %>/member/memberLogout.do">로그아웃</a>&nbsp;<button>검색</button></td>
-<%} %>
-</tr>
-<tr>
-<td colspan=6 style="width:800px;height:200px" >
-<img src="test.jpg" width="800px" height="200px" alt="이미지">
-</td>
-</tr>
-</table>
+ 
+  <%@include file="/WEB-INF/views/common/header.jsp"%>
 
 <center><h1>선생님 등록정보</h1></center>
 <hr></hr>
@@ -233,9 +215,9 @@ for (TeacherDto tedto : tlist)  {%>
 </tr>
 <tr>
 <td>과정</td>
-<td><%=tedto.getCateName() %></td>
-<td>과외비</td>
-<td><%=tedto.getTeacherPay() %> 만원/시간</td>
+<td  style="width:220px"><%=tedto.getCateName() %></td>
+<td style="width:50px">과외비</td>
+<td><%=tedto.getTeacherPay() %> <%if (!tedto.getTeacherPay().equals("협의")) {%>만원/시간<%} %></td>
 </tr>
 <tr>
 <td>등록일</td>
@@ -309,6 +291,7 @@ i = i+1;
 </tr>
 </table>
 
+ <%@include file="/WEB-INF/views/common/footer.jsp"%>
 
  </BODY>
 </HTML>
