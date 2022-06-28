@@ -128,7 +128,7 @@ $(function(){
 					//alist와 nextBlock나온다
 					
 					$("#nextBlock").val(data.nextBlock);
-					alert("다음예정페이지:"+data.nextBlock);
+			//		alert("다음예정페이지:"+data.nextBlock);
 					if (data.nextBlock !=999){
 						  $("#more").css('display','block');
 					}else{
@@ -218,7 +218,7 @@ $.del = function(cidx){
 			success : function(data){			
 						
 				$("#nextBlock").val(data.nextBlock);
-				alert("삭제하기"+data.nextBlock);
+		//		alert("삭제하기"+data.nextBlock);
 				if (data.nextBlock !=999){
 					  $("#more").css('display','block');
 				}else{

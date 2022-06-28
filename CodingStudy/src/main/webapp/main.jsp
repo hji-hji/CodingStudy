@@ -27,16 +27,20 @@ body
 a {
   text-decoration: none;
 } 
-</style>
-<style>
-    .view-box{ 
-      width: 750px; min-height: 20px; border: 1px solid black; 
-    }
-     .view-box2{ 
-      width: 750px; min-height: 20px; border: 1px solid black;      
-    }
+
+.view-box{ 
+  width: 750px; min-height: 20px; border: 1px solid black; 
+}
+ .view-box2{ 
+  width: 750px; min-height: 20px; border: 1px solid black;      
+}
+td,input { 
+   	/* 둥글게 만들기 */
+   border-top-left-radius: 15px; border-top-right-radius: 15px;
+   border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;
+}
    
-  </style>
+</style>
 <script>
 <%	if (request.getAttribute("msg") != null) { %>
 		alert('<%=request.getAttribute("msg")%>');
@@ -208,12 +212,12 @@ function teacherSelectAll(i){
 </tr>
 <tr>
 <td colspan=6 style="width:800px;height:200px" >
-<img src="test.jpg" width="800px" height="200px" alt="이미지">
+<img src="<%=request.getContextPath() %>/resources/images/coding.jpg" width="800px" height="200px" alt="이미지">
 </td>
 </tr>
 </table>
 
-<table border="1" style="width:800px;">
+<table border="1" style="width:800px;border-top: none;border-bottom: none;border-left: none;border-right: none;">
 <%
 	   int cnt = clist.size();
 	   for (int i=0 ; i< cnt; i = i+5) {
@@ -225,8 +229,8 @@ for(int j = i; j<i+5; j++) {
 		 break;
 	 }
 %>
-<td>
-<input type="text" name="cateName"   value="<%=clist.get(j).getCateName() %>"  size=12  readonly style="border:none;">
+<td style="background-color:#87CEEB">&nbsp;
+<input type="text" name="cateName"   value="<%=clist.get(j).getCateName() %>"  size=12  readonly style="border:none;background-color:#87CEEB">
 </td>
 <%} %>
 </tr>
@@ -257,7 +261,7 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 			 break;
 		 }			 
 %>
-	<input type="text" name="areaName"   value="<%=slist.get(j2).getAreaName()%>"  size=2  readonly>			
+	<input type="text" name="areaName" value="&nbsp;&nbsp;<%=slist.get(j2).getAreaName()%>"  size=2  readonly style="border:none;background-color:#87CEEB">			
 <%		 
 	 }
 	 out.println("<br>");
