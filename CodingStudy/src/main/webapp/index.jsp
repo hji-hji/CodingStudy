@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>intro</title>
 <script>
-location.href="<%=request.getContextPath()%>/main/main.do"; 
+location.href="https://<%=request.getContextPath()%>/main/main.do"; 
 </script>
 </head>
 </body>
