@@ -38,9 +38,10 @@ function memberDelete(i){
 		fm.method = "post";
 		fm.submit();		
 	}else{
-		alert("취소 되었습니다.");
+	//	alert("취소 되었습니다.");
 	}
 	
+	return;
 }
 function review(i){
 	
@@ -73,11 +74,12 @@ function review(i){
 				
 				 $.each(data, function (i, item) {	   
 					 
-				 str = str + "<table border=1 style='width:500px;vertical-align:top;'><tr><td>"	  
-	            +" 작성자: "+item.writer+"<br>"
-	            +"내용: "+item.content+"<br>"	           
-	            +"등록일:"+item.writeday+"<br>"
-	            +"</td></tr></table>"; 
+				 str = str + "<table border=0 style='width:800px;vertical-align:top;'>"
+				 		   +"<tr><td style='background-color:#000000'></td></tr><tr><td>"	  
+	          			   +" 작성자: "+item.writer+"<br>"
+	          			   +"내용: "+item.content+"<br>"	           
+	           			   +"등록일:"+item.writeday+"<br>"
+	            		   +"</td></tr></table>"; 
 	    		 });			 
 			
 				$("#cont"+[i]).html(str); 					
@@ -135,15 +137,17 @@ function apply(i){
 					 checkYnStr ="<button id =chk"+item.apidx+"  onclick='checkUpdate("+item.apidx+");return false; '>신청확인</button>";
 				 }	
 					 
-	            str = str + "<table border=1 style='width:500px;vertical-align:top;'><tr><td>"	  
+	            str = str + "<table border=0 style='width:800px;vertical-align:top;'>"
+	            +"<tr><td colspan=3 style='background-color:#000000;width:800px'></td></tr>"
+	            +"<tr><td style='width:300px'>"	  
 	            +"신청인: "+item.memberName+"<br>"
 	            +"지역: "+item.area+"<br>"
 	            +"연락처:"+item.contact+"<br>"
-	            +"희망수업시간:"+item.studyTime+studyTimeStr+"&nbsp;&nbsp;&nbsp;&nbsp;"+checkYnStr+"<br>"
+	            +"희망수업시간:"+item.studyTime+studyTimeStr+"<br>"
 	            +"희망과외금액:"+item.amount+amountStr+" <br>"
-	            +"요청사항:"+item.contents+"<br>"
+	          //  +"요청사항:"+item.contents+"<br>"
 	            +"등록일:"+item.writeday+"<br>"
-	            +"</td></tr></table>"; 
+	            +"</td><td style='width:400px;vertical-align:top;'>요청사항:<br>"+item.contents+"</td><td style='width:100px'>"+checkYnStr+"</td></tr></table>"; 
 	    		 });			 
 			
 				$("#cont"+[i]).html(str); 					
@@ -205,27 +209,29 @@ function checkUpdate(apidx){
 <% 
 int i = 0;
 for (TeacherDto tedto : tlist)  {%>
-<table border="1" style="text-align:left;height:300px">
+<table border="0" style="text-align:left;height:300px;width:800px;">
 <tr>
-<td style="width:150px">선생님 정보</td>
-<td colspan=3>
-<img src='<%=request.getContextPath()%>/displayFile.do?fileName=<%=tedto.getFilename() %>'  width="100px" height="100px"><br>
-<%=tedto.getTeacherName() %>
+
+<td colspan=4>
+<img src='<%=request.getContextPath()%>/displayFile.do?fileName=<%=tedto.getFilename() %>'  width="100px" height="100px">
+(<%=tedto.getTeacherName() %>)
 </td>
 </tr>
 <tr>
-<td>과정</td>
+<td>과정:</td>
 <td  style="width:220px"><%=tedto.getCateName() %></td>
 <td style="width:50px">과외비</td>
 <td><%=tedto.getTeacherPay() %> <%if (!tedto.getTeacherPay().equals("협의")) {%>만원/시간<%} %></td>
 </tr>
 <tr>
-<td>등록일</td>
-<td colspan=3><%=tedto.getWriteday().substring(0,10) %></td>
+<td>등록일:</td>
+<td><%=tedto.getWriteday().substring(0,10) %></td>
+<td style="width:80px">자기소개:</td>
+<td rowspan=5 style="vertical-align:top;"><%=tedto.getTeacherInfo() %></td>
 </tr>
 <tr>
-<td>성별</td>
-<td colspan=3>
+<td>성별:</td>
+<td colspan=2>
 <% 
 if (tedto.getTeacherGender().equals("M")) {
 out.println("남성");	
@@ -236,20 +242,20 @@ out.println("여성");
 </td>
 </tr>
 <tr>
-<td>연락처</td>
-<td colspan=3>
+<td>연락처:</td>
+<td colspan=2>
 <%=tedto.getTeacherPhone() %>
 </td>
 </tr>
 <tr>
-<td>지역</td>
-<td colspan=3>
+<td>지역:</td>
+<td colspan=2>
 <%=tedto.getAreaName() %>
 </td>
 </tr>
 <tr>
-<td>경력 및 경험</td>
-<td colspan=3>
+<td>경력 및 경험:</td>
+<td colspan=2>
 <% if (tedto.getTeacherExp().equals("6")){
 	out.println("5년이상");	
 }else{
@@ -259,10 +265,7 @@ out.println("여성");
 %> 
 </td>
 </tr>
-<tr>
-<td>자기소개</td>
-<td colspan=3><%=tedto.getTeacherInfo() %></td> 
-</tr>
+
 
 <tr>
 <td></td>
@@ -277,9 +280,11 @@ out.println("여성");
 </td>
 </tr>
 <tr>
-<td  colspan=4  id="cont<%=i %>" wdith="600px"></td>
+<td  colspan=4  id="cont<%=i %>" width="800px"></td>
 </tr>
-
+<tr>
+<td  colspan=4  style="background-color:#000000"></td>
+</tr>
 
 </table>
  <%

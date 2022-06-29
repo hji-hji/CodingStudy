@@ -55,9 +55,9 @@ function reviewDelete(ridx){
 <a href="<%=request.getContextPath() %>/member/memberOut.do">회원탈퇴</a><br><br>
 </td>
 
-<td>
+<td style="vertical-align:top;">
 <% for (ReviewDto redto : relist){ %>
-<table border="1" style="text-align:left;width:600px;height:100px">
+<table border="1" style="text-align:left;width:800px;height:100px">
 <tr>
 <td style="width:400px;height:50px"><%=redto.getCatename() %> </td>
 <td><%=redto.getTeacherName() %></td>

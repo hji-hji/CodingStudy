@@ -46,7 +46,7 @@ body
 </td>
 
 <td>
-<table border=1 style="width:600px">
+<table border=1 style="width:800px">
 <tr style="color:green;">
 <th>번호</th>
 <th>과목/과정</th>

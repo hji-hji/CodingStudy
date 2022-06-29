@@ -84,10 +84,9 @@ body
 
 </td>
 
-<td>
-
+<td style="width:800px">
 <form name="frm"> 
- <table border="0" style="text-align:left;width:600px;height:300px">
+ <table border="1" style="text-align:left;width:800px;height:300px">
 <tr>
 <td style="width:150px">아이디</td>
 <td>
@@ -132,7 +131,6 @@ body
  </table>
  </form>
 
- <%@include file="/common/footer.jsp"%>
 
 </td>
 </tr>
@@ -141,7 +139,7 @@ body
 
 
 
-
+<%@include file="/common/footer.jsp"%>
 
 
 

@@ -73,7 +73,7 @@ body
 <td>
 
 <form name="frm"> 
- <table border="0" style="text-align:left;width:600px;height:300px">
+ <table border="0" style="text-align:left;width:800px;height:300px">
 <tr>
 <td style="width:150px">변경 비밀번호</td>
 <td>
@@ -95,14 +95,14 @@ body
  </table>
  </form>
 
- <%@include file="/common/footer.jsp"%>
+
 
 </td>
 </tr>
 </table> 
 
 
-
+ <%@include file="/common/footer.jsp"%>
 
 
 

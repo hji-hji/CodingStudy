@@ -37,7 +37,7 @@ body
 <input type="hidden" name="gubun" value="<%=gubun%>">
 <table border ="0" width="1000px">
 <tr>	
- <td width="650px" align="right">
+ <td width="800px" align="right">
  <select name="searchType">
  <option value="subject">제목</option>
  <option value="writer">작성자</option>

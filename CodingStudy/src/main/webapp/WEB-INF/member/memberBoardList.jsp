@@ -47,7 +47,7 @@ body
 </td>
 
 <td style="vertical-align:top;">
-<table border= "1" width="600px">
+<table border= "1" width="800px">
 <tr align="center" style="color:green;">
 <td>번호</td>
 <td width="300px">제목</td>

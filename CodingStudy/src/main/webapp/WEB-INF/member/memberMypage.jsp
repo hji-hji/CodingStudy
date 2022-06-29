@@ -78,9 +78,12 @@ text-decoration:none;
 </tr>
 <tr>
 <td>회원인증여부</td>
-<td><%=mv.getMemberApproveYn() %>
-<% if (mv.getMemberApproveYn().equals("N")){ %>
+<td>
+<% if (mv.getMemberApproveYn().equals("N")){ %> 
+미인증 &nbsp;&nbsp;
 <button onclick="location.href='<%=request.getContextPath() %>/member/memberAuth.do'">인증하기</button><br>
+<%}else{ %>
+인증완료
 <%} %>
 </td>
 </tr>
