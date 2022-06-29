@@ -57,13 +57,13 @@ function reviewDelete(ridx){
 
 <td style="vertical-align:top;">
 <% for (ReviewDto redto : relist){ %>
-<table border="1" style="text-align:left;width:800px;height:100px">
+<table border="1" style="text-align:left;width:800px;height:120px">
 <tr>
-<td style="width:400px;height:50px"><%=redto.getCatename() %> </td>
-<td><%=redto.getTeacherName() %></td>
+<td style="width:200px;height:20px"><%=redto.getCatename() %> </td>
+<td colspan=2><%=redto.getTeacherName() %></td>
 </tr>
 <tr>
-<td style="width:400px;height:50px"><%=redto.getWriter() %>:<br><%=redto.getContent() %> </td>
+<td colspan=2 style="width:400px;height:100px">이름:<%=redto.getWriter() %><hr></hr>내용:<br><%=redto.getContent() %> </td>
 <td><button onclick="reviewDelete(<%=redto.getRidx()%>);">삭제</button></td>
 </tr>
 </table>

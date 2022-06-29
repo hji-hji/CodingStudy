@@ -219,7 +219,7 @@ for (TeacherDto tedto : tlist)  {%>
 </tr>
 <tr>
 <td style="text-align:left;width:100px;">과정:</td>
-<td  style="width:220px"><%=tedto.getCateName() %></td>
+<td  style="width:180px"><%=tedto.getCateName() %></td>
 <td style="width:50px">과외비</td>
 <td><%=tedto.getTeacherPay() %> <%if (!tedto.getTeacherPay().equals("협의")) {%>만원/시간<%} %></td>
 </tr>

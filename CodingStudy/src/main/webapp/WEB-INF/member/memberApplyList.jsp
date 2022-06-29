@@ -48,16 +48,17 @@ body
 <td style="vertical-align:top;">
 <table border=1 style="width:800px">
 <tr style="color:green;">
-<th>번호</th>
+
 <th>과목/과정</th>
 <th>선생님 이름</th>
 <th>본인 연락처</th>
+<th>확인여부</th>
 </tr>
 <tr style="color:green;">
 <th>희망 학습지역</th>
-<th>희망 학습금액</th>
+<th>희망 과외비</th>
 <th>희망 학습시간</th>
-<th>작성일/확인여부</th>
+<th>작성일</th>
 </tr>
 <tr style="color:green;">
 <th colspan=4>요청내용</th>
@@ -66,16 +67,17 @@ body
 
 <% for (ApplyDto apdto : aplist) { %>
 <tr>
-<td><%=apdto.getApidx() %></td>
+
 <td><%=apdto.getCateName() %></td>
 <td><%=apdto.getTeacherName() %></td>
 <td><%=apdto.getContact() %></td>
+<td><%//=apdto.getApidx() %><% if (apdto.getCheckYn().equals("Y")){ out.println("읽음");}else{out.println("읽지않음"); }  %></td>
 </tr>
 <tr>
 <td><%=apdto.getArea() %></td>
 <td><%=apdto.getAmount() %><%if (!apdto.getAmount().equals("협의")) { %>만원/시간<% }%></td>
 <td><%=apdto.getStudyTime() %><%if (!apdto.getStudyTime().equals("협의")) { %>시간/주<% }%></td>
-<td><%=apdto.getWriteday() %>/ <%=apdto.getCheckYn() %></td>
+<td><%=apdto.getWriteday() %></td>
 </tr>
 <tr>
 <td colspan=4 height="30"><%=apdto.getContents() %></td>
