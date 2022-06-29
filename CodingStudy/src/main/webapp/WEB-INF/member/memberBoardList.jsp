@@ -20,7 +20,7 @@ a {
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 </style> 
  
@@ -33,7 +33,7 @@ body
 <center><h1>내가 남긴 문의</h1></center>
 <hr></hr>
 
-<table border="1" style="width:800px;">
+<table border="1" style="width:1000px;">
 <tr>
 <td style="width:200px;vertical-align:top;">
 <a href="<%=request.getContextPath()%>/member/memberModify.do">회원정보수정</a><br><br>

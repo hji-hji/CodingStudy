@@ -14,7 +14,7 @@
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 a{
 text-decoration:none;
@@ -187,7 +187,7 @@ function checkUpdate(apidx){
 
 <center><h1>선생님 등록정보</h1></center>
 <hr></hr>
-<table border="1" style="width:800px;">
+<table border="1" style="width:1000px;">
 <tr>
 <td style="width:200px;vertical-align:top;">
 <a href="<%=request.getContextPath()%>/member/memberModify.do">회원정보수정</a><br><br>

@@ -9,7 +9,7 @@
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 a {
   text-decoration: none;
@@ -55,7 +55,7 @@ a {
 <center><h1>로그인</h1></center>
 <hr></hr>
 <form name="frm"> 
- <table border="1" style="text-align:left;width:800px;height:300px">
+ <table border="1" style="text-align:left;width:1000px;height:300px">
 <tr>
 <td style="text-align:left;height:50px">
 아이디

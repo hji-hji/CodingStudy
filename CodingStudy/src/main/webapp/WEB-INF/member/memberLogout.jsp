@@ -8,7 +8,7 @@
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 a {
   text-decoration: none;
@@ -18,7 +18,7 @@ a {
 <body>
 
  <%@include file="/common/header.jsp"%>
-<table border="0" style="width:800px;">
+<table border="0" style="width:1000px;">
 <tr>
 <td>
 로그아웃 되었습니다.<br>

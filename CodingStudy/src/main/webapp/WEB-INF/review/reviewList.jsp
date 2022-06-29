@@ -45,7 +45,7 @@ a {
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 </style>
 <script>
@@ -105,7 +105,7 @@ function reviewDelete(tidx,ridx){
  <%@include file="/common/header.jsp"%>
 
 <h1>리뷰</h1>
-<table border="1" style="text-align:left;width:800px;height:100px">
+<table border="1" style="text-align:left;width:1000px;height:100px">
 <tr>
 <td style="width:400px;height:50px"><%=tedto.getCateName() %> </td>
 <td><%=tedto.getTeacherName() %> </td>
@@ -115,7 +115,7 @@ function reviewDelete(tidx,ridx){
 
 <form name="frm">
 <input type="hidden" name="tidx" value="<%=tedto.getTidx()%>">
-<table border="1" style="text-align:left;width:800px;">
+<table border="1" style="text-align:left;width:1000px;">
 <tr>
 <td style="width:100px;height:30px">작성자</td>
 <td><input type="text" name="writer" value="<%=memberName%>" readonly></td>

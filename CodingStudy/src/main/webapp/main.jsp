@@ -22,17 +22,17 @@
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 a {
   text-decoration: none;
 } 
 
 .view-box{ 
-  width: 750px; min-height: 20px; border: 1px solid black; 
+  width: 950px; min-height: 20px; border: 1px solid black; 
 }
  .view-box2{ 
-  width: 750px; min-height: 20px; border: 1px solid black;      
+  width: 950px; min-height: 20px; border: 1px solid black;      
 }
 td,input { 
    	/* 둥글게 만들기 */
@@ -160,7 +160,7 @@ function teacherSelectAll(i){
 						 teacherPayStr ="만원/시간";
 					 }						 
 					 
-	             str = str + "<table border=0 style='width:650px;vertical-align:top;'><tr>"
+	             str = str + "<table border=0 style='width:850px;vertical-align:top;'><tr>"
 	             +"<td style='width:100px;'><img src='<%=request.getContextPath()%>/displayFile.do?fileName="+item.filename+"' width='100px' height='100px' alt='사진'></td>"
 	             +"<td style='width:170px;'>이름:"+item.teacherName 
 	             +"<br>과목:"+item.cateName
@@ -197,7 +197,7 @@ function teacherSelectAll(i){
  
  <%@include file="/common/header.jsp"%>  
 
-<table border="1" style="width:800px;border-top: none;border-bottom: none;border-left: none;border-right: none;">
+<table border="1" style="width:1000px;border-top: none;border-bottom: none;border-left: none;border-right: none;">
 <%
 	   int cnt = clist.size();
 	   for (int i=0 ; i< cnt; i = i+5) {
@@ -209,8 +209,8 @@ for(int j = i; j<i+5; j++) {
 		 break;
 	 }
 %>
-<td style="background-color:#87CEEB">&nbsp;
-<input type="text" name="cateName"  value="<%=clist.get(j).getCateName() %>"  size=15  readonly style="height:30px;border:none;background-color:#87CEEB">
+<td style="background-color:#80a0e0">&nbsp;
+<input type="text" name="cateName"  value="<%=clist.get(j).getCateName() %>"  size=15  readonly style="height:30px;border:none;background-color:#80a0e0;font-size:12pt;">
 </td>
 <%} %>
 </tr>
@@ -224,11 +224,11 @@ for(int j = i; j<i+5; j++) {
 <tr><td colspan=2 style="height:1px"></td></tr>
 <tr>
 <td class="view-box"></td>
-<td><input type="button" name="btn" id="btn" value="검색" onclick="teacherSelectAll(0);"></td>
+<td><input type="button" name="btn" id="btn" value="검색" style="font-size:12pt;" onclick="teacherSelectAll(0);"></td>
 </tr>
 </table>
 </form> 
- <table border="0" style="width:800px;">
+ <table border="0" style="width:1000px;">
 <tr>
 <td style="width:150px;vertical-align:top;" rowspan=2>
 
@@ -241,7 +241,7 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 			 break;
 		 }			 
 %>
-	<input type="text" name="areaName" value="<%=slist.get(j2).getAreaName()%>"  size=2  readonly style="text-align:center;height:20px;border:none;background-color:#87CEEB">			
+	<input type="text" name="areaName" value="<%=slist.get(j2).getAreaName()%>"  size=2  readonly style="text-align:center;height:30px;border:none;background-color:#80a0e0;font-size:12pt;">			
 <%		 
 	 }
 	 out.println("<br>");
@@ -249,9 +249,9 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 %>
 
 </td>
-<td id="cont">
+<td id="cont" style="vertical-align:top;">
 <% for (TeacherDto tedto : telist){ %>
-<table border=0 style='width:650px;vertical-align:top;'>
+<table border=0 style='width:850px;vertical-align:top;'>
 <tr>
 <td style='width:100px;'><img src='<%=request.getContextPath()%>/displayFile.do?fileName=<%=tedto.getFilename() %>'  width="100px" height="100px"></td>
 <td style='width:170px;'>이름 : <%=tedto.getTeacherName()%>

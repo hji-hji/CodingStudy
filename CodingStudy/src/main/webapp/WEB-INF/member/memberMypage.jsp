@@ -14,7 +14,7 @@
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 a{
 text-decoration:none;
@@ -33,7 +33,7 @@ text-decoration:none;
 
 <h1><center>회원정보</center>  </h1>
 <hr></hr>
-<table border="1" style="width:800px;">
+<table border="1" style="width:1000px;">
 <tr>
 <td style="width:200px">
 <a href="<%=request.getContextPath()%>/member/memberModify.do">회원정보수정</a><br><br>
@@ -41,8 +41,8 @@ text-decoration:none;
 <a href="<%=request.getContextPath() %>/member/memberApplyList.do">내가 신청한 과외</a><br><br> 
 <a href="<%=request.getContextPath() %>/member/memberReviewList.do">내가 남긴 리뷰</a><br><br> 
 <a href="<%=request.getContextPath() %>/member/memberBoardList.do">내가 남긴 문의</a><br><br>
-<a href="<%=request.getContextPath() %>/teacher/teacherMypage.do">선생님 등록정보<br><br>
-<a href="<%=request.getContextPath() %>/member/memberOut.do">회원탈퇴<br><br>
+<a href="<%=request.getContextPath() %>/teacher/teacherMypage.do">선생님 등록정보</a><br><br>
+<a href="<%=request.getContextPath() %>/member/memberOut.do">회원탈퇴</a><br><br>
 </td>
 
 <td>

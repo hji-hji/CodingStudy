@@ -20,7 +20,7 @@ a {
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 
 .fileDrop {
@@ -227,7 +227,7 @@ function textlength(){
 <center><h1>선생님 회원등록</h1></center>
 <hr></hr>
 <form name="frm"> 
- <table border="1" style="text-align:left;width:800px;height:300px">
+ <table border="1" style="text-align:left;width:1000px;height:300px">
 <tr>
 <td style="width:150px">사진등록<br>(1.사진을 드래그해서 올려주세요 2.jpg/gif/png 파일만 가능합니다)</td>
 <td class="fileDrop">

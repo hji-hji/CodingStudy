@@ -24,7 +24,7 @@ a {
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 </style>
 </head>
@@ -35,7 +35,7 @@ body
 <h1><%=title %> 게시판</h1>
 <form name='frm' action='<%=request.getContextPath()%>/board/boardList.do' method='post'>
 <input type="hidden" name="gubun" value="<%=gubun%>">
-<table border ="0" width="800px">
+<table border ="0" width="1000px">
 <tr>	
  <td width="650px" align="right">
  <select name="searchType">
@@ -52,7 +52,7 @@ body
 </tr>	
 </table>
 </form>
-<table border= "1" width="800px">
+<table border= "1" width="1000px">
 <tr align="center">
 <td>번호</td>
 <td width="500px">제목</td>
@@ -83,7 +83,7 @@ for (int i=1;i<=bv.getLevel_();i++){
 
 <br>
 	
-	<table border= "0" width="800px">
+	<table border= "0" width="1000px">
 	<tr>
 		 	<td width="300px" align="right">
 		 	<%if (pm.isPrev() == true) { %>
@@ -109,7 +109,7 @@ for (int i=1;i<=bv.getLevel_();i++){
 		 </tr>
 	 </table>
 	
-	<table border= 0  width="800px">
+	<table border= 0  width="1000px">
 	<tr>
 	<td colspan=3 style="text-align:right"><a href="<%=request.getContextPath() %>/board/boardWrite.do?gubun=<%=gubun%>"> 글쓰기</a></td>
 	</tr>

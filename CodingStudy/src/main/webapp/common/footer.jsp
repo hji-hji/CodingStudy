@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<table border="0" style="width:800px;text-align:center">
+<table border="0" style="width:1000px;text-align:center">
+<tr>
+<td style="height:20px;"></td>
+</tr>
+
 <tr>
 <td style="width:800px;background-color:gray;"></td>
 </tr>

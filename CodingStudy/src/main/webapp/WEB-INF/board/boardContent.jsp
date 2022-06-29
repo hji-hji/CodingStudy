@@ -30,7 +30,7 @@ body
 {
 border : 1px solid bold;
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 #tbl {
 	width:100%;	
@@ -295,7 +295,7 @@ function getImageLink(fileName){
  <%@include file="/common/header.jsp"%>
 
 <h1><%=title %> 게시판</h1>
-<table border="1" style="text-align:left;width:800px;height:300px">
+<table border="1" style="text-align:left;width:1000px;height:300px">
 <tr>
 <td style="width:100px;height:50px">제목</td>
 <td><%=bv.getSubject() %></td>
@@ -333,7 +333,7 @@ function getImageLink(fileName){
 <% if (gubun.equals("c")){ %>
 
 <div id="commenttbl">
-	<table border="1" style="width:800px;">
+	<table border="1" style="width:1000px;">
 	<tr>
 	<td>작성자</td>
 	<td rowspan=4>

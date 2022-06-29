@@ -8,7 +8,7 @@
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 a {
   text-decoration: none;
@@ -34,7 +34,7 @@ function check(){
 
 <center>회원 탈퇴 이유를 적어주세요.
 <form name="frm">
-<table border="0" style="width:800px;text-align:center;">
+<table border="0" style="width:1000px;text-align:center;">
 <tr><td>
 <textarea name="reason"  cols="100" rows="5"></textarea>
 <br>

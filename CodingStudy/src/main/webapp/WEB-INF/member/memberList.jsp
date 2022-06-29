@@ -25,7 +25,7 @@ if (session.getAttribute("midx") != null){
 
 <H1>회원목록 리스트</H1>
 
-<table border=1 style="width:800px">
+<table border=1 style="width:1000px">
 <tr style="color:green;">
 <th>번호</th>
 <th>회원이름</th>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<table border="0" style="width:800px;">
+<table border="0" style="width:1000px;">
 <tr>
 <td style="width:310px">
 <a href="<%=request.getContextPath() %>/main/main.do"><img src="test.jpg" width="300px" height="100px" alt="로고이미지"></a>
@@ -22,7 +22,7 @@
 </tr>
 <tr>
 <td colspan=6 style="width:100%;height:200px" >
-<img src="<%=request.getContextPath() %>/resources/images/main.png" width="800px" height="200px" alt="이미지">
+<img src="<%=request.getContextPath() %>/resources/images/main.png" width="1000px" height="200px" alt="이미지">
 </td>
 </tr>
 </table>

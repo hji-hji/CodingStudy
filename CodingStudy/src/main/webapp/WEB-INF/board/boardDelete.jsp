@@ -22,7 +22,7 @@ a {
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 </style>
 <script>
@@ -54,7 +54,7 @@ body
 <form name="frm"> 
 <input type="hidden" name="bidx" value="<%=bidx%>">
 <input type="hidden" name="gubun" value="<%=gubun%>">
- <table border="1" style="text-align:left;width:800px;height:300px">
+ <table border="1" style="text-align:left;width:1000px;height:300px">
 <tr>
 <td>비밀번호</td>
 <td><input type="password" name="password" size="30"></td>

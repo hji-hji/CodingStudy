@@ -26,7 +26,7 @@ a {
 body
 {
   margin: 0 auto;
-  width: 800px;
+  width: 1000px;
 }
 </style>
 <script language = "javascript">
@@ -65,7 +65,7 @@ body
 <input type="hidden" name="depth" value="<%=depth%>">
 <input type="hidden" name="level_" value="<%=level_%>">
 <input type="hidden" name="gubun" value="<%=gubun%>">
- <table border="1" style="text-align:left;width:800px;height:300px">
+ <table border="1" style="text-align:left;width:1000px;height:300px">
 <tr>
 <td>제목</td>
 <td><input type="text" name="subject" size="30"></td>
