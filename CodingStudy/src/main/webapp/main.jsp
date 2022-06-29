@@ -241,7 +241,7 @@ for (int i2=0 ; i2< cnt2 ; i2 = i2+2) {
 			 break;
 		 }			 
 %>
-	<input type="text" name="areaName" value="<%=slist.get(j2).getAreaName()%>"  size=2  readonly style="text-align:center;height:30px;border:none;background-color:#80a0e0;font-size:12pt;">			
+	<input type="text" name="areaName" value="<%=slist.get(j2).getAreaName()%>"  size=2  readonly style="text-align:center;height:40px;border:none;background-color:#80a0e0;font-size:12pt;">			
 <%		 
 	 }
 	 out.println("<br>");

@@ -14,6 +14,10 @@ body
 a {
   text-decoration: none;
 } 
+table {
+    margin-left:auto; 
+    margin-right:auto;
+}
 </style>
   <script>
 <%	if (request.getAttribute("msg") != null) { %>
@@ -52,12 +56,15 @@ a {
  
   <%@include file="/common/header.jsp"%>
  
-<center><h1>로그인</h1></center>
-<hr></hr>
+<center>
+<h1>로그인</h1><hr></hr></center>
 <form name="frm"> 
- <table border="1" style="text-align:left;width:1000px;height:300px">
+ <table border="0" style="text-align:left;width:400px;height:100px">
+ <tr>
+<td colspan=3 style="height:20px"></td>
+</tr>
 <tr>
-<td style="text-align:left;height:50px">
+<td style="text-align:left;height:20px;vertical-align:top;">
 아이디
 <br>
 비밀번호
@@ -68,16 +75,18 @@ a {
 <input type="checkbox" name="useCookie" id="useCookie" />자동로그인
 
 </td>
-</tr>
-<tr>
-<td style="text-align:left;height:30px"></td>
-<td>
-<input type="button" name ="btn" value="확인" onclick="check();"> 
-<input type="reset" value="다시작성"> 
+<td style="text-align:left;height:20px;vertical-align:top;">
+<input type="button" name ="btn" value="확인" onclick="check();"> <br>
+<input type="button" value="취소" onclick="history.back(-1);"> 
 </td>
 </tr>
 <tr>
-<td colspan=2 style="text-align:left;height:50px">
+<td colspan=3><hr></hr></td>
+</tr>
+
+<tr>
+<td></td>
+<td colspan=2 style="text-align:left;height:10px">
 <a href="<%=request.getContextPath()%>/member/memberJoin.do">회원가입</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
 <a href="<%=request.getContextPath()%>/member/memberIdFind.do">아이디</a>/
 <a href="<%=request.getContextPath()%>/member/memberPwdFind.do">비밀번호 찾기</a>
@@ -85,7 +94,7 @@ a {
 </tr>
  </table>
  </form>
- 
+
   <%@include file="/common/footer.jsp"%>
  
  </BODY>

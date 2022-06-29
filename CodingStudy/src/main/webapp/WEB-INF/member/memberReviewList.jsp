@@ -43,7 +43,7 @@ function reviewDelete(ridx){
 <H1><center>내가 남긴 리뷰</center></H1>
 <hr>
 
-<table border="1" style="width:1000px;">
+<table border="0" style="width:1000px;">
 <tr>
 <td style="width:200px;vertical-align:top;">
 <a href="<%=request.getContextPath()%>/member/memberModify.do">회원정보수정</a><br><br>

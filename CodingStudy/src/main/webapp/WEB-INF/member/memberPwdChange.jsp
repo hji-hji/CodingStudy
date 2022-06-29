@@ -57,7 +57,7 @@ body
 <center><h1>비밀번호 변경</h1></center>
 <hr></hr>
 
-<table border="1" style="width:1000px;">
+<table border="0" style="width:1000px;">
 <tr>
 <td style="width:200px">
 <a href="<%=request.getContextPath()%>/member/memberModify.do">회원정보수정</a><br><br>
@@ -70,19 +70,16 @@ body
 
 </td>
 
-<td>
+<td style="vertical-align:top;">
 
 <form name="frm"> 
- <table border="0" style="text-align:left;width:800px;height:300px">
+ <table border="1" style="text-align:left;width:800px;height:100px">
 <tr>
-<td style="width:150px">변경 비밀번호</td>
+<td style="width:150px">변경 비밀번호<br>변경 비밀번호 확인</td>
 <td>
-<input type="password" name="memberPwd" size="20">
+<input type="password" name="memberPwd" size="20"><br>
+<input type="password" name="memberPwd2" size="20">
 </td>
-</tr>
-<tr>
-<td>변경 비밀번호 확인</td>
-<td><input type="password" name="memberPwd2" size="20"></td>
 </tr>
 <tr>
 <td></td>

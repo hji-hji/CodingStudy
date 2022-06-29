@@ -15,6 +15,10 @@ body
   margin: 0 auto;
   width: 1000px;
 }
+table {
+    margin-left:auto; 
+    margin-right:auto;
+}
 </style>
   <!-- jquery를 사용하기위한 CDN주소 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -145,12 +149,16 @@ body
  
   <%@include file="/common/header.jsp"%>
 
-<center><h1>회원가입</h1></center>
+<center><h1>회원가입</h1> </center>
 <hr></hr>
 <form name="frm"> 
- <table border="1" style="text-align:left;width:1000px;height:300px">
+ <table border="0" style="text-align:left;width:550px;height:300px">
+  <tr>
+<td colspan=2 style="height:20px"></td>
+</tr>
+ 
 <tr>
-<td style="width:150px">아이디</td>
+<td style="width:180px">아이디</td>
 <td>
 <input type="text" name="memberId" id="memberId" size="20">
 <input type="button"  id="idCheck"  value="아이디 중복체크">  <span id="prt"></span>
@@ -229,8 +237,15 @@ body
 </td>
 </tr>
 <tr>
+<td colspan=2 style="height:10px"></td>
+</tr>
+<tr>
+<td colspan=2><hr></hr></td>
+</tr>
+<tr>
 <td></td>
 <td>
+<br>
 <input type="hidden" name="memberApproveYn" size="10" value="N" readonly style="border:none;">	
 <input type="button" name ="btn" value="확인" onclick="check();"> 
 <input type="button" value="다시작성" onclick="location.href='<%=request.getContextPath()%>/member/memberJoin.do';"> 
@@ -238,7 +253,7 @@ body
 </tr>
  </table>
  </form>
- 
+
   <%@include file="/common/footer.jsp"%>
  
  </BODY>

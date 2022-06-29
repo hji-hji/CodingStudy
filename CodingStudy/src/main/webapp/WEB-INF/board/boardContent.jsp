@@ -320,7 +320,7 @@ function getImageLink(fileName){
 </tr>
 
 <tr>
-<td colspan="6" style="text-align:left;">
+<td colspan="6" style="text-align:right;">
 <a href="<%=request.getContextPath()%>/board/boardModify.do?gubun=<%=gubun%>&bidx=<%=bv.getBidx()%>">수정</a>
 <a href="<%=request.getContextPath()%>/board/boardDelete.do?gubun=<%=gubun%>&bidx=<%=bv.getBidx()%>">삭제</a>
 <a href="<%=request.getContextPath()%>/board/boardReply.do?gubun=<%=gubun%>&bidx=<%=bv.getBidx()%>&originbidx=<%=bv.getOriginbidx() %>&depth=<%=bv.getDepth()%>&level_=<%=bv.getLevel_()%>">답변</a>
@@ -333,7 +333,7 @@ function getImageLink(fileName){
 <% if (gubun.equals("c")){ %>
 
 <div id="commenttbl">
-	<table border="1" style="width:1000px;">
+	<table border="0" style="width:1000px;">
 	<tr>
 	<td>작성자</td>
 	<td rowspan=4>

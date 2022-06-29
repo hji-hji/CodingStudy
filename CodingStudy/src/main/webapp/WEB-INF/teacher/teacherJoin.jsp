@@ -24,8 +24,8 @@ body
 }
 
 .fileDrop {
-width: 100%;
-height:200px;
+width: 100px;
+height:100px;
 border:1px dotted blue;
 }
 
@@ -34,6 +34,12 @@ margin-left:3px;
 font-weight:bold;
 color:gray;
 }
+table {
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+
 </style>
   <!-- jQuery 3.3.1 -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -223,24 +229,26 @@ function textlength(){
  <BODY>
  
   <%@include file="/common/header.jsp"%>
-
 <center><h1>선생님 회원등록</h1></center>
 <hr></hr>
 <form name="frm"> 
- <table border="1" style="text-align:left;width:1000px;height:300px">
+ <table border="0" style="text-align:left;width:500px;height:300px">
 <tr>
-<td style="width:150px">사진등록<br>(1.사진을 드래그해서 올려주세요 2.jpg/gif/png 파일만 가능합니다)</td>
+<td style="width:100px;">사진등록</td>
 <td class="fileDrop">
 <input type="hidden" id ="uploadfile" name="uploadfile">
-
 <div class="uploadedList"></div>
-
 </td>
+</tr>
+<tr>
+<td></td>
+<td>1.사진을 드래그해서 올려주세요 <br>2.jpg/gif/png 파일만 가능합니다</td>
 </tr>
 <tr>
 <td>이름</td>
 <td><input type="text" name="tearchName" size="20"></td>
 </tr>
+
 <tr>
 <td>과목</td>
 <td>
@@ -318,8 +326,11 @@ function textlength(){
 </tr>
 <tr>
 <td>자기소개</td>
-<td><textarea name="teacherInfo" cols="50" rows="5" onFocus="clearMessage();"  onKeyup="textlength();">100자 내외</textarea>	
+<td><textarea name="teacherInfo" cols="40" rows="5" onFocus="clearMessage();"  onKeyup="textlength();">100자 내외</textarea>	
 </td>
+</tr>
+<tr>
+<td colspan=2><hr></hr></td>
 </tr>
 <tr>
 <td></td>
@@ -330,6 +341,7 @@ function textlength(){
 <input type="button" value="취소" onclick="location.href='<%=request.getContextPath()%>/main/main.do';"> 
 </td>
 </tr>
+
  </table>
  </form>
 

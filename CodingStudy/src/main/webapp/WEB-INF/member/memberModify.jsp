@@ -71,7 +71,7 @@ body
 <center><h1>회원정보수정</h1></center>
 <hr></hr>
 
-<table border="1" style="width:1000px;">
+<table border="0" style="width:1000px;">
 <tr>
 <td style="width:200px">
 <a href="<%=request.getContextPath()%>/member/memberModify.do">회원정보수정</a><br><br>

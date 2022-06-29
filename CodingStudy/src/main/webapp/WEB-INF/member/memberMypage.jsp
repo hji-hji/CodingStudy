@@ -33,7 +33,7 @@ text-decoration:none;
 
 <h1><center>회원정보</center>  </h1>
 <hr></hr>
-<table border="1" style="width:1000px;">
+<table border="0" style="width:1000px;">
 <tr>
 <td style="width:200px">
 <a href="<%=request.getContextPath()%>/member/memberModify.do">회원정보수정</a><br><br>
@@ -46,7 +46,7 @@ text-decoration:none;
 </td>
 
 <td>
-<table border="0" style="text-align:left;height:300px">
+<table border="1" style="text-align:left;width:800px;height:300px">
 <tr>
 <td style="width:100px">아이디</td>
 <td style="width:300px"><%=mv.getMemberId() %></td>

@@ -31,20 +31,21 @@ function check(){
 <body>
 
  <%@include file="/common/header.jsp"%>
-
-<center>회원 탈퇴 이유를 적어주세요.
+<center><h1>회원탈퇴</h1></center>
+<hr></hr>
+<center>회원 탈퇴 이유를 적어주세요.</center>
 <form name="frm">
 <table border="0" style="width:1000px;text-align:center;">
 <tr><td>
 <textarea name="reason"  cols="100" rows="5"></textarea>
 <br>
-<button onclick="check();">확인</button>
-<button onclick="location.href='<%=request.getContextPath() %>/member/memberMypage.do'" >취소</button>
+<input type="button" onclick="check();" value="확인">
+<input type="button" onclick="history.back();" value="취소">
 
 </td></tr>
 </table>
 </form>
-</center>
+
 
  <%@include file="/common/footer.jsp"%>
  

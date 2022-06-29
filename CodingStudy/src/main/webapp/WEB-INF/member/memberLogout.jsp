@@ -18,7 +18,10 @@ a {
 <body>
 
  <%@include file="/common/header.jsp"%>
-<table border="0" style="width:1000px;">
+ <center><h1>로그아웃</h1></center>
+<hr></hr>
+ 
+<table border="0" style="width:1000px;text-align:center;">
 <tr>
 <td>
 로그아웃 되었습니다.<br>

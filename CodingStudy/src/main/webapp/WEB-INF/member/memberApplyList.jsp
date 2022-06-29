@@ -33,7 +33,7 @@ body
 <H1><center>내가 신청한 과외</center></H1>
 <hr>
 
-<table border="1" style="width:1000px;">
+<table border="0" style="width:1000px;">
 <tr>
 <td style="width:200px;vertical-align:top;">
 <a href="<%=request.getContextPath()%>/member/memberModify.do">회원정보수정</a><br><br>
@@ -45,7 +45,7 @@ body
 <a href="<%=request.getContextPath() %>/member/memberOut.do">회원탈퇴</a><br><br>
 </td>
 
-<td>
+<td style="vertical-align:top;">
 <table border=1 style="width:800px">
 <tr style="color:green;">
 <th>번호</th>

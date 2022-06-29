@@ -191,7 +191,7 @@ function checkUpdate(apidx){
 
 <center><h1>선생님 등록정보</h1></center>
 <hr></hr>
-<table border="1" style="width:1000px;">
+<table border="0" style="width:1000px;">
 <tr>
 <td style="width:200px;vertical-align:top;">
 <a href="<%=request.getContextPath()%>/member/memberModify.do">회원정보수정</a><br><br>
@@ -209,7 +209,7 @@ function checkUpdate(apidx){
 <% 
 int i = 0;
 for (TeacherDto tedto : tlist)  {%>
-<table border="0" style="text-align:left;height:300px;width:800px;">
+<table border="1" style="text-align:left;height:300px;width:800px;">
 <tr>
 
 <td colspan=4>
@@ -218,7 +218,7 @@ for (TeacherDto tedto : tlist)  {%>
 </td>
 </tr>
 <tr>
-<td>과정:</td>
+<td style="text-align:left;width:100px;">과정:</td>
 <td  style="width:220px"><%=tedto.getCateName() %></td>
 <td style="width:50px">과외비</td>
 <td><%=tedto.getTeacherPay() %> <%if (!tedto.getTeacherPay().equals("협의")) {%>만원/시간<%} %></td>
@@ -282,10 +282,6 @@ out.println("여성");
 <tr>
 <td  colspan=4  id="cont<%=i %>" width="800px"></td>
 </tr>
-<tr>
-<td  colspan=4  style="background-color:#000000"></td>
-</tr>
-
 </table>
  <%
 i = i+1; 

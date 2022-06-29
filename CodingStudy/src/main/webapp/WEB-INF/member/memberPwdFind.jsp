@@ -14,6 +14,10 @@ body
 a {
   text-decoration: none;
 } 
+table {
+    margin-left:auto; 
+    margin-right:auto;
+}
 </style>
   <script>
 <%	if (request.getAttribute("msg") != null) { %>
@@ -55,9 +59,9 @@ a {
 <center><h1>비밀번호 찾기</h1></center>
 <hr></hr>
 <form name="frm"> 
- <table border="1" style="text-align:left;width:1000px;height:300px">
+ <table border="0" style="text-align:left;width:400px;height:100px">
 <tr>
-<td style="text-align:left;height:50px">
+<td style="text-align:left;height:100px">
 아이디
 <br>
 이메일
@@ -66,13 +70,13 @@ a {
 <input type="text" name="memberId" size="30"><br>
 <input type="text" name="memberEmail" size="30"><br>
 </td>
+<td>
+<input type="button" name ="btn" value="확인" onclick="check();"> <br>
+<input type="button" value="취소" onclick="history.back(-1);"> 
+</td>
 </tr>
 <tr>
-<td style="text-align:left;height:30px"></td>
-<td>
-<input type="button" name ="btn" value="확인" onclick="check();"> 
-<input type="reset" value="다시작성"> 
-</td>
+<td colspan=3><hr></hr></td>
 </tr>
  </table>
  </form>
